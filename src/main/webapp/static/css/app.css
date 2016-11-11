@@ -1,0 +1,592 @@
+/*common start*/
+html {
+	font-family: sans-serif;
+	-ms-text-size-adjust: 100%;
+	-webkit-text-size-adjust: 100%;
+}
+
+body {
+	ont-family: "Lantinghei SC", "Open Sans", Arial, "Hiragino Sans GB",
+		"Microsoft YaHei", "\5FAE\8F6F\96C5\9ED1", "STHeiti",
+		"WenQuanYi Micro Hei", SimSun, sans-serif;
+	min-height: 100vh;
+	overflow: scroll;
+	overflow-x: hidden;
+	background-color: #EAE8DF;
+	font-size: 1.3rem;
+}
+
+p, table {
+	font-size: 1.6rem;
+}
+
+th {
+	text-align: center;
+}
+
+td {
+	padding: 3px 7px;
+}
+
+b, strong {
+	font-weight: bolder;
+}
+
+h1 {
+	font-size: 4.2rem;
+}
+
+h2 {
+	font-size: 4rem;
+}
+
+h3 {
+	font-size: 3rem;
+}
+
+h4 {
+	font-size: 2.4rem;
+}
+
+h5 {
+	font-size: 2rem;
+}
+
+h6 {
+	font-size: 1.6rem;
+}
+/*common end*/
+
+/*通知栏 start*/
+.tips {
+	margin-top: -25px;
+	margin-bottom: 5px;
+	overflow: hidden;
+}
+
+.tips .tips-bg {
+	position: relative;
+	padding: 5px;
+}
+
+.tips .tips-bulls {
+	position: absolute;
+	left: 34px;
+	top: 6px;
+}
+/*通知栏 end*/
+
+/*header start*/
+header a {
+	color: #fff;
+}
+
+header .dropdown-menu {
+	background-color: rgba(255, 255, 255, 0.9);
+}
+
+.navbar-default {
+	background-color: rgba(236, 240, 241, .5);
+}
+
+/*header end*/
+.page-text {
+	padding: 10px 20px;
+}
+
+.rigth {
+	float: right;
+	margin-right: 10px;
+}
+
+button[name='refresh'], div[title='列']>button {
+	color: #fff;
+	background-color: #6EAE97;
+	padding: 10px 10px;
+}
+
+.fixed-table-pagination button, .fixed-table-pagination .pagination a {
+	padding: 3px 4px;
+}
+
+.pagination li>a {
+	min-width: 40px;
+	min-height: 30px;
+}
+
+.modal-content {
+	background-color: #EAE8DF;
+}
+
+.common-page {
+	padding-bottom: 20px;
+}
+
+.bg-one {
+	/*background: url('../images/header_bg.jpg') no-repeat, repeat fixed, fixed left 0, left top;*/
+	background: url('../images/login-bg.jpg') no-repeat, repeat fixed, fixed
+		left 0, left top;
+	background-size: cover;
+	width: 100vw;
+	height: 100vh;
+	margin: 0;
+	padding: 0;
+	overflow-y: hidden;
+	position: relative;
+	overflow-x: hidden;
+}
+
+.page {
+	padding-top: 10%;
+	color: #fff;
+}
+
+.bg-one .sign-form button {
+	background-color: #6FAF98;
+	color: #fff;
+	border: none;
+}
+
+.bg-two {
+	background-color: #32383B;
+	padding-bottom: 10%;
+}
+
+.bg-two .thumbnail {
+	padding: 0;
+}
+
+.bg-three {
+	padding-top: 5%;
+	padding-bottom: 5%;
+}
+
+.bg-three h5 {
+	margin-bottom: 8px;
+	margin-top: 16px;
+	font-weight: 600;
+	color: #32383B;
+}
+
+.bg-three .list-view-item {
+	padding: 10px 10px;
+	text-align: left;
+}
+/*具体栏目配置*/
+p {
+	overflow: hidden;
+}
+
+.problemsection {
+	padding: 10px 10px;
+	border: 1px dotted gray;
+}
+
+.problempage .problemsection>p {
+	padding: 10px 10px;
+	background-color: #F7F6F1;
+	border: 1px dotted gray;
+}
+
+.articlempage .article-time {
+	width: 60px;
+	background-color: #00a1cb;
+	text-align: center;
+	line-height: 20px;
+	float: left;
+	color: #FFF;
+	font-size: 14px;
+	font-family: Arial;
+	padding: 8px 0;
+	margin-bottom: 5px;
+}
+
+.articlempage .article-list-left {
+	padding-right: 20px;
+	border-right: 1px dashed black;
+	margin-bottom: 10px;
+}
+
+.articlempage .article-list {
+	margin-bottom: 10px;
+}
+
+.articlempage .article-detail {
+	margin-left: 70px;
+	margin-bottom: 5px;
+}
+
+.articlempage .article-detail a {
+	color: #34495E;
+}
+
+.articlempage .article-detail a:hover {
+	color: #6EAE97;
+}
+
+.articlempage .article-detail>dt {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	border-bottom: 1px dotted gray;
+}
+
+.articlempage .article-detail>dd {
+	opacity: .7;
+}
+
+.articlempage .article-mark {
+	margin-top: 5px;
+	position: relative;
+	line-height: 1.4em;
+	/* 3 times the line-height to show 3 lines */
+	height: 5.6em;
+	overflow: hidden;
+	margin-bottom: 0;
+	border-bottom: 1px dashed black;
+}
+
+.articlempage .article-mark::after {
+	content: "...";
+	font-weight: bold;
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	padding: 0 10px 1px 10px;
+	background-color: #EAE8DF;
+}
+
+.articlempage .article-footer>a, .articlempage dd>a {
+	padding-left: 7px;
+	color: gray;
+}
+
+.articlempage .article-footer>a:hover, .articlempage dd>a:hover {
+	color: black;
+	font-weight: bold;
+}
+
+.articlempage .article-footer {
+	margin-bottom: 15px;
+	border-bottom: 1px solid rgba(0, 0, 0, .2);
+}
+
+.articlempage .pagination-plain {
+	margin-top: 20px;
+	text-align: center;
+}
+
+.userpage .userheader .person-photo {
+	width: 190px;
+	height: 200px;
+	float: left;
+	margin: 15px 30px 15px 20px;
+}
+
+.userpage .userheader {
+	border-bottom: 2px dotted gray;
+}
+
+.userpage .userheader .person-detail>dd {
+	padding: 16px 3px;
+}
+
+.userpage .userheader .focus_num {
+	margin-top: 5px;
+	width: 90px;
+	height: 32px;
+	border-right: 1px solid #f0f0f0;
+	float: left;
+	font-size: 15px;
+	color: #999;
+	text-align: center;
+	overflow: hidden;
+}
+
+.userpage .userheader .focus_num b {
+	color: #333;
+	display: block;
+	width: 90px;
+	text-align: center;
+	line-height: 14px;
+	float: left;
+}
+
+.userpage .usercontent .actagcloud>a {
+	padding: 5px 10px;
+	margin: 5px 10px;
+}
+
+.priview>img {
+	padding: 5px 5px;
+	margin: 5px 15px;
+}
+
+/*具体栏目配置结束*/
+
+/*aside开始*/
+.widget aside {
+	background: #F7F6F1;
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15);
+	border: 1px solid rgba(255, 255, 255, 0.8);
+	border-radius: 3px;
+	margin-bottom: 10px;
+	padding: 5px;
+	color: #867F6F;
+}
+
+.widget aside h5 {
+	margin: 0 0 10px;
+	padding-bottom: 10px;
+	border-bottom: 1px solid #E8E2D2;
+	text-align: center;
+}
+
+.widget aside h5 span {
+	position: relative;
+	display: block;
+}
+
+.widget aside h5 span:before, .widget aside h5 span:after {
+	content: '';
+	height: 8px;
+	width: 8px;
+	position: absolute;
+	border-radius: 8px;
+	z-index: 0;
+	top: 8px;
+	background-color: #D0C6B0;
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2) inset;
+}
+
+.widget h5 span:before {
+	left: 10px;
+}
+
+.widget h5 span:after {
+	right: 10px;
+}
+
+.widget ul>li {
+	padding-left: 10px;
+	padding-bottom: 5px;
+	margin-bottom: 5px;
+	line-height: 20px;
+	border-bottom: 1px dashed #E8E3D4;
+}
+
+.widget a {
+	color: #867F6F;
+	padding-left: 5px;
+	padding-right: 5px;
+}
+
+.widget a:hover {
+	color: black;
+}
+
+.widget .tagcloud>a {
+	border: 1px solid #E8E2D2;
+	padding: 3px 7px;
+	border-radius: 3px;
+	float: left;
+	margin-right: 5px;
+	margin-bottom: 5px;
+}
+
+.widget .tagcloud>a:hover {
+	background-color: #EAE8DF;
+	color: black;
+}
+
+.widget p {
+	padding-left: 10px;
+}
+
+.widget .preson>a {
+	padding: 5px 30px;
+	color: #34495e;
+	font-weight: 700;
+}
+
+.widget .preson>a:hover {
+	color: #1abc9c;
+}
+/*aside结束*/
+
+/*footer*/
+footer {
+	padding: 10px 0;
+	color: black;
+}
+
+footer .fa {
+	opacity: .6;
+	line-height: 100%;
+	margin-top: 10px;
+}
+
+footer .fa:hover {
+	opacity: 1;
+}
+
+footer img {
+	width: 200px;
+	height: 200px;
+}
+
+footer .tooltip-inner {
+	padding: 0;
+}
+
+/*响应式设置*/
+/*1.侧边栏隐藏*/
+@media ( max-width : 800px) {
+	.widget {
+		display: none;
+	}
+	#user-widget {
+		display: block;
+	}
+	#nav .navbar-collapse {
+		background-color: rgba(236, 237, 232, .7);
+		color: black;
+	}
+	footer {
+		text-align: center;
+	}
+	footer .col-md-1 {
+		display: none;
+	}
+}
+/*动画效果*/
+.animated {
+	-webkit-animation-duration: 1s;
+	animation-duration: 1s;
+	-webkit-animation-fill-mode: both;
+	animation-fill-mode: both
+}
+
+@
+-webkit-keyframes fadeInDown { 0% {
+	opacity: 0;
+	-webkit-transform: translate3d(0, -100%, 0);
+	transform: translate3d(0, -100%, 0)
+}
+
+to {
+	opacity: 1;
+	-webkit-transform: none;
+	transform: none
+}
+
+}
+@
+keyframes fadeInDown { 0% {
+	opacity: 0;
+	-webkit-transform: translate3d(0, -100%, 0);
+	transform: translate3d(0, -100%, 0)
+}
+
+to {
+	opacity: 1;
+	-webkit-transform: none;
+	transform: none
+}
+
+}
+.fadeInDown {
+	-webkit-animation-name: fadeInDown;
+	animation-name: fadeInDown
+}
+
+@
+-webkit-keyframes fadeInUp { 0% {
+	opacity: 0;
+	-webkit-transform: translate3d(0, 100%, 0);
+	transform: translate3d(0, 100%, 0)
+}
+
+to {
+	opacity: 1;
+	-webkit-transform: none;
+	transform: none
+}
+
+}
+@
+keyframes fadeInUp { 0% {
+	opacity: 0;
+	-webkit-transform: translate3d(0, 100%, 0);
+	transform: translate3d(0, 100%, 0)
+}
+
+to {
+	opacity: 1;
+	-webkit-transform: none;
+	transform: none
+}
+
+}
+.fadeInUp {
+	-webkit-animation-name: fadeInUp;
+	animation-name: fadeInUp
+}
+
+@
+-webkit-keyframes fadeIn { 0% {
+	opacity: 0
+}
+
+to {
+	opacity: 1
+}
+
+}
+@
+keyframes fadeIn { 0% {
+	opacity: 0
+}
+
+to {
+	opacity: 1
+}
+
+}
+.fadeIn {
+	-webkit-animation-name: fadeIn;
+	animation-name: fadeIn
+}
+
+@
+-webkit-keyframes fadeInRight { 0% {
+	opacity: 0;
+	-webkit-transform: translate3d(100%, 0, 0);
+	transform: translate3d(100%, 0, 0)
+}
+
+to {
+	opacity: 1;
+	-webkit-transform: none;
+	transform: none
+}
+
+}
+@
+keyframes fadeInRight { 0% {
+	opacity: 0;
+	-webkit-transform: translate3d(100%, 0, 0);
+	transform: translate3d(100%, 0, 0)
+}
+
+to {
+	opacity: 1;
+	-webkit-transform: none;
+	transform: none
+}
+
+}
+.fadeInRight {
+	-webkit-animation-name: fadeInRight;
+	animation-name: fadeInRight
+}
