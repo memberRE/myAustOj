@@ -52,17 +52,12 @@
 							id="start-table">
 							<thead>
 								<tr>
-									<th class="col-xs-1" data-sortable="true"
-										data-formatter="problemid" data-field="problem_id"
-										data-align="center">ID</th>
-									<th class="col-xs-5" data-formatter="problemtitle"
-										data-field="title">题目标题</th>
-									<th class="col-xs-3" data-field="tag">涉及知识点</th>
-									<th class="col-xs-1" data-formatter="problemRatio"
-										data-field="ratio" data-align="center">Ratio</th>
-									<th class="col-xs-2" data-formatter="problemacsubmit"
-										data-field="acsubmit" data-align="center">AC/Submit</th>
-								</tr>
+                           			 <th class="col-xs-1" data-sortable="true" data-formatter="problemid" data-field="problem_id" data-align="center">ID</th>
+                            		 <th class="col-xs-5" data-formatter="problemtitle" data-field="title">题目标题</th>
+                            		 <th class="col-xs-3" data-field="tag">涉及知识点</th>
+                            		 <th class="col-xs-1" data-formatter="problemRatio" data-field="ratio" data-align="center">Ratio</th>
+                            		 <th class="col-xs-2" data-formatter="problemacsubmit" data-field="acsubmit" data-align="center">AC/Submit</th>
+                        </tr>
 							</thead>
 							<tbody>
 

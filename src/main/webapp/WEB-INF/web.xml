@@ -6,7 +6,7 @@
 	<!--配置获取项目的根路径,java类中使用System.getProperty("web.root") -->
 	<context-param>
 		<param-name>webAppRootKey</param-name>
-		<param-value>web.root</param-value>
+		<param-value>web.root1</param-value>
 	</context-param>
 	<listener>
 		<listener-class>org.springframework.web.util.WebAppRootListener</listener-class>
@@ -15,7 +15,7 @@
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<!--配置文件的路径 -->
-		<param-value>classpath:spring/applicationContext.xml</param-value>
+		<param-value>classpath:spring/spring.xml</param-value>
 	</context-param>
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
@@ -103,7 +103,7 @@
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
 			<!--配置文件的路径 -->
-			<param-value>classpath:spring/dispatcher-servlet.xml</param-value>
+			<param-value>classpath:spring/spring-mvc.xml</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>

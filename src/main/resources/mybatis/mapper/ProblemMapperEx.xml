@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.edu.aust.dao.ProblemMapper">
+
+	<resultMap id="BaseResultMapEx" type="cn.edu.aust.pojo.form.ProblemForm">
+		<id column="problem_id" property="problemId" jdbcType="INTEGER" />
+		<result column="title" property="title" jdbcType="VARCHAR" />
+		<result column="description" property="description" jdbcType="LONGVARCHAR" />
+		<result column="input" property="input" jdbcType="LONGVARCHAR" />
+		<result column="output" property="output" jdbcType="LONGVARCHAR" />
+		<result column="sample_input" property="sampleInput" jdbcType="LONGVARCHAR" />
+		<result column="sample_output" property="sampleOutput"
+			jdbcType="LONGVARCHAR" />
+		<result column="tag" property="tag" jdbcType="VARCHAR" />
+		<result column="hint" property="hint" jdbcType="LONGVARCHAR" />
+		<!-- <result column="catelog_id" property="catelogId" jdbcType="INTEGER" 
+			/> -->
+		<result column="stage" property="stage" jdbcType="INTEGER" />
+		<result column="time_limit" property="timeLimit" jdbcType="INTEGER" />
+		<result column="memory_limit" property="memoryLimit" jdbcType="INTEGER" />
+		<!-- <result column="user_id" property="userId" jdbcType="INTEGER" /> -->
+		<association property="catelog" javaType="cn.edu.aust.pojo.Catelog">
+			<id column="catelog_id" property="catelogId" jdbcType="INTEGER" />
+			<result column="catename" property="catename" jdbcType="VARCHAR" />
+		</association>
+		<association property="user" javaType="cn.edu.aust.pojo.User">
+			<id column="user_id" property="userId" jdbcType="INTEGER" />
+			<result column="avatar" property="avatar" jdbcType="VARCHAR" />
+			<result column="username" property="username" jdbcType="VARCHAR" />
+			<result column="password" property="password" jdbcType="VARCHAR" />
+			<result column="nickname" property="nickname" jdbcType="VARCHAR" />
+			<result column="email" property="email" jdbcType="VARCHAR" />
+			<result column="school" property="school" jdbcType="VARCHAR" />
+			<result column="motto" property="motto" jdbcType="VARCHAR" />
+			<result column="language" property="language" jdbcType="INTEGER" />
+			<result column="blogname" property="blogname" jdbcType="VARCHAR" />
+			<result column="blog" property="blog" jdbcType="VARCHAR" />
+			<result column="honor" property="honor" jdbcType="VARCHAR" />
+			<result column="regdate" property="regdate" jdbcType="TIMESTAMP" />
+			<result column="lastlogin" property="lastlogin" jdbcType="TIMESTAMP" />
+		</association>
+	</resultMap>
+
+	<!-- 按照等级查询题目题目，包括所包含的题目分类信息和作者信息 -->
+	<select id="selectByStage" resultMap="BaseResultMapEx" parameterType="java.lang.Integer">
+		select
+		*
+		from problem p,catelog c,user u
+		where stage=#{stage,jdbcType=INTEGER}
+		and p.catelog_id = c.catelog_id
+		and p.user_id = u.user_id
+	</select>
+
+</mapper>

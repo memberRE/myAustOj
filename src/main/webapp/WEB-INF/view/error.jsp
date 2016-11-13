@@ -36,7 +36,7 @@
 			<div class="input-group login-field">
 				<br /> <a href="javascript:void(0);" onClick="history.back(-1);"
 					class="btn btn-primary"> <i class="fa fa-backward"></i>&nbsp;&nbsp;上一页
-				</a> <a href="/index" class="btn btn-primary"><i class="fa fa-home"></i>&nbsp;&nbsp;主页</a>
+				</a> <a href="${pageContext.request.contextPath}/index" class="btn btn-primary"><i class="fa fa-home"></i>&nbsp;&nbsp;主页</a>
 			</div>
 		</div>
 	</div>

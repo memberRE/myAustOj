@@ -18,11 +18,11 @@
 
 	<dependencies>
 		<!-- https://mvnrepository.com/artifact/org.apache.maven.wagon/wagon-file -->
-		<dependency>
-			<groupId>org.apache.maven.wagon</groupId>
-			<artifactId>wagon-file</artifactId>
-			<version>1.0-beta-2</version>
-		</dependency>
+			<!-- <dependency>
+				<groupId>org.apache.maven.wagon</groupId>
+				<artifactId>wagon-file</artifactId>
+				<version>1.0-beta-2</version>
+			</dependency> -->
 
 		<!-- springframe start -->
 		<dependency>

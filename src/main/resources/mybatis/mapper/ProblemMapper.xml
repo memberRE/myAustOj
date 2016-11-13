@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.edu.aust.dao.ProblemMapper" >
+  <resultMap id="BaseResultMap" type="cn.edu.aust.pojo.Problem" >
+    <id column="problem_id" property="problemId" jdbcType="INTEGER" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="tag" property="tag" jdbcType="VARCHAR" />
+    <result column="catelog_id" property="catelogId" jdbcType="INTEGER" />
+    <result column="stage" property="stage" jdbcType="INTEGER" />
+    <result column="time_limit" property="timeLimit" jdbcType="INTEGER" />
+    <result column="memory_limit" property="memoryLimit" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="cn.edu.aust.pojo.ProblemWithBLOBs" extends="BaseResultMap" >
+    <result column="description" property="description" jdbcType="LONGVARCHAR" />
+    <result column="input" property="input" jdbcType="LONGVARCHAR" />
+    <result column="output" property="output" jdbcType="LONGVARCHAR" />
+    <result column="sample_input" property="sampleInput" jdbcType="LONGVARCHAR" />
+    <result column="sample_output" property="sampleOutput" jdbcType="LONGVARCHAR" />
+    <result column="hint" property="hint" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    problem_id, title, tag, catelog_id, stage, time_limit, memory_limit, user_id
+  </sql>
+  <sql id="Blob_Column_List" >
+    description, input, output, sample_input, sample_output, hint
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from problem
+    where problem_id = #{problemId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from problem
+    where problem_id = #{problemId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.edu.aust.pojo.ProblemWithBLOBs" >
+    insert into problem (problem_id, title, tag, 
+      catelog_id, stage, time_limit, 
+      memory_limit, user_id, description, 
+      input, output, sample_input, 
+      sample_output, hint)
+    values (#{problemId,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{tag,jdbcType=VARCHAR}, 
+      #{catelogId,jdbcType=INTEGER}, #{stage,jdbcType=INTEGER}, #{timeLimit,jdbcType=INTEGER}, 
+      #{memoryLimit,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{description,jdbcType=LONGVARCHAR}, 
+      #{input,jdbcType=LONGVARCHAR}, #{output,jdbcType=LONGVARCHAR}, #{sampleInput,jdbcType=LONGVARCHAR}, 
+      #{sampleOutput,jdbcType=LONGVARCHAR}, #{hint,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.edu.aust.pojo.ProblemWithBLOBs" >
+    insert into problem
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="problemId != null" >
+        problem_id,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="tag != null" >
+        tag,
+      </if>
+      <if test="catelogId != null" >
+        catelog_id,
+      </if>
+      <if test="stage != null" >
+        stage,
+      </if>
+      <if test="timeLimit != null" >
+        time_limit,
+      </if>
+      <if test="memoryLimit != null" >
+        memory_limit,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+      <if test="input != null" >
+        input,
+      </if>
+      <if test="output != null" >
+        output,
+      </if>
+      <if test="sampleInput != null" >
+        sample_input,
+      </if>
+      <if test="sampleOutput != null" >
+        sample_output,
+      </if>
+      <if test="hint != null" >
+        hint,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="problemId != null" >
+        #{problemId,jdbcType=INTEGER},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="tag != null" >
+        #{tag,jdbcType=VARCHAR},
+      </if>
+      <if test="catelogId != null" >
+        #{catelogId,jdbcType=INTEGER},
+      </if>
+      <if test="stage != null" >
+        #{stage,jdbcType=INTEGER},
+      </if>
+      <if test="timeLimit != null" >
+        #{timeLimit,jdbcType=INTEGER},
+      </if>
+      <if test="memoryLimit != null" >
+        #{memoryLimit,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="input != null" >
+        #{input,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="output != null" >
+        #{output,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="sampleInput != null" >
+        #{sampleInput,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="sampleOutput != null" >
+        #{sampleOutput,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="hint != null" >
+        #{hint,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.edu.aust.pojo.ProblemWithBLOBs" >
+    update problem
+    <set >
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="tag != null" >
+        tag = #{tag,jdbcType=VARCHAR},
+      </if>
+      <if test="catelogId != null" >
+        catelog_id = #{catelogId,jdbcType=INTEGER},
+      </if>
+      <if test="stage != null" >
+        stage = #{stage,jdbcType=INTEGER},
+      </if>
+      <if test="timeLimit != null" >
+        time_limit = #{timeLimit,jdbcType=INTEGER},
+      </if>
+      <if test="memoryLimit != null" >
+        memory_limit = #{memoryLimit,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="input != null" >
+        input = #{input,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="output != null" >
+        output = #{output,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="sampleInput != null" >
+        sample_input = #{sampleInput,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="sampleOutput != null" >
+        sample_output = #{sampleOutput,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="hint != null" >
+        hint = #{hint,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where problem_id = #{problemId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="cn.edu.aust.pojo.ProblemWithBLOBs" >
+    update problem
+    set title = #{title,jdbcType=VARCHAR},
+      tag = #{tag,jdbcType=VARCHAR},
+      catelog_id = #{catelogId,jdbcType=INTEGER},
+      stage = #{stage,jdbcType=INTEGER},
+      time_limit = #{timeLimit,jdbcType=INTEGER},
+      memory_limit = #{memoryLimit,jdbcType=INTEGER},
+      user_id = #{userId,jdbcType=INTEGER},
+      description = #{description,jdbcType=LONGVARCHAR},
+      input = #{input,jdbcType=LONGVARCHAR},
+      output = #{output,jdbcType=LONGVARCHAR},
+      sample_input = #{sampleInput,jdbcType=LONGVARCHAR},
+      sample_output = #{sampleOutput,jdbcType=LONGVARCHAR},
+      hint = #{hint,jdbcType=LONGVARCHAR}
+    where problem_id = #{problemId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.edu.aust.pojo.Problem" >
+    update problem
+    set title = #{title,jdbcType=VARCHAR},
+      tag = #{tag,jdbcType=VARCHAR},
+      catelog_id = #{catelogId,jdbcType=INTEGER},
+      stage = #{stage,jdbcType=INTEGER},
+      time_limit = #{timeLimit,jdbcType=INTEGER},
+      memory_limit = #{memoryLimit,jdbcType=INTEGER},
+      user_id = #{userId,jdbcType=INTEGER}
+    where problem_id = #{problemId,jdbcType=INTEGER}
+  </update>
+</mapper>

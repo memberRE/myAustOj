@@ -14,6 +14,7 @@ var problem = new Array();
 function contain(value) { var i = problem.length; while (i--){ if
 (problem[i] == value){ return true; } } return false; } //更改题目ID
 function problemid(value, row, index) { if (contain(value)){ return [ '
++ '
 <div class="text-center">
 	', '<span class="text-primary"><i class="fa fa-thumbs-up"></i>'
 		+ value + '</span>', '

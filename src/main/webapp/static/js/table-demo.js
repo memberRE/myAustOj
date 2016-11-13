@@ -2,14 +2,14 @@
 var pathName=window.document.location.pathname;
 var projectPath=pathName.substring(0,pathName.substr(1).indexOf('/')+1);
 //start表格数据获取
-setTable($("#start-table"),projectPath  + "problem/findStageProblem/1");
+setTable($("#start-table"),projectPath  + "/problem/findStageProblem/1");
 //practice表格数据获取
-setTable($("#practice-table"),projectPath + "problem/findStageProblem/2");
+setTable($("#practice-table"),projectPath + "/problem/findStageProblem/2");
 //master表格数据获取
-setTable($("#master-table"),projectPath + "problem/findStageProblem/3");
+setTable($("#master-table"),projectPath + "/problem/findStageProblem/3");
 //获取指定目录下的题目
 var cateid = $("#cateid").val();
-setTable($("#cate-table"),projectPath + "problem/findCateProblem/"+cateid);
+setTable($("#cate-table"),projectPath + "/problem/findCateProblem/"+cateid);
 
 //表格数据获取
 function setTable(obj,url) {

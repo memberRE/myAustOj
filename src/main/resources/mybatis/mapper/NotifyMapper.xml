@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.edu.aust.dao.NotifyMapper" >
+  <resultMap id="BaseResultMap" type="cn.edu.aust.pojo.Notify" >
+    <id column="notify_id" property="notifyId" jdbcType="INTEGER" />
+    <result column="notifyContent" property="notifycontent" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    notify_id, notifyContent
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from notify
+    where notify_id = #{notifyId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from notify
+    where notify_id = #{notifyId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.edu.aust.pojo.Notify" >
+    insert into notify (notify_id, notifyContent)
+    values (#{notifyId,jdbcType=INTEGER}, #{notifycontent,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.edu.aust.pojo.Notify" >
+    insert into notify
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="notifyId != null" >
+        notify_id,
+      </if>
+      <if test="notifycontent != null" >
+        notifyContent,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="notifyId != null" >
+        #{notifyId,jdbcType=INTEGER},
+      </if>
+      <if test="notifycontent != null" >
+        #{notifycontent,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.edu.aust.pojo.Notify" >
+    update notify
+    <set >
+      <if test="notifycontent != null" >
+        notifyContent = #{notifycontent,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where notify_id = #{notifyId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.edu.aust.pojo.Notify" >
+    update notify
+    set notifyContent = #{notifycontent,jdbcType=VARCHAR}
+    where notify_id = #{notifyId,jdbcType=INTEGER}
+  </update>
+</mapper>
