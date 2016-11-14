@@ -2,6 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="cn.edu.aust.dao.ProblemMapper">
 
+	 <!--启用二级缓存-->
+  <!--  <cache type="org.mybatis.caches.ehcache.EhcacheCache"/>  -->
+    
 	<resultMap id="BaseResultMapEx" type="cn.edu.aust.pojo.form.ProblemForm">
 		<id column="problem_id" property="problemId" jdbcType="INTEGER" />
 		<result column="title" property="title" jdbcType="VARCHAR" />
@@ -68,6 +71,16 @@
 		from solution s
 		where 
 		s.problem_id = #{id}
+	</select>
+	
+	<!-- 通过问题id查询具体问题 -->
+	<select id="selectProblemById" resultMap="BaseResultMapEx" parameterType="java.lang.Integer">
+		select
+		*
+		from problem p,catelog c,user u
+		where p.problem_id=#{id,jdbcType=INTEGER}
+		and p.catelog_id = c.catelog_id
+		and p.user_id = u.user_id
 	</select>
 
 </mapper>

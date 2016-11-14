@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -55,14 +56,19 @@
 								<caption>
 									<h5 class="text-primary">近期的比赛</h5>
 								</caption>
-								<c:forEach items="${listsValid}" var="contest">
+								<c:forEach items="${contestRecent}" var="contest">
 									<tr>
-										<td width="10%">${contest.contest_id}</td>
-										<td width="40%"><a
-											href="/contest/${contest.contest_id}/${contest.type}"
-											class="contesttitle">${contest.title}</a></td>
-										<td width="20%">${contest.start_time.toLocaleString()}</td>
-										<td width="20%">${contest.end_time.toLocaleString()}</td>
+										<td width="5%">${contest.contestId}</td>
+										<td width="35%"><a href="javascript:" class="contesttitle">${contest.title}</a>
+											<span style="display: none;">${contest.contestId}/${contest.type}</span>
+										</td>
+									<%-- 	href="${pageContext.request.contextPath}/contest/${contest.contestId}/${contest.type}"  --%>
+									<%-- 
+										<td width="25%">${contest.startTime.toLocaleString()}</td> 
+										<td width="25%">${contest.endTime.toLocaleString()}</td>
+										 --%>
+										<td width="25%">${contest.localStartTime}</td> 
+										<td width="25%">${contest.localEndTime}</td>
 										<td width="10%">${contest.type==1?"校内":"公开"}</td>
 									</tr>
 								</c:forEach>
@@ -75,12 +81,14 @@
 								</caption>
 								<c:forEach items="${info.list}" var="contest">
 									<tr>
-										<td width="10%">${contest.contest_id}</td>
-										<td width="40%"><a
-											href="/contest/${contest.contest_id}/${contest.type}"
-											class="contesttitle">${contest.title}</a></td>
-										<td width="20%">${contest.start_time.toLocaleString()}</td>
-										<td width="20%">${contest.end_time.toLocaleString()}</td>
+										<td width="5%">${contest.contestId}</td>
+										<td width="35%"><a href="javascript:" class="contesttitle">${contest.title}</a>
+											<span style="display: none;">${contest.contestId}/${contest.type}</span>
+										</td>
+										<td width="25%">${contest.localStartTime}</td>
+										<%-- <td width="25%">${contest.startTime.toLocaleString()}</td> --%>
+										<%-- <td width="25%">${contest.endTime.toLocaleString()}</td> --%>
+										<td width="25%">${contest.localEndTime}</td>
 										<td width="10%">${contest.type==1?"校内":"公开"}</td>
 									</tr>
 								</c:forEach>
@@ -129,9 +137,9 @@
 				<form id="contestJudgeForm">
 					<div class="modal-body">
 						<div class="form-group">
-							<input type="hidden" id="contest_id" name="contest_id" /> <input
-								type="hidden" id="type" name="type" /> <input
-								class="form-control" type="password" name="password" />
+							<input type="hidden" id="contestId" name="contestId" /> 
+							<!-- <input type="hidden" id="type" name="type" />  -->
+							<input class="form-control" type="password" name="password" />
 						</div>
 
 					</div>
@@ -148,8 +156,7 @@
 	<!-- /.modal -->
 	<!--具体提交的模态框结束-->
 	<!--模态框结束-->
-	<input type="hidden" value="${sessionScope.userLogin == null ?0:1}"
-		id="session">
+	<input type="hidden" value="${sessionScope.userLogin == null ?0:1}" id="session">
 	<!--script引入-->
 	<script
 		src="${pageContext.request.contextPath}/static/js/jquery.min.js"></script>

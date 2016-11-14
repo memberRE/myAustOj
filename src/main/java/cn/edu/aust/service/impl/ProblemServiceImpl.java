@@ -78,4 +78,9 @@ public class ProblemServiceImpl implements IProblemService{
 		return proFormList;
 	}
 
+	@Override
+	public ProblemForm selectProblemById(int id) {
+		return problemMapper.selectProblemById(id);
+	}
+
 }

@@ -34,7 +34,14 @@ function setTable(obj,url) {
             title: 'ID'
         }, {
             field: 'title',
-            title: '题目标题'
+            title: '题目标题',
+            formatter: function(value,row,index){
+            	return [
+                    '<div>',
+                    '<a href="'+projectPath+'/problem/'+row.problemId+'" target="_blank">' + value + '</a>',
+                    '</div>'
+                ].join('');
+            }
         }, {
         	field: 'tag',
         	title: '涉及知识点'
@@ -244,11 +251,6 @@ function toDecimal(x) {
     }
     f = Math.round(x*100)/100;
     return f;
-}
-//功能，求题目通过率
-function passingRate(ac,submit){
-	var result =  parseInt(ac)/parseInt(submit);
-	return toDecimal(result);
 }
 
 

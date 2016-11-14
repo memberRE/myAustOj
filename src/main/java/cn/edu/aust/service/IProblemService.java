@@ -27,5 +27,12 @@ public interface IProblemService {
      * @return
      */
     List<ProblemForm> selectByStage(Integer stage);
+
+    /**
+     * 查询具体问题
+     * @param id
+     * @return ProblemForm
+     */
+	ProblemForm selectProblemById(int id);
     
 }

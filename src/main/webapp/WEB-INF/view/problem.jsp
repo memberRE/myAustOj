@@ -51,7 +51,7 @@
 									<div class="title">
 										<h3 class="text-center text-primary">${problem.title}</h3>
 										<p class="text-center text-danger">
-											<span>时间:${problem.time_limit}ms&nbsp;&nbsp;</span><span>&nbsp;&nbsp;内存:${problem.memory_limit/1000}M</span>
+											<span>时间:${problem.timeLimit}ms&nbsp;&nbsp;</span><span>&nbsp;&nbsp;内存:${problem.memoryLimit/1000}M</span>
 										</p>
 									</div>
 									<h4 data-anchor-id="uxo3">题目描述:</h4>
@@ -61,14 +61,14 @@
 									<h4 data-anchor-id="uxo3">输出:</h4>
 									<p data-anchor-id="jiy7">${problem.output}</p>
 									<h4 data-anchor-id="uxo3">样例输入:</h4>
-									<p data-anchor-id="jiy7">${problem.sample_input}</p>
+									<p data-anchor-id="jiy7">${problem.sampleInput}</p>
 									<h4 data-anchor-id="uxo3">样例输出:</h4>
-									<p data-anchor-id="jiy7">${problem.sample_output}</p>
+									<p data-anchor-id="jiy7">${problem.sampleOutput}</p>
 									<h4 data-anchor-id="uxo3">提示:</h4>
 									<p data-anchor-id="jiy7">${problem.hint}</p>
 									<h4 data-anchor-id="uxo3">来源:</h4>
 									<p data-anchor-id="jiy7">
-										<a href="/user/${problem.author_id}">${problem.author}</a>
+										<a href="/user/${problem.user.userId}">${problem.user.nickname}</a>
 									</p>
 									<c:if test="${sessionScope.userLogin != null}">
 										<button type="button"

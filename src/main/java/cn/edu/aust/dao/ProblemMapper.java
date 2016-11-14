@@ -26,4 +26,6 @@ public interface ProblemMapper {
 	int selectAcById(int id);
 
 	int selectSubmitById(int id);
+
+	ProblemForm selectProblemById(int id);
 }

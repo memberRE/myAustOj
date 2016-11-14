@@ -36,13 +36,6 @@ public class MenuController {
 		return "master";
 	}
 	
-	/**
-	 * 前往比赛页面
-	 */
-	@RequestMapping(value="/contest",method=RequestMethod.GET)
-	public String toContest(){
-		return "contest";
-	}
 	
 	/**
 	 * 前往排名页面
@@ -52,12 +45,5 @@ public class MenuController {
 		return "rank";
 	}
 	
-	/**
-	 * 前往干货页面
-	 */
-	@RequestMapping(value="/articles",method=RequestMethod.GET)
-	public String toArticles(){
-		return "articles";
-	}
 
 }

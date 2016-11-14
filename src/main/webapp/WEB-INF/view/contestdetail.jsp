@@ -57,7 +57,7 @@
 									<tr>
 										<th class="col-xs-1">ID</th>
 										<th class="col-xs-5">题目标题</th>
-										<th class="col-xs-3">分数</th>
+										<!-- <th class="col-xs-3">状态</th> -->
 										<th class="col-xs-1">Ratio</th>
 										<th class="col-xs-2">AC/Submit</th>
 									</tr>
@@ -65,20 +65,18 @@
 								<tbody>
 									<c:forEach items="${CP}" var="cproblem">
 										<tr>
-											<td class="col-xs-1">${cproblem.num}</td>
-											<td class="col-xs-5"><a
-												href="/contest/${contest.contest_id}/pro/${cproblem.problem_id}"
-												target="_blank">${cproblem.title}</a></td>
-											<td class="col-xs-1">${cproblem.point}</td>
+											<td class="col-xs-1">${cproblem.problemId}</td>
+											<td class="col-xs-5"><a href="/contest/${contestId}/pro/${cproblem.problemId}" target="_blank">${cproblem.title}</a></td>
+											<%-- <td class="col-xs-1">${cproblem.point}</td> --%>
 											<c:if test="${cproblem.submit == 0}">
-												<td class="col-xs-1">${cproblem.solved/1}</td>
+												<td class="col-xs-1">${cproblem.ac/1}</td>
 											</c:if>
 											<c:if test="${cproblem.submit != 0}">
 
 												<td class="col-xs-1"><fmt:formatNumber
-														value="${cproblem.solved/cproblem.submit*100}" pattern="#" />%</td>
+														value="${cproblem.ac/cproblem.submit*100}" pattern="#" />%</td>
 											</c:if>
-											<td class="col-xs-2">(${cproblem.solved}/${cproblem.submit})</td>
+											<td class="col-xs-2">(${cproblem.ac}/${cproblem.submit})</td>
 										</tr>
 									</c:forEach>
 								</tbody>
@@ -109,9 +107,9 @@
 		src="${pageContext.request.contextPath}/static/js/flat-ui.min.js"></script>
 	<script src="${pageContext.request.contextPath}/static/js/app.js"></script>
 	<script>
-    <c:if test="${sessionScope.contest_id != contest.contest_id}">
+    <c:if test="${sessionScope.contestId != contest.contestId}">
         window.location.href = '/404';
     </c:if>
-</script>
+	</script>
 </body>
 </html>

@@ -17,10 +17,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
+import cn.edu.aust.pojo.Problem;
 import cn.edu.aust.pojo.form.ProblemForm;
 import cn.edu.aust.service.IProblemService;
 import cn.edu.aust.util.PageUtil;
@@ -66,6 +68,21 @@ public class ProblemController {
 	    maps.put("rows", page.getList());
 	    
 		return maps;
+	}
+	
+	
+	@RequestMapping(value="/{id}")
+	 public ModelAndView findProblemById(
+			 @PathVariable("id") int id){
+		
+		ModelAndView mav = new ModelAndView("problem");
+		ProblemForm pf = this.problemService.selectProblemById(id);
+		if(null != pf){
+			mav.addObject("problem",pf);
+		}else{
+			mav.addObject("error","获取题目失败，题目不存在！");
+		}
+		return mav;
 	}
 	
 }
