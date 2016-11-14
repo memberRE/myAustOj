@@ -10,26 +10,41 @@ setTable($("#master-table"),projectPath + "/problem/findStageProblem/3");
 //获取指定目录下的题目
 var cateid = $("#cateid").val();
 setTable($("#cate-table"),projectPath + "/problem/findCateProblem/"+cateid);
-
 //表格数据获取
 function setTable(obj,url) {
     obj.bootstrapTable({
         url: url,//这里配置请求链接
         method: 'post',
-        cache: true,					   //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+        cache: false,					   //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
         pagination: true,				   //是否显示分页（*）
-        queryParams: queryParams,//传递参数（*）
         sidePagination: "server",		   //分页方式：client客户端分页，server服务端分页（*）
         search: !0,
         striped: true,
         showRefresh: !0,
         pageNumber:1,					   //初始化加载第一页，默认第一页
-        pageSize:15,
-        pageList:[15, 30, 50, 100],
+        pageSize:10,
+        pageList:[10, 15, 30, 50],
+        queryParams: queryParams,//传递参数（*）可以传递自定义参数
         showColumns: !0,
         iconSize: "outline",
         icons: {refresh: "glyphicon-repeat", columns: "glyphicon-list"},
-        uniqueId: "id"
+        uniqueId: "id",
+        columns: [{
+            field: 'problemId',
+            title: 'ID'
+        }, {
+            field: 'title',
+            title: '题目标题'
+        }, {
+        	field: 'tag',
+        	title: '涉及知识点'
+        }, {
+        	field: 'ratio',
+        	title: 'Ratio',
+        }, {
+        	field: 'acFra',
+        	title: 'AC/Submit'
+        }],
     });
 }
     //排名请求
@@ -44,12 +59,12 @@ function setTable(obj,url) {
         striped: true,
         showRefresh: !0,
         pageNumber:1,					   //初始化加载第一页，默认第一页
-        pageSize:18,
+        pageSize:10,
         pageList:[20, 30, 50, 100],
         showColumns: !0,
         iconSize: "outline",
         icons: {refresh: "glyphicon-repeat", columns: "glyphicon-list"},
-        uniqueId: "id"
+        uniqueId: "id",
     });
 
     //提交请求
@@ -69,7 +84,7 @@ function setTable(obj,url) {
         showColumns: !0,
         iconSize: "outline",
         icons: {refresh: "glyphicon-repeat", columns: "glyphicon-list"},
-        uniqueId: "id"
+        uniqueId: "id",
     });
 
 
@@ -230,7 +245,11 @@ function toDecimal(x) {
     f = Math.round(x*100)/100;
     return f;
 }
-
+//功能，求题目通过率
+function passingRate(ac,submit){
+	var result =  parseInt(ac)/parseInt(submit);
+	return toDecimal(result);
+}
 
 
 

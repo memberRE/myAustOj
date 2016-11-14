@@ -22,4 +22,8 @@ public interface ProblemMapper {
     int updateByPrimaryKeyWithBLOBs(ProblemWithBLOBs record);
 
     int updateByPrimaryKey(Problem record);
+
+	int selectAcById(int id);
+
+	int selectSubmitById(int id);
 }

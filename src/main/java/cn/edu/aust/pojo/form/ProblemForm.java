@@ -31,8 +31,48 @@ public class ProblemForm {
     private Integer memoryLimit;
 
     private User user;
+    
+    private String ratio;//百分号表示的通过率
+    
+    private String acFra;//分数表示提交数
+    
+    private Integer ac;//提交通过的数量
+    
+    private Integer submit;//提交的数量
+    
+    public String getRatio() {
+		return ratio;
+	}
 
-    public Integer getProblemId() {
+	public void setRatio(String ratio) {
+		this.ratio = ratio;
+	}
+
+	public String getAcFra() {
+		return acFra;
+	}
+
+	public void setAcFra(String acFra) {
+		this.acFra = acFra;
+	}
+
+    public Integer getAc() {
+		return ac;
+	}
+
+	public void setAc(Integer ac) {
+		this.ac = ac;
+	}
+
+	public Integer getSubmit() {
+		return submit;
+	}
+
+	public void setSubmit(Integer submit) {
+		this.submit = submit;
+	}
+
+	public Integer getProblemId() {
         return problemId;
     }
 

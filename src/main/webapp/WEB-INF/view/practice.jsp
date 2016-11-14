@@ -49,24 +49,7 @@
 							起步主要考察基本算法,大多都是课本上的例题,每一道题涉及的考点都会在题目列表中提及</p>
 						<h4 class="text-center">题目列表</h4>
 						<table class="table-bordered" width="100%" data-toggle="table"
-							id="practice-table">
-							<thead>
-								<tr>
-									<th class="col-xs-1" data-sortable="true"
-										data-formatter="problemid" data-field="problem_id"
-										data-align="center">ID</th>
-									<th class="col-xs-5" data-formatter="problemtitle"
-										data-field="title">题目标题</th>
-									<th class="col-xs-3" data-field="tag">涉及知识点</th>
-									<th class="col-xs-1" data-formatter="problemRatio"
-										data-field="ratio" data-align="center">Ratio</th>
-									<th class="col-xs-2" data-formatter="problemacsubmit"
-										data-field="acsubmit" data-align="center">AC/Submit</th>
-								</tr>
-							</thead>
-							<tbody>
-
-							</tbody>
+							id="practice-table" style="text-align: center;">
 						</table>
 					</section>
 				</div>

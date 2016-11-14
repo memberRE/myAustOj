@@ -4,9 +4,10 @@
   Date: 2016/8/6
   Time: 22:14
   To change this template use File | Settings | File Templates.
---%>
+  -->
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%--判断用户是否已经完成该题,思路先用一个js数组,把用户完成题目存储起来,然后再判断--%>
+<%--
 var problem = new Array();
 <c:forEach items="${sessionScope.userAC}" var="id">
     problem.push(${id});
@@ -24,3 +25,5 @@ function problemid(value, row, index) { if (contain(value)){ return [ '
 	', '<span>' + value + '</span>', '
 </div>
 ' ].join(''); } }
+
+--%>

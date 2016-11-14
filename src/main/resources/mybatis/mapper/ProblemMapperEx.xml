@@ -50,5 +50,24 @@
 		and p.catelog_id = c.catelog_id
 		and p.user_id = u.user_id
 	</select>
+	
+	<!-- 通过问题id查询问题的ac数量 -->
+	<select id="selectAcById" resultType="java.lang.Integer" parameterType="java.lang.Integer">
+		select
+		count(*)
+		from solution s
+		where 
+		s.problem_id = #{id}
+		and s.verdict = 5;
+	</select>
+	
+	<!-- 通过问题id查询问题的提交数量 -->
+	<select id="selectSubmitById" resultType="java.lang.Integer" parameterType="java.lang.Integer">
+		select
+		count(*)
+		from solution s
+		where 
+		s.problem_id = #{id}
+	</select>
 
 </mapper>
