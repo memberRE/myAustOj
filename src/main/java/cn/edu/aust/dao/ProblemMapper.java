@@ -31,4 +31,6 @@ public interface ProblemMapper {
 	ProblemForm selectProblemById(int id);
 
 	List<SolutionForm> selectSubmitList(Integer userId);
+
+	ProblemForm selectProblemByCatelogId(int catelogId);
 }

@@ -32,7 +32,7 @@ $(function () {
             //使用$.each方法遍历返回的数据date,插入到id为#result中
             $.each(data,function(i,item){
                 var content=item.catename;
-                $(".widget .catelog").append('<li><i class="fa fa-bookmark-o">&nbsp;&nbsp;<a href="'+projectPath+'/problem/catepro/'+item.id+'/'+content+'">'+content+'</a></i></li>');
+                $(".widget .catelog").append('<li><i class="fa fa-bookmark-o">&nbsp;&nbsp;<a href="'+projectPath+'/problem/catelog/'+item.id+'">'+content+'</a></i></li>');
             })
         }
     });
@@ -49,7 +49,7 @@ $(function () {
             //使用$.each方法遍历返回的数据date,插入到id为#result中
             $.each(data,function(i,item){
                 var content=item.tag;
-                $(".widget .tags").append('<a href="'+projectPath+'/articles?search='+content+'" style="font-size: 12px;">'+content+'</a>');
+                $(".widget .tags").append('<a href="'+projectPath+'/articles/search?search='+content+'" style="font-size: 12px;">'+content+'</a>');
             })
         }
     });

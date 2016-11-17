@@ -89,4 +89,9 @@ public class ProblemServiceImpl implements IProblemService{
 		return problemMapper.selectSubmitList(userId);
 	}
 
+	@Override
+	public ProblemForm selectProblemByCatelogId(int catelogId) {
+		return problemMapper.selectProblemByCatelogId(catelogId);
+	}
+
 }

@@ -42,5 +42,12 @@ public interface IProblemService {
 	 * @return
 	 */
 	List<SolutionForm> selectSubmitList(Integer userId);
+
+	/**
+	 * 根据分类ID查询问题
+	 * @param catelogId
+	 * @return
+	 */
+	ProblemForm selectProblemByCatelogId(int catelogId);
     
 }

@@ -81,8 +81,7 @@ public class ProblemController {
 	 * @return
 	 */
 	@RequestMapping(value="/{id}")
-	 public ModelAndView findProblemById(
-			 @PathVariable("id") int id){
+	 public ModelAndView findProblemById(@PathVariable("id") int id){
 		
 		ModelAndView mav = new ModelAndView("problem");
 		ProblemForm pf = this.problemService.selectProblemById(id);
@@ -122,5 +121,18 @@ public class ProblemController {
 	    maps.put("total",page.getTotal());
 	    maps.put("rows", page.getList());
 		return maps;
+	}
+	
+	
+	@RequestMapping(value="/catelog/{catelogId}")
+	 public ModelAndView findProblemByCatelogId(@PathVariable("catelogId") int catelogId){
+		ModelAndView mav = new ModelAndView("problem");
+		ProblemForm pf = this.problemService.selectProblemByCatelogId(catelogId);
+		if(null != pf){
+			mav.addObject("problem",pf);
+		}else{
+			mav.addObject("error","获取题目失败，题目不存在！");
+		}
+		return mav;
 	}
 }

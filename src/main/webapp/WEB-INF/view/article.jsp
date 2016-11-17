@@ -49,7 +49,7 @@
 							<div class="title">
 								<h5 class="text-center">${article.title}</h5>
 								<p class="text-center">
-									<span>作者:${article.nickname}&nbsp;&nbsp;</span><span>&nbsp;&nbsp;分类:${article.catelog}</span>
+									<span>作者:${article.user.nickname}&nbsp;&nbsp;</span><span>&nbsp;&nbsp;分类:${article.catelog}</span>
 								</p>
 							</div>
 							<p style="text-indent: 2em">${article.content}</p>

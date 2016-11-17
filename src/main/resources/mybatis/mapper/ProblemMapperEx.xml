@@ -119,4 +119,11 @@
     and p.problem_id=s.problem_id
 	</select>
 
+	<!-- 通过分类id查询问题 -->
+	<select id="selectProblemByCatelogId" resultMap="BaseResultMapEx" parameterType="java.lang.Integer">
+		select
+		*
+		from problem p
+		where p.catelog_id=#{catelogId}
+	</select>
 </mapper>

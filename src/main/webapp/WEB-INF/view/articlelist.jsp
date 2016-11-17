@@ -47,93 +47,87 @@
 					<section class="problemsection animated fadeInUp">
 						<h5 style="border-bottom: 2px dotted gray; padding-bottom: 5px">
 							当前搜索:
-							<c:if test="${search != null}">${search.substring(1,search.length()-1)}</c:if>
+							<c:if test="${search != null}">${search}</c:if>
 							<c:if test="${search == null}">全部</c:if>
 						</h5>
 						<div class="row">
 							<div class="col-md-6">
-								<c:forEach items="${pageinfo.list}" var="article"
-									varStatus="status">
+								<c:forEach items="${pageinfo.list}" var="article" varStatus="status">
 									<c:if test="${status.index % 2 == 0}">
 										<div class="article-list">
 											<dl class="article-time text-center">
-												<dd>${article.start_time.year + 1900}</dd>
-												<dd>${article.start_time.month}-${article.start_time.date}</dd>
+												<dd>${article.startTime.year + 1900}</dd>
+												<dd>${article.startTime.month}-${article.startTime.date}</dd>
 											</dl>
 											<dl class="article-detail">
 												<c:if test="${article.totop}">
 													<dt>
 														<a
-															href="${pageContext.request.contextPath}/articles/${article.id}"
+															href="${pageContext.request.contextPath}/articles/${article.articleId}"
 															target="_blank"><span class="text-danger">[置顶]</span>${article.title}</a>
 													</dt>
 												</c:if>
 												<c:if test="${!article.totop}">
 													<dt>
 														<a
-															href="${pageContext.request.contextPath}/articles/${article.id}"
+															href="${pageContext.request.contextPath}/articles/${article.articleId}"
 															target="_blank">${article.title}</a>
 													</dt>
 												</c:if>
 												<dd>
 													<i class="glyphicon glyphicon-user"></i><a
-														href="/user/${article.user_id}">${article.nickname}</a>
+														href="${pageContext.request.contextPath}/user/getUser/${article.user.userId}">${article.user.nickname}</a>
 												</dd>
 											</dl>
 											<p class="article-mark">${article.summary}</p>
 											<div class="article-footer">
 												<i class="fa fa-bookmark"></i>&nbsp;
-												<c:forTokens items="${article.tags}" delims="," var="tag"
-													begin="0" end="4">
-													<a
-														href="${pageContext.request.contextPath}/articles?search=${tag}">${tag}</a>
-												</c:forTokens>
-												<a
-													href="${pageContext.request.contextPath}/articles/${article.id}"
-													class="rigth" target="_blank">More</a>
+												<c:forEach items="${article.tags}"  var="tag" begin="0" end="4">
+													<a href="${pageContext.request.contextPath}/articles/search?search=${tag}">[${tag}]</a>
+												</c:forEach>
+												<a href="${pageContext.request.contextPath}/articles/${article.articleId}" class="rigth" target="_blank">More</a>
 											</div>
 										</div>
 									</c:if>
 								</c:forEach>
 							</div>
 							<div class="col-md-6">
-								<c:forEach items="${pageinfo.list}" var="article"
-									varStatus="status">
+								<c:forEach items="${pageinfo.list}" var="article" varStatus="status">
 									<c:if test="${status.index % 2 != 0}">
 										<div class="article-list">
 											<dl class="article-time text-center">
-												<dd>${article.start_time.year + 1900}</dd>
-												<dd>${article.start_time.month}-${article.start_time.date}</dd>
+												<dd>${article.startTime.year+1900}</dd>
+												<dd>${article.startTime.month}-${article.startTime.date}</dd>
 											</dl>
 											<dl class="article-detail">
 												<c:if test="${article.totop}">
 													<dt>
 														<a
-															href="${pageContext.request.contextPath}/articles/${article.id}"
+															href="${pageContext.request.contextPath}/articles/${article.articleId}"
 															target="_blank"><span class="text-danger">[置顶]</span>${article.title}</a>
 													</dt>
 												</c:if>
 												<c:if test="${!article.totop}">
 													<dt>
 														<a
-															href="${pageContext.request.contextPath}/articles/${article.id}"
+															href="${pageContext.request.contextPath}/articles/${article.articleId}"
 															target="_blank">${article.title}</a>
 													</dt>
 												</c:if>
 												<dd>
 													<i class="glyphicon glyphicon-user"></i><a
-														href="/user/${article.user_id}">${article.nickname}</a>
+														href="${pageContext.request.contextPath}/user/getUser/${article.user.userId}">${article.user.nickname}</a>
 												</dd>
 											</dl>
 											<p class="article-mark">${article.summary}</p>
 											<div class="article-footer">
 												<i class="fa fa-bookmark"></i>&nbsp;
-												<c:forTokens items="${article.tags}" delims="," var="tag"
+												<c:forEach items="${article.tags}"  var="tag"
 													begin="0" end="4">
-													<a href="#">${tag}</a>
-												</c:forTokens>
+													<a href="${pageContext.request.contextPath}/articles/search?search=${tag}">[${tag}]</a>
+												</c:forEach>
 												<a
-													href="${pageContext.request.contextPath}/articles/${article.id}"
+													href="${pageContext.request.contextPath}/articles/${article.articleId}"
 													class="rigth" target="_blank">More</a>
 											</div>
 										</div>
@@ -167,13 +161,13 @@
 							<span>搜索</span>
 						</h5>
 						<p>
-						<form class="form-inline" action="/articles">
+						<form class="form-inline" action="${pageContext.request.contextPath}/articles/search">
 							<div class="form-group">
 								<div class="input-group">
-									<input type="search" class="form-control" size="100%"
+									<input type="search" class="form-control" size="80%"
 										value="${search.substring(1,search.length()-1)}" name="search">
 									<span class="input-group-btn">
-										<button class="btn btn-default" type="submit"
+										<button class="btn btn-sm" type="submit"
 											style="background-color: #fff">
 											<i class="fa fa-search" style="color: #34495E"></i>
 										</button>

@@ -44,9 +44,8 @@
 				<div class="col-md-9">
 					<!--主面板-->
 					<section class="animated fadeInLeft">
-						<strong>&nbsp;&nbsp;须知:</strong><br />
-						<p class="page-text" style="text-indent: 2em;">
-							为了减轻服务器压力,排名设置每两小时刷新一次</p>
+						<strong></strong><br />
+						<p class="page-text" style="text-indent: 2em;"></p>
 						<h4 class="text-center">排名列表</h4>
 						<table class="table-bordered text-center" width="80%"
 							data-toggle="table" id="rank-table">

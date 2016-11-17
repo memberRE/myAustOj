@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.edu.aust.dao.ArticleMapper">
+	<resultMap id="ArticleFormBaseResultMap" type="cn.edu.aust.pojo.form.ArticleForm">
+		<id column="article_id" property="articleId" jdbcType="INTEGER" />
+		<result column="title" property="title" jdbcType="VARCHAR" />
+		<result column="catelog" property="catelog" jdbcType="VARCHAR" />
+		<result column="start_time" property="startTime" jdbcType="DATE" />
+		<result column="totop" property="totop" jdbcType="BIT" />
+		<result column="summary" property="summary" jdbcType="LONGVARCHAR" />
+		<result column="content" property="content" jdbcType="LONGVARCHAR" />
+		<association property="user" javaType="cn.edu.aust.pojo.User">
+			<id column="user_id" property="userId" jdbcType="INTEGER" />
+			<result column="avatar" property="avatar" jdbcType="VARCHAR" />
+			<result column="username" property="username" jdbcType="VARCHAR" />
+			<result column="password" property="password" jdbcType="VARCHAR" />
+			<result column="nickname" property="nickname" jdbcType="VARCHAR" />
+			<result column="email" property="email" jdbcType="VARCHAR" />
+			<result column="school" property="school" jdbcType="VARCHAR" />
+			<result column="motto" property="motto" jdbcType="VARCHAR" />
+			<result column="language" property="language" jdbcType="INTEGER" />
+			<result column="blogname" property="blogname" jdbcType="VARCHAR" />
+			<result column="blog" property="blog" jdbcType="VARCHAR" />
+			<result column="honor" property="honor" jdbcType="VARCHAR" />
+			<result column="regdate" property="regdate" jdbcType="TIMESTAMP" />
+			<result column="lastlogin" property="lastlogin" jdbcType="TIMESTAMP" />
+		</association>
+	</resultMap>
+
+	<select id="getArticleFormList" resultMap="ArticleFormBaseResultMap">
+		select
+		*
+		from article a,user u
+		where a.user_id=u.user_id
+	</select>
+	<select id="getArticleById" resultMap="ArticleFormBaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		*
+		from article a,user u
+		where a.article_id=#{articleId}
+		and a.user_id=u.user_id
+	</select>
+	<!-- 查询某篇文章的标签 -->
+	<select id="getArticleTags" resultType="java.lang.String"
+		parameterType="java.lang.Integer">
+		select
+		t.tagname
+		from tags t
+		where t.tags_id in
+		(
+		select
+		at.tags_id
+		from article_tags at
+		where at.article_id=#{articleId}
+		)
+	</select>
+	<!-- 搜索文章 -->
+	<select id="getArticleIdSearch" resultType="java.lang.Integer"
+		parameterType="java.lang.String">
+		select
+		at.article_id
+		from article_tags at
+		where at.tags_id in
+			(select
+				t.tags_id
+				from tags t
+				where t.tagname like #{search}
+			)
+	</select>
+</mapper>
