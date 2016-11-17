@@ -106,12 +106,6 @@ public class ContestController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		/*if(cf.getPassword().equals(contest.getPassword())){
-			return  "redirect:/contest/contestdetail/"+cf.getContestId();
-			//return new ModelAndView("redirect:/toList");
-		}else{
-			return null;
-		}*/
 	}
 	
 	/**

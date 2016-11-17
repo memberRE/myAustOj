@@ -5,6 +5,7 @@ import java.util.List;
 import cn.edu.aust.pojo.Problem;
 import cn.edu.aust.pojo.ProblemWithBLOBs;
 import cn.edu.aust.pojo.form.ProblemForm;
+import cn.edu.aust.pojo.form.SolutionForm;
 
 public interface IProblemService {
 	int deleteByPrimaryKey(Integer problemId);
@@ -34,5 +35,12 @@ public interface IProblemService {
      * @return ProblemForm
      */
 	ProblemForm selectProblemById(int id);
+
+	/**
+	 * 查询某个具体用户的提交列表
+	 * @param userId
+	 * @return
+	 */
+	List<SolutionForm> selectSubmitList(Integer userId);
     
 }

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.edu.aust.dao.UserMapper" >
+	<!-- 验证用户 -->
+  <select id="verificationUser" resultMap="BaseResultMap" parameterType="cn.edu.aust.pojo.User" >
+    select 
+    <include refid="Base_Column_List" />
+    from user u
+    where (u.username=#{username,jdbcType=VARCHAR} or u.email=#{username,jdbcType=VARCHAR})
+    and u.password=#{password,jdbcType=VARCHAR}
+  </select>
+  
+	<!-- 查询用户名是否存在 -->
+  <select id="selectUserByUsername" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from user u
+    where u.username=#{username,jdbcType=VARCHAR}
+  </select>
+	<!-- 查询用户名已经提交并通过的题目ID(去除重复值) -->
+  <select id="FindACPronblemId" resultType="java.lang.Integer" parameterType="cn.edu.aust.pojo.Solution" >
+    select 
+    distinct s.problem_id 
+    from solution s
+    where s.user_id=#{userId,jdbcType=VARCHAR} 
+    and s.verdict=#{verdict,jdbcType=INTEGER}
+  </select>
+  
+	<!-- 查询用户名已经提交但并未通过的题目ID(去除重复值) -->
+  <select id="FindACBingPronblemId" resultType="java.lang.Integer" parameterType="cn.edu.aust.pojo.Solution" >
+    select 
+    distinct s.problem_id 
+    from solution s
+    where s.user_id=#{userId,jdbcType=VARCHAR} 
+    and s.verdict &lt;&gt; #{verdict,jdbcType=INTEGER}
+    and s.problem_id not in
+    (
+    select 
+    distinct s.problem_id 
+    from solution s
+    where s.user_id=#{userId,jdbcType=VARCHAR} 
+    and s.verdict=#{verdict,jdbcType=INTEGER}
+    )
+  </select>
+  
+  <!-- 排名查询 -->
+  <select id="getRankUserId" resultType="java.lang.Integer" >
+    select 
+    distinct s.user_id 
+    from solution s
+  </select>
+  
+  <!-- 查询某个用户提交数量 -->
+  <select id="getSubmitNum" resultType="java.lang.Integer" parameterType="java.lang.Integer" >
+    select 
+    count(*)
+    from solution s
+    where s.user_id=#{userId,jdbcType=VARCHAR} 
+  </select>
+  <!-- 查询某个用户提交通过数量 -->
+  <select id="getAcNum" resultType="java.lang.Integer" parameterType="java.lang.Integer" >
+    select 
+    count(*)
+    from solution s
+    where s.user_id=#{userId,jdbcType=VARCHAR} 
+    and s.verdict=5
+  </select>
+  
+</mapper>

@@ -10,6 +10,7 @@ import cn.edu.aust.dao.ProblemMapper;
 import cn.edu.aust.pojo.Problem;
 import cn.edu.aust.pojo.ProblemWithBLOBs;
 import cn.edu.aust.pojo.form.ProblemForm;
+import cn.edu.aust.pojo.form.SolutionForm;
 import cn.edu.aust.service.IProblemService;
 
 @Service("problemService")
@@ -81,6 +82,11 @@ public class ProblemServiceImpl implements IProblemService{
 	@Override
 	public ProblemForm selectProblemById(int id) {
 		return problemMapper.selectProblemById(id);
+	}
+
+	@Override
+	public List<SolutionForm> selectSubmitList(Integer userId) {
+		return problemMapper.selectSubmitList(userId);
 	}
 
 }

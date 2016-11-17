@@ -75,6 +75,10 @@
 											class="btn btn-primary btn-lg center-block"
 											data-toggle="modal" data-target="#myModal">提&nbsp;交</button>
 									</c:if>
+									<c:if test="${sessionScope.userLogin == null}">
+										<button type="button"
+											class="btn btn-primary btn-lg center-block" onclick="alert('请先登录');">提&nbsp;交</button>
+									</c:if>
 								</c:if>
 								<c:if test="${error != null}">
 									<div class="title">
@@ -123,14 +127,11 @@
 						</button>
 						<h4 class="modal-title">提交代码</h4>
 					</div>
-					<form id="pro_form"
-						action="${pageContext.request.contextPath}/problem/judge"
-						method="post">
+					<form id="pro_form" action="${pageContext.request.contextPath}/problem/judge" method="post">
 						<div class="modal-body">
 							<%--判断是否属于竞赛提交--%>
-							<input type="hidden" value="${consubmit>0?consubmit:0}"
-								name="contest_id"> <input type="hidden"
-								value="${problem.problem_id}" name="problem_id">
+							<input type="hidden" value="${consubmit>0?consubmit:0}" name="contestId"> 
+							<input type="hidden" value="${problem.problemId}" name="problemId">
 
 							<div class="form-group">
 								<label class="radio-inline">选择编译器:</label> <label

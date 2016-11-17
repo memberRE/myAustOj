@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -54,16 +55,16 @@
 										width="170" height="170"></a>
 								</dt>
 								<dd class="focus_num">
-									<b>${user.solved}</b>AC
+									<b>${fn:length(ACProId)}</b>AC 
 								</dd>
 								<dd class="focus_num">
-									<b>${user.submit}</b>CT
+									<b>${fn:length(ACBingProId)}</b>CT
 								</dd>
 							</dl>
 							<dl class="person-detail">
 								<dd>
 									&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-user"></i>&nbsp;昵称:&nbsp;&nbsp;${user.nickname}
-									<c:if test="${sessionScope.userLogin.id == user.id}">
+									<c:if test="${sessionScope.userLogin.userId == user.userId}">
 										<button type="button" data-toggle="modal"
 											data-target="#myModal" class="btn btn-primary btn-sm"
 											style="float: right; margin-right: 30px">
@@ -95,9 +96,8 @@
 							<br />
 							<h5 style="text-align: left; margin-left: 20px">AC的题目</h5>
 							<div class="tagcloud actagcloud clearfix">
-								<c:forEach items="${userAC}" var="p">
-									<a href="/problem/${p}" style="font-size: 15px;"
-										target="_blank">${p}</a>
+								<c:forEach items="${ACProId}" var="AC">
+									<a href="${pageContext.request.contextPath}/problem/${AC}" style="font-size: 15px;" target="_blank">${AC}</a>
 								</c:forEach>
 							</div>
 						</div>
@@ -105,9 +105,9 @@
 							<br />
 							<h5 style="text-align: left; margin-left: 20px">正攻克的题目</h5>
 							<div class="tagcloud actagcloud clearfix">
-								<c:forEach items="${userBeingAC}" var="p">
-									<a href="${pageContext.request.contextPath}/problem/${p}"
-										style="font-size: 15px;" target="_blank">${p}</a>
+								<c:forEach items="${ACBingProId}" var="ACBing">
+									<a href="${pageContext.request.contextPath}/problem/${ACBing}"
+										style="font-size: 15px;" target="_blank">${ACBing}</a>
 								</c:forEach>
 							</div>
 							<div style="padding-bottom: 50px"></div>
@@ -131,7 +131,7 @@
 
 	<!--模态框-->
 	<!--具体提交的模态框-->
-	<c:if test="${sessionScope.userLogin.id == user.id}">
+	<c:if test="${sessionScope.userLogin.userId == user.userId}">
 		<div class="modal fade" id="myModal">
 			<div class="modal-dialog">
 				<div class="modal-content">
@@ -145,7 +145,7 @@
 					<form class="form-horizontal"
 						action="${pageContext.request.contextPath}/user/update"
 						method="post">
-						<input type="hidden" value="${user.id}" name="id">
+						<input type="hidden" value="${user.userId}" name="userId">
 						<div class="modal-body">
 							<div class="form-group">
 								<label class="col-lg-2 control-label">用户名:</label>
@@ -189,15 +189,18 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-lg-2 control-label">博客:</label>
+								<label class="col-lg-2 control-label">博客名称:</label>
 								<div class="col-lg-10">
-									<input type="text" class="form-control"
-										value="${user.blogname}" name="blogname"> <input
-										type="text" class="form-control" value="${user.blog}"
-										name="blog">
+									<input type="text" class="form-control" value="${user.blogname}" name="blogname"> 
 								</div>
 							</div>
-
+							<div class="form-group">
+								<label class="col-lg-2 control-label">博客地址:</label>
+								<div class="col-lg-10">
+									<input type="text" class="form-control" value="${user.blog}" name="blog" onchange="checkBlog(this)">
+									<span class="text-danger toolmsg"></span>
+								</div>
+							</div>
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-default"
@@ -215,7 +218,7 @@
 			<div class="modal-dialog">
 				<form action="${pageContext.request.contextPath}/user/updateimg"
 					method="post" enctype="multipart/form-data">
-					<input type="hidden" value="${user.id}" name="id">
+					<input type="hidden" value="${user.userId}" name="userId">
 					<div class="modal-content">
 						<div class="modal-header">
 							<button type="button" class="close" data-dismiss="modal"
@@ -224,7 +227,7 @@
 							</button>
 							<h4 class="modal-title">修改资料</h4>
 							<br> <input type="file" class="form-control" id="up"
-								name="pictureFile">
+								name="file">
 						</div>
 						<div class="modal-body">
 							<div class="row text-center">
@@ -274,8 +277,6 @@
 	<script
 		src="${pageContext.request.contextPath}/static/js/flat-ui.min.js"></script>
 	<script src="${pageContext.request.contextPath}/static/js/app.js"></script>
-	<script src="http://apps.bdimg.com/libs/jquery/1.7.1/jquery.min.js"
-		type="text/javascript"></script>
 	<script
 		src="${pageContext.request.contextPath}/static/js/uploadShow.js"></script>
 	<script>
@@ -284,6 +285,33 @@
         $("#up").uploadPreview({ Img: "ImgPr2", Width: 130, Height: 130 });
         $("#up").uploadPreview({ Img: "ImgPr3", Width: 100, Height: 100 });
     });
+    
+    //博客地址格式验证
+    function checkBlog(bolg){
+    	var boUrl = bolg.value;
+    	var strRegex = "^((https|http|ftp|rtsp|mms)?://)"  
+    	       + "?(([0-9a-z_!~*'().&=+$%-]+: )?[0-9a-z_!~*'().&=+$%-]+@)?" //ftp的user@  
+    	       + "(([0-9]{1,3}\.){3}[0-9]{1,3}" // IP形式的URL- 199.194.52.184  
+    	       + "|" // 允许IP和DOMAIN（域名） 
+    	       + "([0-9a-z_!~*'()-]+\.)*" // 域名- www.  
+    	       + "([0-9a-z][0-9a-z-]{0,61})?[0-9a-z]\." // 二级域名  
+    	       + "[a-z]{2,6})" // first level domain- .com or .museum  
+    	       + "(:[0-9]{1,4})?" // 端口- :80  
+    	       + "((/?)|" // a slash isn't required if there is no file name  
+    	       + "(/[0-9a-z_!~*'().;?:@&=+$,%#-]+)+/?)$";  
+    	       var re=new RegExp(strRegex);  
+    	       if (re.test(boUrl) || boUrl==''){ 
+    	    	 //格式验证成功
+    	    		$('#emailSpan').text('*');
+    	    		$('#regBtn').removeClass('disabled');
+    	           return (true);  
+    	       }else{  
+    	    	 //邮箱格式验证失败
+    	    		$('#emailSpan').text('邮箱格式不正确');
+    	            $('#regBtn').addClass('disabled');
+    	           return (false);  
+    	       } 
+    }
 </script>
 </body>
 </html>

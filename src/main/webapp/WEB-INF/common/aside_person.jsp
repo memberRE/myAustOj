@@ -13,17 +13,17 @@
 	</h5>
 	<c:if test="${sessionScope.userLogin == null}">
 		<p class="text-center preson">
-			<a href="${pageContext.request.contextPath}/login" class="btn">登录</a>
-			<a href="${pageContext.request.contextPath}/register" class="btn">注册</a>
+			<a href="${pageContext.request.contextPath}/user/login" class="btn">登录</a>
+			<a href="${pageContext.request.contextPath}/user/register" class="btn">注册</a>
 		</p>
 	</c:if>
 	<c:if test="${sessionScope.userLogin != null}">
 		<p>
 			用户名: <a
-				href="${pageContext.request.contextPath}/user/${sessionScope.userLogin.id}">${sessionScope.userLogin.username}</a>
+				href="${pageContext.request.contextPath}/user/getUser/${sessionScope.userLogin.userId}">${sessionScope.userLogin.username}</a>
 		</p>
 		<p>
-			提交列表: <a href="${pageContext.request.contextPath}/problem/sub">查看</a>
+			提交列表: <a href="${pageContext.request.contextPath}/problem/toSubmit">查看</a>
 		</p>
 		<p>宣言: ${sessionScope.userLogin.motto}</p>
 	</c:if>

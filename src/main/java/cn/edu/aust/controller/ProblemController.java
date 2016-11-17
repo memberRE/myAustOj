@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,7 +24,10 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
 import cn.edu.aust.pojo.Problem;
+import cn.edu.aust.pojo.Solution;
+import cn.edu.aust.pojo.User;
 import cn.edu.aust.pojo.form.ProblemForm;
+import cn.edu.aust.pojo.form.SolutionForm;
 import cn.edu.aust.service.IProblemService;
 import cn.edu.aust.util.PageUtil;
 /**
@@ -71,6 +75,11 @@ public class ProblemController {
 	}
 	
 	
+	/**
+	 * 根据问题ID查询问题
+	 * @param id
+	 * @return
+	 */
 	@RequestMapping(value="/{id}")
 	 public ModelAndView findProblemById(
 			 @PathVariable("id") int id){
@@ -85,4 +94,33 @@ public class ProblemController {
 		return mav;
 	}
 	
+	/**
+	 * 跳转到用户提交列表页面
+	 * @return
+	 */
+	@RequestMapping("toSubmit")
+	public String toSubmit(){
+		return "submit";
+	}
+	
+	/**
+	 * 获取用户的提交列表
+	 * @param
+	 * @return
+	 */
+	@RequestMapping(value="/getsubmitList")
+	public @ResponseBody Map<String,Object> getsubmitList(HttpSession session,
+			@RequestBody PageUtil pageUtil){
+		Map<String, Object> maps = new HashMap<>();
+	    PageHelper.startPage(pageUtil.getOffset()/pageUtil.getLimit()+1,pageUtil.getLimit());
+	    User user = (User) session.getAttribute("userLogin");
+	    //查询当前用户的提交列表
+	    List<SolutionForm> SolutionList = this.problemService.selectSubmitList(user.getUserId());
+	    //用PageInfo对结果进行包装
+	    PageInfo<SolutionForm> page = new PageInfo<SolutionForm>(SolutionList);
+	    log.info("获取的数据总数：" + page.getTotal() + "  获取的数据：" + page.getList());
+	    maps.put("total",page.getTotal());
+	    maps.put("rows", page.getList());
+		return maps;
+	}
 }

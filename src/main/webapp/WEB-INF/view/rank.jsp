@@ -55,9 +55,10 @@
 									<th class="col-xs-2" data-formatter="tablerankid">RankID</th>
 									<th class="col-xs-3" data-formatter="tableusername"
 										data-field="nickname">昵称</th>
-									<th class="col-xs-2" data-field="solved">AC</th>
+									<th class="col-xs-2" data-field="ac">AC</th>
 									<th class="col-xs-1" data-field="submit">Submit</th>
-									<th class="col-xs-1" data-formatter="tableuserradio">Ratio</th>
+									<!-- <th class="col-xs-1" data-formatter="tableuserradio">Ratio</th> -->
+									<th class="col-xs-1" data-field="ratio">Ratio</th>
 									<th class="col-xs-3" data-formatter="tableuserblog"
 										data-field="blogname">博客</th>
 								</tr>

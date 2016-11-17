@@ -43,7 +43,34 @@
 			<result column="lastlogin" property="lastlogin" jdbcType="TIMESTAMP" />
 		</association>
 	</resultMap>
-
+	<!-- 用户提交列表 -->
+	<resultMap id="BaseSolutionResultMap" type="cn.edu.aust.pojo.form.SolutionForm" >
+    <id column="solution_id" property="solutionId" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="memory" property="memory" jdbcType="INTEGER" />
+    <result column="time" property="time" jdbcType="INTEGER" />
+    <result column="submit_date" property="submitDate" jdbcType="TIMESTAMP" />
+    <result column="code_length" property="codeLength" jdbcType="INTEGER" />
+    <result column="language" property="language" jdbcType="TINYINT" />
+    <result column="verdict" property="verdict" jdbcType="INTEGER" />
+    <result column="source" property="source" jdbcType="LONGVARCHAR" />
+    <association property="problem" javaType="cn.edu.aust.pojo.ProblemWithBLOBs">
+    	<id column="problem_id" property="problemId" jdbcType="INTEGER" />
+	    <result column="title" property="title" jdbcType="VARCHAR" />
+	    <result column="tag" property="tag" jdbcType="VARCHAR" />
+	    <result column="catelog_id" property="catelogId" jdbcType="INTEGER" />
+	    <result column="stage" property="stage" jdbcType="INTEGER" />
+	    <result column="time_limit" property="timeLimit" jdbcType="INTEGER" />
+	    <result column="memory_limit" property="memoryLimit" jdbcType="INTEGER" />
+	    <result column="user_id" property="userId" jdbcType="INTEGER" />
+	    <result column="description" property="description" jdbcType="LONGVARCHAR" />
+	    <result column="input" property="input" jdbcType="LONGVARCHAR" />
+	    <result column="output" property="output" jdbcType="LONGVARCHAR" />
+	    <result column="sample_input" property="sampleInput" jdbcType="LONGVARCHAR" />
+	    <result column="sample_output" property="sampleOutput" jdbcType="LONGVARCHAR" />
+	    <result column="hint" property="hint" jdbcType="LONGVARCHAR" />
+	</association>
+  </resultMap>
 	<!-- 按照等级查询题目题目，包括所包含的题目分类信息和作者信息 -->
 	<select id="selectByStage" resultMap="BaseResultMapEx" parameterType="java.lang.Integer">
 		select
@@ -81,6 +108,15 @@
 		where p.problem_id=#{id,jdbcType=INTEGER}
 		and p.catelog_id = c.catelog_id
 		and p.user_id = u.user_id
+	</select>
+	
+	<!-- 通过用户ID查询提交列表 -->
+	<select id="selectSubmitList" resultMap="BaseSolutionResultMap" parameterType="java.lang.Integer">
+	select 
+    *
+    from solution s,problem p
+    where s.user_id=#{userId,jdbcType=VARCHAR} 
+    and p.problem_id=s.problem_id
 	</select>
 
 </mapper>

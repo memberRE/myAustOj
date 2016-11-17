@@ -43,13 +43,13 @@
 		<ul class="nav navbar-nav navbar-right">
 			<c:if test="${sessionScope.userLogin != null}">
 				<li><a
-					href="${pageContext.request.contextPath}/user/${sessionScope.userLogin.id}">${sessionScope.userLogin.nickname}</a></li>
+					href="${pageContext.request.contextPath}/user/getUser/${sessionScope.userLogin.userId}">${sessionScope.userLogin.nickname}</a></li>
 				<li><a href="${pageContext.request.contextPath}/loginout">退出</a></li>
 			</c:if>
 			<c:if test="${sessionScope.userLogin == null}">
-				<li><a href="${pageContext.request.contextPath}/login">Login
+				<li><a href="${pageContext.request.contextPath}/user/login">Login
 						in</a></li>
-				<li><a href="${pageContext.request.contextPath}/register">Register</a></li>
+				<li><a href="${pageContext.request.contextPath}/user/register">Register</a></li>
 			</c:if>
 
 		</ul>

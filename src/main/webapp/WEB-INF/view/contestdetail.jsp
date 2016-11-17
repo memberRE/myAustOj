@@ -66,7 +66,7 @@
 									<c:forEach items="${CP}" var="cproblem">
 										<tr>
 											<td class="col-xs-1">${cproblem.problemId}</td>
-											<td class="col-xs-5"><a href="/contest/${contestId}/pro/${cproblem.problemId}" target="_blank">${cproblem.title}</a></td>
+											<td class="col-xs-5"><a href="${pageContext.request.contextPath}/problem/${cproblem.problemId}" target="_blank">${cproblem.title}</a></td>
 											<%-- <td class="col-xs-1">${cproblem.point}</td> --%>
 											<c:if test="${cproblem.submit == 0}">
 												<td class="col-xs-1">${cproblem.ac/1}</td>
@@ -106,10 +106,10 @@
 	<script
 		src="${pageContext.request.contextPath}/static/js/flat-ui.min.js"></script>
 	<script src="${pageContext.request.contextPath}/static/js/app.js"></script>
-	<script>
+	<!-- <script>
     <c:if test="${sessionScope.contestId != contest.contestId}">
         window.location.href = '/404';
     </c:if>
-	</script>
+	</script> -->
 </body>
 </html>

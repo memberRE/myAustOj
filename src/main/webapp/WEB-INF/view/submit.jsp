@@ -17,10 +17,9 @@
 	href="${pageContext.request.contextPath}/static/css/font-awesome.min.css"
 	rel="stylesheet">
 <link
-	href="${pageContext.request.contextPath}/static/css/bootstrap-table.min.css"
-	rel="stylesheet">
-<link href="${pageContext.request.contextPath}/static/css/app.css"
-	rel="stylesheet">
+	href="${pageContext.request.contextPath}/static/css/bootstrap-table.min.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/static/css/monokai-sublime.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/static/css/app.css" rel="stylesheet">
 </head>
 <body>
 	<!--头部开始-->
@@ -48,8 +47,8 @@
 						<p class="page-text" style="text-indent: 2em;">如有问题请发送反馈告知</p>
 						<h4 class="text-center">提交列表</h4>
 						<table class="table-bordered text-center" width="80%"
-							data-toggle="table" id="submit-table">
-							<thead>
+							data-toggle="table" id="submit-table" style="text-align: center;">
+							<!-- <thead>
 								<tr>
 									<th class="col-xs-1" data-field="solution_id">ID</th>
 									<th class="col-xs-3" data-formatter="problemtitle"
@@ -68,7 +67,7 @@
 							</thead>
 							<tbody>
 
-							</tbody>
+							</tbody> -->
 						</table>
 					</section>
 				</div>
@@ -82,6 +81,30 @@
 			</div>
 		</div>
 	</div>
+	<!-- 代码显示 -->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					&times;
+				</button>
+				<h4 class="modal-title" id="myModalLabel">
+					源码
+				</h4>
+			</div>
+			<div id='codeDiv' class="modal-body">
+				<pre class="prettyprint">
+					<code class="hljs" id="MyCode">
+					</code>
+				</pre>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-sm" data-dismiss="modal">关闭</button>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal -->
+</div>
 	<!--主体结束-->
 
 	<footer>
@@ -97,8 +120,9 @@
 		src="${pageContext.request.contextPath}/static/js/bootstrap-table.min.js"></script>
 	<script
 		src="${pageContext.request.contextPath}/static/js/bootstrap-table-zh-CN.min.js"></script>
+	<script src="${pageContext.request.contextPath}/static/js/highlight.pack.js"></script>
 	<script src="${pageContext.request.contextPath}/static/js/app.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/static/js/table-demo.js"></script>
+	<script src="${pageContext.request.contextPath}/static/js/table-demo.js"></script>
+	<script>hljs.initHighlightingOnLoad();</script>
 </body>
 </html>

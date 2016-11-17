@@ -5,6 +5,7 @@ import java.util.List;
 import cn.edu.aust.pojo.Problem;
 import cn.edu.aust.pojo.ProblemWithBLOBs;
 import cn.edu.aust.pojo.form.ProblemForm;
+import cn.edu.aust.pojo.form.SolutionForm;
 
 public interface ProblemMapper {
     int deleteByPrimaryKey(Integer problemId);
@@ -28,4 +29,6 @@ public interface ProblemMapper {
 	int selectSubmitById(int id);
 
 	ProblemForm selectProblemById(int id);
+
+	List<SolutionForm> selectSubmitList(Integer userId);
 }

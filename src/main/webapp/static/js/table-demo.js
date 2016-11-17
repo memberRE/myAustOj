@@ -56,7 +56,7 @@ function setTable(obj,url) {
 }
     //排名请求
     $("#rank-table").bootstrapTable({
-        url: projectPath + "user/userRank",//这里配置请求链接
+        url: projectPath + "/user/userRank",//这里配置请求链接
         method: 'post',
         cache: true,					   //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
         pagination: true,				   //是否显示分页（*）
@@ -67,7 +67,7 @@ function setTable(obj,url) {
         showRefresh: !0,
         pageNumber:1,					   //初始化加载第一页，默认第一页
         pageSize:10,
-        pageList:[20, 30, 50, 100],
+        pageList:[10, 20, 30, 50],
         showColumns: !0,
         iconSize: "outline",
         icons: {refresh: "glyphicon-repeat", columns: "glyphicon-list"},
@@ -76,7 +76,7 @@ function setTable(obj,url) {
 
     //提交请求
     $("#submit-table").bootstrapTable({
-        url: projectPath +"problem/sub",//这里配置请求链接
+        url: projectPath +"/problem/getsubmitList",//这里配置请求链接
         method: 'post',
         cache: true,					   //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
         pagination: true,				   //是否显示分页（*）
@@ -86,12 +86,46 @@ function setTable(obj,url) {
         striped: true,
         showRefresh: !0,
         pageNumber:1,					   //初始化加载第一页，默认第一页
-        pageSize:20,
-        pageList:[20, 30, 50, 100],
+        pageSize:10,
+        pageList:[10, 20, 30, 50],
         showColumns: !0,
         iconSize: "outline",
         icons: {refresh: "glyphicon-repeat", columns: "glyphicon-list"},
         uniqueId: "id",
+        columns: [{
+            field: 'solutionId',
+            title: 'ID'
+        }, {
+            field: 'problem.title',
+            title: '题目',
+            formatter:function(value,row,index){
+            	return [
+                    '<div>',
+                    '<a href="'+projectPath+'/problem/'+row.problem.problemId+'" target="_blank">' + value + '</a>',
+                    '</div>'
+                ].join('');
+            }
+        }, {
+        	field: 'memory',
+        	title: '内存(M)',
+        	formatter: 'setmemory'
+        }, {
+        	field: 'time',
+        	title: '时间(ms)'
+        }, {
+        	field: 'language',
+        	title: '语言',
+        	formatter: 'setlanguage'
+        }, {
+        	field: 'verdict',
+        	title: '状态',
+        	formatter:'setverdict'
+        }, {
+        	field: 'source',
+        	title: '代码',
+        	formatter:'setSource',
+        	event:'setCode'
+        }],
     });
 
 
@@ -183,10 +217,57 @@ function setcontest(value, row, index) {
 function problemtitle(value, row, index) {
     return [
         '<div>',
-        '<a href="'+projectPath+'problem/'+row.problem_id+'" target="_blank">' + value + '</a>',
+        '<a href="'+projectPath+'problem/'+row.problemId+'" target="_blank">' + value + '</a>',
         '</div>'
     ].join('');
 }
+
+//查看代码，设置为进行高亮显示
+function setSource(value, row, index) {
+	/*alert(value);
+	$('#codeDiv').html(
+			'<pre class="prettyprint"><code class="hljs" id="MyCode">'+value+'</code></pre >'		
+	);
+	var language = row.language;
+	switch (language){
+    case 3:
+    	language = 'c';break;
+    case 4:
+    	language = 'c++';break;
+    case 5:
+    	language = 'java';
+	}
+	
+	$('#MyCode').addClass(language);*/
+	//$('#MyCode').text(value);
+	//使用数组将代码的值记录下来
+	return [
+		'<button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#myModal" onclick="setCode(this)">查看</button>'+
+		'<p style="display:none;">'+row.language+'</p>'+
+		'<p style="display:none;">'+value+'</p>'
+		].join('');
+}
+
+function setCode(btn){
+	var $btn = $(btn);
+	var language = $btn.next().text();
+	var code = $btn.next().next().text();
+	//var language = row.language;
+	
+	switch (language){
+    case '3':
+    	language = 'c';break;
+    case '4':
+    	language = 'c++';break;
+    case '5':
+    	language = 'java';
+	}
+	
+	$('#MyCode').addClass(language);
+	$('#MyCode').text(code);
+}
+
+
 //更改题目Ratio
 function problemRatio(value, row, index) {
     return [
@@ -231,7 +312,7 @@ function tableusername(value, row, index) {
     }
     return [
         '<div>',
-        '<a href="'+projectPath+'user/'+row.id+'" target="_blank">' + value + '</a>',
+        '<a href="'+projectPath+'/user/getUser/'+row.userId+'" target="_blank">' + value + '</a>',
         '</div>'
     ].join('');
 }
