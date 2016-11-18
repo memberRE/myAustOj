@@ -1,9 +1,12 @@
 package cn.edu.aust.pojo;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class User {
-    private Integer userId;
+public class User implements Serializable{
+	private static final long serialVersionUID = 5655305848764480707L;
+
+	private Integer userId;
 
     private String avatar;
 

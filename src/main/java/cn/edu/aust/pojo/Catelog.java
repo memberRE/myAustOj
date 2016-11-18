@@ -1,7 +1,11 @@
 package cn.edu.aust.pojo;
 
-public class Catelog {
-    private Integer catelogId;
+import java.io.Serializable;
+
+public class Catelog implements Serializable{
+	private static final long serialVersionUID = 1976116937117631103L;
+
+	private Integer catelogId;
 
     private String catename;
 

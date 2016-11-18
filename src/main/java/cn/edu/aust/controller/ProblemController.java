@@ -53,22 +53,15 @@ public class ProblemController {
 			 @RequestBody PageUtil pageUtil,
 			 @PathVariable("stage") int stage){
 		Map<String, Object> maps = new HashMap<>();
-		/*//在服务端设置默认值
-		pageNumber = pageNumber == null?1:pageNumber;
-	    pageSize = pageSize == null?10:pageSize;
-	    System.out.println("stage:" + stage);
-	    */
-		//log.info("pageSize:" + pageSize + "  pageNumber:" + pageNumber);
 	    //分页查询问题
 	    //PageHelper.startPage(pageNumber, pageSize);
 	    PageHelper.startPage(pageUtil.getOffset()/pageUtil.getLimit()+1,pageUtil.getLimit());
-
 	    
 	    List<ProblemForm> list = this.problemService.selectByStage(stage);
 	    //用PageInfo对结果进行包装
 	    PageInfo<ProblemForm> page = new PageInfo<ProblemForm>(list);
 		
-	    log.info("获取的数据总数：" + page.getTotal() + "  获取的数据：" + page.getList());
+	    //log.info("获取的数据总数：" + page.getTotal() + "  获取的数据：" + page.getList());
 	    maps.put("total",page.getTotal());
 	    maps.put("rows", page.getList());
 	    

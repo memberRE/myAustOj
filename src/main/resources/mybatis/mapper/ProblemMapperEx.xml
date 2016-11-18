@@ -2,9 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="cn.edu.aust.dao.ProblemMapper">
 
-	 <!--启用二级缓存-->
-  <!--  <cache type="org.mybatis.caches.ehcache.EhcacheCache"/>  -->
-    
+	<!--启用二级缓存-->
+	<!--  <cache type="org.mybatis.caches.ehcache.EhcacheCache"/>  -->
+	<!--启用二级缓存 这个配置可以输出日志-->
+  	<cache type="org.mybatis.caches.ehcache.LoggingEhcache"/> 
+  
 	<resultMap id="BaseResultMapEx" type="cn.edu.aust.pojo.form.ProblemForm">
 		<id column="problem_id" property="problemId" jdbcType="INTEGER" />
 		<result column="title" property="title" jdbcType="VARCHAR" />

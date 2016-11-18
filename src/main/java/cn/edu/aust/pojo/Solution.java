@@ -1,9 +1,12 @@
 package cn.edu.aust.pojo;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Solution {
-    private Integer solutionId;
+public class Solution implements Serializable{
+	private static final long serialVersionUID = 755147543548810668L;
+
+	private Integer solutionId;
 
     private Integer problemId;
 

@@ -1,10 +1,13 @@
 package cn.edu.aust.pojo.form;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import cn.edu.aust.pojo.Problem;
 
-public class SolutionForm {
+public class SolutionForm implements Serializable{
+	private static final long serialVersionUID = -8558440012512246159L;
+
 	private Integer solutionId;
 
     private Problem problem;

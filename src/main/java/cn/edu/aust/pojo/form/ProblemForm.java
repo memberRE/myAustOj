@@ -1,10 +1,15 @@
 package cn.edu.aust.pojo.form;
 
+import java.io.Serializable;
+
 import cn.edu.aust.pojo.Catelog;
 import cn.edu.aust.pojo.User;
 
-public class ProblemForm {
-    private Integer problemId;
+public class ProblemForm implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
+
+	private Integer problemId;
 
     private String title;
     

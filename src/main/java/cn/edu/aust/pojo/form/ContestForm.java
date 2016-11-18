@@ -1,11 +1,14 @@
 package cn.edu.aust.pojo.form;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import cn.edu.aust.pojo.User;
 
-public class ContestForm {
+public class ContestForm implements Serializable{
+	private static final long serialVersionUID = 3509575655283917782L;
+
 	private Integer contestId;
 
 	private String title;
