@@ -3,6 +3,7 @@ package cn.edu.aust.controller;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -41,6 +42,7 @@ import cn.edu.aust.pojo.form.SolutionForm;
 import cn.edu.aust.service.IUserService;
 import cn.edu.aust.util.DecriptUtil;
 import cn.edu.aust.util.PageUtil;
+import cn.edu.aust.util.TimeUtil;
 
 /**
  * 登录页面控制器
@@ -119,6 +121,10 @@ public class UserController {
 			//进行验证
 			User userLogin = this.userService.verificationUser(user);
 			if(null != userLogin){
+				//更新此用户最后一次登录时间
+				//String date = TimeUtil.getDate(new Date());
+				userLogin.setLastlogin(new Date());
+				this.userService.updateLastTime(userLogin);
 				//验证成功 将用户信息加入到session中去
 				maps.put("type", "1");
 				session.setAttribute("userLogin", userLogin);
@@ -305,5 +311,11 @@ public class UserController {
 		maps.put("total", page.getTotal());
 		maps.put("rows", page.getList());
 		return maps;
+	}
+	
+	@RequestMapping(value = "/loginout")
+	public String loginout(HttpSession session){
+		session.setAttribute("userLogin", null);
+		return "login";
 	}
 }

@@ -16,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -123,16 +124,50 @@ public class ProblemController {
 		return maps;
 	}
 	
-	
-	@RequestMapping(value="/catelog/{catelogId}")
-	 public ModelAndView findProblemByCatelogId(@PathVariable("catelogId") int catelogId){
-		ModelAndView mav = new ModelAndView("problem");
-		ProblemForm pf = this.problemService.selectProblemByCatelogId(catelogId);
-		if(null != pf){
-			mav.addObject("problem",pf);
-		}else{
-			mav.addObject("error","获取题目失败，题目不存在！");
-		}
+	//转到搜索列表页面
+	@RequestMapping(value="/tocatelog/{catelogId}/{content}")
+	 public ModelAndView toCatelogproblem(@PathVariable("catelogId") int catelogId,
+			 @PathVariable("content") String content){
+		ModelAndView mav = new ModelAndView("catelogproblem");
+		mav.addObject("catelogId",catelogId);
+		mav.addObject("content",content);
 		return mav;
 	}
+	
+	
+	@RequestMapping(value="/catelog/{catelogId}")
+	 public @ResponseBody Map<String,Object> findProblemByCatelogId(
+			 @PathVariable("catelogId") int catelogId,
+			 @RequestBody PageUtil pageUtil){
+		Map<String, Object> maps = new HashMap<>();
+		PageHelper.startPage(pageUtil.getOffset()/pageUtil.getLimit()+1,pageUtil.getLimit());
+		List<ProblemForm> pfList = this.problemService.selectProblemByCatelogId(catelogId);
+		 //用PageInfo对结果进行包装
+	    PageInfo<ProblemForm> page = new PageInfo<ProblemForm>(pfList);
+			maps.put("total",page.getTotal());
+		    maps.put("rows", page.getList());
+		return maps;
+	}
+	
+	//转到搜索列表页面
+		@RequestMapping(value="/search",method=RequestMethod.GET)
+		 public ModelAndView toSearchproblem(String search){
+			ModelAndView mav = new ModelAndView("searchproblem");
+			mav.addObject("search",search);
+			return mav;
+		}
+		
+		@RequestMapping(value="/search/{search}",method=RequestMethod.POST)
+		 public @ResponseBody Map<String,Object> getProblemListBySearch(
+				 @PathVariable("search") String search,
+				 @RequestBody PageUtil pageUtil){
+			Map<String, Object> maps = new HashMap<>();
+			PageHelper.startPage(pageUtil.getOffset()/pageUtil.getLimit()+1,pageUtil.getLimit());
+			List<ProblemForm> pfList = this.problemService.getProblemListBySearch(search);
+			 //用PageInfo对结果进行包装
+		    PageInfo<ProblemForm> page = new PageInfo<ProblemForm>(pfList);
+				maps.put("total",page.getTotal());
+			    maps.put("rows", page.getList());
+			return maps;
+		}
 }

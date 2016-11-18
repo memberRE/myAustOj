@@ -16,4 +16,9 @@ public class Contants {
 	 * 干货页面每页展示的文章数
 	 */
 	public final static int ARTICLE_PAGESIZE = 10;
+	
+	/**
+	 * 静态文件存储位置，正式部署时需要进行修改
+	 */
+	public final static String STATIC_PATH = "F:\\mavenProject\\myAustOj\\src\\main\\webapp\\static";
 }

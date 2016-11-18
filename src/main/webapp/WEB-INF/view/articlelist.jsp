@@ -165,7 +165,7 @@
 							<div class="form-group">
 								<div class="input-group">
 									<input type="search" class="form-control" size="80%"
-										value="${search.substring(1,search.length()-1)}" name="search">
+										value="${search}" name="search">
 									<span class="input-group-btn">
 										<button class="btn btn-sm" type="submit"
 											style="background-color: #fff">

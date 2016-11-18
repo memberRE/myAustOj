@@ -68,4 +68,28 @@
 				where t.tagname like #{search}
 			)
 	</select>
+
+	<resultMap id="TagsJSONBaseResultMap" type="cn.edu.aust.pojo.Tags">
+		<id column="tags_id" property="tagsId" jdbcType="INTEGER" />
+		<result column="tagname" property="tagname" jdbcType="VARCHAR" />
+	</resultMap>
+	<!--获取标签列表 -->
+	<select id="getTagsList" resultMap="TagsJSONBaseResultMap">
+		select
+		*
+		from tags t
+		order by t.tags_id 
+	</select>
+	<resultMap id="articleJSONBaseResultMap" type="cn.edu.aust.pojo.form.ArticleJSONForm">
+		<id column="article_id" property="id" jdbcType="INTEGER" />
+		<result column="title" property="title" jdbcType="VARCHAR" />
+	</resultMap>
+	<!--获取最新4篇文章列表 -->
+	<select id="getArticleJSONList" resultMap="articleJSONBaseResultMap">
+		select
+		a.article_id,a.title
+		from article a
+		order by a.start_time DESC
+		limit 4
+	</select>
 </mapper>

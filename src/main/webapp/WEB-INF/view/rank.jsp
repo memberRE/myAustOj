@@ -44,8 +44,8 @@
 				<div class="col-md-9">
 					<!--主面板-->
 					<section class="animated fadeInLeft">
-						<strong></strong><br />
-						<p class="page-text" style="text-indent: 2em;"></p>
+						<strong>须知:</strong><br />
+						<p class="page-text" style="text-indent: 2em;">此排名仅根据用户提交通过的数量进行，仅供参考。</p>
 						<h4 class="text-center">排名列表</h4>
 						<table class="table-bordered text-center" width="80%"
 							data-toggle="table" id="rank-table">

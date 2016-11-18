@@ -50,30 +50,12 @@
 					<!--主面板-->
 					<section>
 						<span>&nbsp;&nbsp;当前所属目录:</span> <span class="text-center"
-							style="margin-left: 10px"><b>${content}</b></span> <br />
+							style="margin-left: 10px"><b>${search}</b></span> <br />
 
 						<h4 class="text-center">题目列表</h4>
 						<table class="table-bordered" width="100%" data-toggle="table"
-							id="cate-table">
-							<input type="hidden" value="${catelogId}" id="catelogId">
-							<!--名字未起完--  hidden>
-							<!-- <thead>
-								<tr>
-									<th class="col-xs-1" data-sortable="true"
-										data-formatter="problemid" data-field="problem_id"
-										data-align="center">ID</th>
-									<th class="col-xs-5" data-formatter="problemtitle"
-										data-field="title">题目标题</th>
-									<th class="col-xs-3" data-field="tag">涉及知识点</th>
-									<th class="col-xs-1" data-formatter="problemRatio"
-										data-field="ratio" data-align="center">Ratio</th>
-									<th class="col-xs-2" data-formatter="problemacsubmit"
-										data-field="acsubmit" data-align="center">AC/Submit</th>
-								</tr>
-							</thead>
-							<tbody>
-
-							</tbody> -->
+							id="search-table" style="text-align: center;">
+							<input type="hidden" value="${search}" id="search">
 						</table>
 					</section>
 				</div>

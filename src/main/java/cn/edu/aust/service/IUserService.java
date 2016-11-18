@@ -24,4 +24,10 @@ public interface IUserService {
 
 	List<RankForm> userRank();
 
+	/**
+	 * 更新最后一次登录时间
+	 * @param userLogin
+	 */
+	void updateLastTime(User userLogin);
+
 }

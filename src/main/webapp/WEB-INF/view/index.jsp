@@ -43,14 +43,12 @@
 				</div>
 				<div class="row animated fadeInDown">
 					<div class="col-md-4 col-md-offset-4">
-						<form class="sign-form" action="/register">
+						<form class="sign-form" action="${pageContext.request.contextPath}/problem/search">
 							<div class="form-group">
 								<div class="input-group">
-									<input type="email" class="form-control"
-										placeholder="Email Address" required id="email" name="email">
+									<input type="text" class="form-control" name="search">
 									<span class="input-group-btn">
-										<button class="btn" type="submit" id="Signup">Sign Me
-											Up!</button>
+										<button class="btn" type="submit" id="Signup">Search</button>
 									</span>
 								</div>
 							</div>
@@ -124,7 +122,7 @@
 									</p>
 									<p>
 										<a role="button" class="btn btn-primary"
-											href="${pageContext.request.contextPath}/articlelist">Read</a>
+											href="${pageContext.request.contextPath}/articles">Read</a>
 									</p>
 								</div>
 							</div>

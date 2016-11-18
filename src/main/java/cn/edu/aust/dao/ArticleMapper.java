@@ -4,7 +4,9 @@ import java.util.List;
 
 import cn.edu.aust.pojo.Article;
 import cn.edu.aust.pojo.ArticleWithBLOBs;
+import cn.edu.aust.pojo.Tags;
 import cn.edu.aust.pojo.form.ArticleForm;
+import cn.edu.aust.pojo.form.ArticleJSONForm;
 
 public interface ArticleMapper {
     int deleteByPrimaryKey(Integer articleId);
@@ -28,4 +30,8 @@ public interface ArticleMapper {
 	ArticleForm getArticleById(Integer articleId);
 
 	List<Integer> getArticleIdSearch(String search);
+
+	List<Tags> getTagsList();
+
+	List<ArticleJSONForm> getArticleJSONList();
 }

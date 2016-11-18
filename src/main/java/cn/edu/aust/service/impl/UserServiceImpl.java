@@ -92,4 +92,9 @@ public class UserServiceImpl implements IUserService{
 		
 		return rankFormList;
 	}
+
+	@Override
+	public void updateLastTime(User userLogin) {
+		this.userMapper.updateByPrimaryKeySelective(userLogin);
+	}
 }

@@ -22,7 +22,7 @@ $(function () {
         var startTime = $(this).parent().next().text();
         //获取比赛结束时间
         var endTime = $(this).parent().next().next().text();
-        alert("now:" + nowTime + "\nstartTime:" + startTime +"\nendTime:" + endTime);
+        //alert("now:" + nowTime + "\nstartTime:" + startTime +"\nendTime:" + endTime);
         //判断时间
         if(nowTime > endTime){
         	//比赛已经结束
@@ -78,7 +78,7 @@ $(function () {
                    var objs = jQuery.parseJSON(data);
                    //alert("正确" + data +"  " + status + "  " + objs.type);
                    if(objs.type == '1'){
-                	   alert("验证成功");
+                	   //alert("验证成功");
                 	   window.location.href=projectPath+"/contest/contestdetail/"+objs.ContestId;
                    }else{
                 	   alert("密码错误");

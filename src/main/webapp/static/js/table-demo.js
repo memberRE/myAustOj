@@ -7,6 +7,12 @@ setTable($("#start-table"),projectPath  + "/problem/findStageProblem/1");
 setTable($("#practice-table"),projectPath + "/problem/findStageProblem/2");
 //master表格数据获取
 setTable($("#master-table"),projectPath + "/problem/findStageProblem/3");
+//catelogproblem表格数据获取
+var catelogId = $('#catelogId').val();
+setTable($("#cate-table"),projectPath + "/problem/catelog/"+ catelogId);
+//searchproblem表格数据获取
+var search = $('#search').val();
+setTable($("#search-table"),projectPath + "/problem/search/"+ search);
 //获取指定目录下的题目
 var cateid = $("#cateid").val();
 setTable($("#cate-table"),projectPath + "/problem/findCateProblem/"+cateid);
@@ -18,7 +24,8 @@ function setTable(obj,url) {
         cache: false,					   //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
         pagination: true,				   //是否显示分页（*）
         sidePagination: "server",		   //分页方式：client客户端分页，server服务端分页（*）
-        search: !0,
+        search: true,
+        silent : true, // 必须设置刷新事件
         striped: true,
         showRefresh: !0,
         pageNumber:1,					   //初始化加载第一页，默认第一页
@@ -54,6 +61,16 @@ function setTable(obj,url) {
         }],
     });
 }
+/*
+ * 设置自定义搜索，暂未实现
+	$('input.form-control.input-outline').first().keypress(function(e){
+		 var key = e.which; //e.which是按键的值
+		    if (key == 13) {
+		    	var search = $(this).val();
+		    	setTable($("#search-table"),projectPath + "/problem/search/"+ search);
+		    }
+	});*/
+
     //排名请求
     $("#rank-table").bootstrapTable({
         url: projectPath + "/user/userRank",//这里配置请求链接
@@ -128,6 +145,7 @@ function setTable(obj,url) {
         }],
     });
 
+    	
 
 function queryParams(params) {
     return {

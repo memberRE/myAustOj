@@ -5,11 +5,18 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.slf4j.Logger;
 import org.springframework.stereotype.Service;
 
+import com.alibaba.fastjson.JSON;
+
 import cn.edu.aust.dao.ArticleMapper;
+import cn.edu.aust.pojo.Tags;
 import cn.edu.aust.pojo.form.ArticleForm;
+import cn.edu.aust.pojo.form.ArticleJSONForm;
 import cn.edu.aust.service.IArticleService;
+import cn.edu.aust.util.JSONFileUtil;
+import cn.edu.aust.util.MyLogUtil;
 
 @Service("articleService")
 public class ArticleServiceImpl implements IArticleService{
@@ -50,5 +57,28 @@ public class ArticleServiceImpl implements IArticleService{
 		}
 		return articleList;
 	}
+
+	@Override
+	public void refreshTags(String path) {
+		List<Tags> tagsJSONList = this.articleMapper.getTagsList();
+		String text = JSON.toJSONString(tagsJSONList);
+		Logger log =  MyLogUtil.getLogger();
+		log.info("tagsJSONList写入文件路径：" + path);
+		log.info("转换为JSON的Tags："+text);
+		JSONFileUtil.refreshTags(path, text);
+	}
+
+	@Override
+	public void refreshArticle(String path) {
+		List<ArticleJSONForm> articleJSONList = this.articleMapper.getArticleJSONList();
+		
+		String text = JSON.toJSONString(articleJSONList);
+		Logger log =  MyLogUtil.getLogger();
+		log.info("articleJSONList写入文件路径：" + path);
+		log.info("转换为JSON的article："+text);
+		JSONFileUtil.refreshTags(path, text);
+	}
+	
+	
 	
 }

@@ -3,6 +3,7 @@ package cn.edu.aust.controller;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.springframework.stereotype.Controller;
@@ -30,13 +31,29 @@ public class ArticleController {
 	 * @return
 	 */
 	@RequestMapping(value="",method=RequestMethod.GET)
-	public ModelAndView getArticleList(){
+	public ModelAndView getArticleList(HttpServletRequest request){
 		ModelAndView mav = new ModelAndView("articlelist");
 		List<ArticleForm> articleFormList = this.articleService.getArticleFormList();
 		PageHelper.startPage(1,Contants.ARTICLE_PAGESIZE);
 	    //用PageInfo对结果进行包装
 	    PageInfo<ArticleForm> pageinfo = new PageInfo<ArticleForm>(articleFormList);
 		mav.addObject("pageinfo",pageinfo);
+		
+		//测试refreshTags,更新标签JSON文件，这里的功能将来需要转移到添加文章的控制器里边去
+		//获取JSON文件路径
+		//String path = request.getSession().getServletContext().getRealPath("/") + "static\\json\\tags.json";
+		//开发时保存路径
+		String tagsPath = Contants.STATIC_PATH + "\\json\\tags.json";
+		this.articleService.refreshTags(tagsPath);
+		
+		//测试refreshArticle,更新标签JSON文件，这里的功能将来需要转移到添加文章的控制器里边去
+		//获取JSON文件路径
+		//String path = request.getSession().getServletContext().getRealPath("/") + "static\\json\\tags.json";
+		//开发时保存路径
+		String articlePath = Contants.STATIC_PATH + "\\json\\article.json";
+		this.articleService.refreshArticle(articlePath);
+		
+		
 		return mav;
 	}
 	

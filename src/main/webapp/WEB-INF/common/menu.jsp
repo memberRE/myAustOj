@@ -37,7 +37,7 @@
 			<c:if test="${sessionScope.userLogin != null}">
 				<li><a
 					href="${pageContext.request.contextPath}/user/getUser/${sessionScope.userLogin.userId}">${sessionScope.userLogin.nickname}</a></li>
-				<li><a href="${pageContext.request.contextPath}/loginout">退出</a></li>
+				<li><a href="${pageContext.request.contextPath}/user/loginout">退出</a></li>
 			</c:if>
 			<c:if test="${sessionScope.userLogin == null}">
 				<li><a href="${pageContext.request.contextPath}/user/login">Login

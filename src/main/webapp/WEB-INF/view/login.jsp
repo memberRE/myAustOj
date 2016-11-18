@@ -50,7 +50,7 @@
 						class="custom-checkbox" name="rmb_me" value="1"> Remember me
 					</label>
 					<div class="input-group">
-						<button type="button" id="signInBtn" class="btn btn-primary sign-in">Sign in</button>
+						<button type="button" id="signInBtn" class="btn btn-primary sign-in">Sign in</button>&nbsp;&nbsp;
 						<a href="${pageContext.request.contextPath}/user/register" class="btn btn-primary">Register</a>&nbsp;&nbsp;
 					</div>
 				</form>
@@ -97,7 +97,7 @@
                  	   $('#error').text('验证码错误');
                     }else if(data.type == '1'){
                     	//验证码用账号都验证成功
-                 	   alert("登录成功");
+                 	   //alert("登录成功");
                  	   window.location.href=projectPath+"/index";
                     }else{
                  	   $('#error').text("用户名或密码错误");

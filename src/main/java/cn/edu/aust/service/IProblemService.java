@@ -48,6 +48,13 @@ public interface IProblemService {
 	 * @param catelogId
 	 * @return
 	 */
-	ProblemForm selectProblemByCatelogId(int catelogId);
+	List<ProblemForm> selectProblemByCatelogId(int catelogId);
+
+	/**
+	 * 搜索问题列表
+	 * @param search
+	 * @return
+	 */
+	List<ProblemForm> getProblemListBySearch(String search);
     
 }

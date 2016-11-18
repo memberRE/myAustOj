@@ -32,7 +32,7 @@ $(function () {
             //使用$.each方法遍历返回的数据date,插入到id为#result中
             $.each(data,function(i,item){
                 var content=item.catename;
-                $(".widget .catelog").append('<li><i class="fa fa-bookmark-o">&nbsp;&nbsp;<a href="'+projectPath+'/problem/catelog/'+item.id+'">'+content+'</a></i></li>');
+                $(".widget .catelog").append('<li><i class="fa fa-bookmark-o">&nbsp;&nbsp;<a href="'+projectPath+'/problem/tocatelog/'+item.id+'/'+content+'">'+content+'</a></i></li>');
             })
         }
     });
@@ -48,7 +48,7 @@ $(function () {
         success: function(data){
             //使用$.each方法遍历返回的数据date,插入到id为#result中
             $.each(data,function(i,item){
-                var content=item.tag;
+                var content=item.tagname;
                 $(".widget .tags").append('<a href="'+projectPath+'/articles/search?search='+content+'" style="font-size: 12px;">'+content+'</a>');
             })
         }
@@ -66,8 +66,23 @@ $(function () {
             //使用$.each方法遍历返回的数据date,插入到id为#result中
             $.each(data,function(i,item){
                 var content=item.title;
+                if(content.length <17){
                 $(".widget .article").append('<li><i class="fa fa-file-text-o"><a href="'+projectPath+'/articles/'+item.id+'" target="_blank">&nbsp;&nbsp;'+content+'</a></i></li>');
+            	}else{
+            		var content1 = content.substr(0,17) +"...";
+            		$(".widget .article").append('<li><i class="fa fa-file-text-o"><a href="'+projectPath+'/articles/'+item.id+'" target="_blank"  data-placement="bottom"  data-content="'+content+'">&nbsp;&nbsp;'+content1+'</a></i></li>');
+            		
+            		//设置鼠标放置下方显示全部标题，无省略
+            		$(".widget .article").find("a").each(function(){
+            			$(this).mouseover(function(){
+            				$(this).popover("show");
+            			}).mouseout(function(){
+            				$(this).popover("hide");
+            			});
+            		});
+            	}
             })
+            
         }
     });
     //写入到通知
