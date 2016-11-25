@@ -6,6 +6,8 @@ public class User {
     private Integer userId;
 
     private String avatar;
+    
+    private String role;
 
     private String username;
 
@@ -43,7 +45,16 @@ public class User {
         return avatar;
     }
 
-    public void setAvatar(String avatar) {
+    
+    public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+
+	public void setAvatar(String avatar) {
         this.avatar = avatar == null ? null : avatar.trim();
     }
 

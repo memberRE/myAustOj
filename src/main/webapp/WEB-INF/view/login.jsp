@@ -47,7 +47,7 @@
 					</div>
 					<label class="checkbox" for="checkbox1"> 
 					<input 	type="checkbox" data-toggle="checkbox" id="checkbox1"
-						class="custom-checkbox" name="rememberMe" value="1"> Remember me
+						class="custom-checkbox" name="rememberMe" > Remember me
 					</label>
 					<div class="input-group">
 						<button type="button" id="signInBtn" class="btn btn-primary sign-in">Sign in</button>&nbsp;&nbsp;
@@ -95,12 +95,15 @@
                     if(data.type == '2'){
                     	//验证码错误
                  	   $('#error').text('验证码错误');
+                 	  changeUrl();
                     }else if(data.type == '1'){
                     	//验证码用账号都验证成功
                  	   //alert("登录成功");
                  	   window.location.href=projectPath+"/index";
                     }else{
-                 	   $('#error').text("用户名或密码错误");
+                 	   //$('#error').text("用户名或密码错误");
+                 	   $('#error').text(data.type);
+                 	  changeUrl();
                     }
                 }else{
              	   alert("请求失败");

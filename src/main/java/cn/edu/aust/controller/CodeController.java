@@ -1,5 +1,7 @@
 package cn.edu.aust.controller;
 
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.session.Session;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,7 +11,6 @@ import javax.imageio.ImageIO;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -69,7 +70,10 @@ public class CodeController {
         ServletOutputStream sos = response.getOutputStream();
         ImageIO.write(buffImg,"png",sos);
         //6.保存到session中
-        HttpSession session = request.getSession();
+        Session session =  SecurityUtils.getSubject().getSession();
+        //HttpSession session = request.getSession();
+        //session.setMaxInactiveInterval(600);
+        System.out.println("设置的验证码是：" + builderCode.toString() +"  session过期时长：" + session.getTimeout());
         session.setAttribute("codeValidate",builderCode.toString());
         //7.禁止图像缓存。
         response.setHeader("Pragma", "no-cache");

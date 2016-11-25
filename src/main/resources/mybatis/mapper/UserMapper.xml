@@ -4,6 +4,7 @@
   <resultMap id="BaseResultMap" type="cn.edu.aust.pojo.User" >
     <id column="user_id" property="userId" jdbcType="INTEGER" />
     <result column="avatar" property="avatar" jdbcType="VARCHAR" />
+    <result column="role" property="role" jdbcType="VARCHAR" />
     <result column="username" property="username" jdbcType="VARCHAR" />
     <result column="password" property="password" jdbcType="VARCHAR" />
     <result column="nickname" property="nickname" jdbcType="VARCHAR" />
@@ -18,7 +19,7 @@
     <result column="lastlogin" property="lastlogin" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Base_Column_List" >
-    user_id, avatar, username, password, nickname, email, school, motto, language, blogname, 
+    user_id, avatar, role, username, password, nickname, email, school, motto, language, blogname, 
     blog, honor, regdate, lastlogin
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
@@ -32,12 +33,12 @@
     where user_id = #{userId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="cn.edu.aust.pojo.User" >
-    insert into user (user_id, avatar, username, 
+    insert into user (user_id, avatar, role, username, 
       password, nickname, email, 
       school, motto, language, 
       blogname, blog, honor, 
       regdate, lastlogin)
-    values (#{userId,jdbcType=INTEGER}, #{avatar,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, 
+    values (#{userId,jdbcType=INTEGER}, #{avatar,jdbcType=VARCHAR},#{role,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, 
       #{password,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
       #{school,jdbcType=VARCHAR}, #{motto,jdbcType=VARCHAR}, #{language,jdbcType=INTEGER}, 
       #{blogname,jdbcType=VARCHAR}, #{blog,jdbcType=VARCHAR}, #{honor,jdbcType=VARCHAR}, 
@@ -51,6 +52,9 @@
       </if>
       <if test="avatar != null" >
         avatar,
+      </if>
+      <if test="role != null" >
+        role,
       </if>
       <if test="username != null" >
         username,
@@ -96,6 +100,9 @@
       <if test="avatar != null" >
         #{avatar,jdbcType=VARCHAR},
       </if>
+      <if test="role != null" >
+        #{role,jdbcType=VARCHAR},
+      </if>
       <if test="username != null" >
         #{username,jdbcType=VARCHAR},
       </if>
@@ -140,6 +147,9 @@
       <if test="avatar != null" >
         avatar = #{avatar,jdbcType=VARCHAR},
       </if>
+      <if test="role != null" >
+        role = #{role,jdbcType=VARCHAR},
+      </if>
       <if test="username != null" >
         username = #{username,jdbcType=VARCHAR},
       </if>
@@ -182,6 +192,7 @@
   <update id="updateByPrimaryKey" parameterType="cn.edu.aust.pojo.User" >
     update user
     set avatar = #{avatar,jdbcType=VARCHAR},
+    	role = #{role,jdbcType=VARCHAR},
       username = #{username,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},
       nickname = #{nickname,jdbcType=VARCHAR},

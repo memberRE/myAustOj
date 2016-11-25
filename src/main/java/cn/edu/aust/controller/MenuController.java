@@ -1,5 +1,10 @@
 package cn.edu.aust.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -49,8 +54,14 @@ public class MenuController {
 	 * 前往排名页面
 	 */
 	@RequestMapping(value="/unauthorized")
-	public String toUnauthorized(){
-		return "unauthorized";
+	public void toUnauthorized(HttpServletResponse response){
+		try {
+			PrintWriter pw = response.getWriter();
+			String html = "<script>alert('您没有权限访问！');window.history.back();</script>";
+			pw.append(html);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 }

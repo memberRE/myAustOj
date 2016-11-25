@@ -150,9 +150,4 @@
 		<location>/WEB-INF/view/error.jsp</location>
 	</error-page>
 
-	<!--配置session过期时间 -->
-	<session-config>
-		<session-timeout>600</session-timeout>
-	</session-config>
-
 </web-app>

@@ -1,4 +1,4 @@
-package cn.edu.aust.shiro;
+/*package cn.edu.aust.shiro;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
@@ -60,3 +60,4 @@ public class UserRealm implements Realm{
 
 
 }
+*/

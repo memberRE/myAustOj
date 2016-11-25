@@ -64,7 +64,8 @@
 							<dl class="person-detail">
 								<dd>
 									&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-user"></i>&nbsp;昵称:&nbsp;&nbsp;${user.nickname}
-									<c:if test="${sessionScope.userLogin.userId == user.userId}">
+									
+									<c:if test = "${sessionScope.userLogin.userId == user.userId}">
 										<button type="button" data-toggle="modal"
 											data-target="#myModal" class="btn btn-primary btn-sm"
 											style="float: right; margin-right: 30px">

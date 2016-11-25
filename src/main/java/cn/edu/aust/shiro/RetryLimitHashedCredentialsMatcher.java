@@ -1,4 +1,4 @@
-package cn.edu.aust.shiro;
+/*package cn.edu.aust.shiro;
 
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -9,11 +9,6 @@ import org.apache.shiro.cache.CacheManager;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
-/**
- * <p>User: Zhang Kaitao
- * <p>Date: 14-1-28
- * <p>Version: 1.0
- */
 public class RetryLimitHashedCredentialsMatcher extends HashedCredentialsMatcher {
 
     private Cache<String, AtomicInteger> passwordRetryCache;
@@ -44,3 +39,4 @@ public class RetryLimitHashedCredentialsMatcher extends HashedCredentialsMatcher
         return matches;
     }
 }
+*/
