@@ -45,4 +45,12 @@ public class MenuController {
 		return "rank";
 	}
 	
+	/**
+	 * 前往排名页面
+	 */
+	@RequestMapping(value="/unauthorized")
+	public String toUnauthorized(){
+		return "unauthorized";
+	}
+	
 }

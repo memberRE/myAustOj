@@ -15,12 +15,28 @@
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<!--配置文件的路径 -->
-		<param-value>classpath:spring/spring.xml</param-value>
-		<!-- <param-value>classpath:spring/spring-shiro.xml</param-value> -->
+		 <param-value>
+            classpath:spring/spring.xml,
+            classpath:spring/spring-shiro-web.xml
+        </param-value>
 	</context-param>
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
+	<!-- 权限控制 -->
+	 <filter>
+        <filter-name>shiroFilter</filter-name>
+        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+        <async-supported>true</async-supported>
+        <init-param>
+            <param-name>targetFilterLifecycle</param-name>
+            <param-value>true</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>shiroFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
 	<!--配置spring编码 -->
 	<!-- 配置字符编码过滤器，编码格式设为UTF-8，避免中文乱码 -->
 	<filter>
@@ -41,17 +57,10 @@
 		<filter-name>encodingFilter</filter-name>
 		<url-pattern>/*</url-pattern> <!--设置你想过滤的页面或者是Servlet，根据自己的需要配置 -->
 	</filter-mapping>
-	<!-- 权限控制 -->
-	<!-- <filter> 
-           <filter-name>shiroFilter</filter-name> 
-           <filter-class> 
-              org.springframework.web.filter.DelegatingFilterProxy 
-           </filter-class> 
-         </filter> 
-         <filter-mapping> 
-           <filter-name>shiroFilter</filter-name> 
-           <url-pattern>/*</url-pattern> 
-         </filter-mapping> -->
+	
+	
+	
+	
 	<!--GZIP压缩 -->
 	<!-- <filter> <filter-name>gzipFilter</filter-name> <filter-class> net.sf.ehcache.constructs.web.filter.GzipFilter 
 		</filter-class> </filter> -->

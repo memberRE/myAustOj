@@ -68,6 +68,15 @@ public class UserController {
 	}
 	
 	/**
+	 * 前往登录页面
+	 * @return
+	 */
+	@RequestMapping(value="/login2",method=RequestMethod.GET)
+	public String toLogin2(){
+		return "login2";
+	}
+	
+	/**
 	 * 前往注册页面
 	 * @return
 	 */
@@ -132,6 +141,45 @@ public class UserController {
 				//验证失败
 				maps.put("type", "0");
 			}
+			out.print(JSON.toJSON(maps));
+			out.flush();
+			out.close();
+		}
+	}
+	/**
+	 * 验证用户
+	 * @return
+	 */
+	@RequestMapping(value="/verifyCode",method=RequestMethod.POST)
+	public void verifyCode(User user,
+			String codevalidate,
+			HttpServletResponse response,
+			HttpServletRequest request,
+			HttpSession session){
+		Map<String, Object> maps = new HashMap<>();
+		// 设置页面不缓存
+		PrintWriter out = null;
+		try {
+			response.setContentType("application/json");
+			response.setHeader("Pragma", "No-cache");
+			response.setHeader("Cache-Control", "no-cache");
+			response.setCharacterEncoding("UTF-8");
+			out = response.getWriter();
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+		
+		//验证验证码
+		String code = (String) session.getAttribute("codeValidate");
+		if(!code.equalsIgnoreCase(codevalidate.trim())){
+			//验证码错误
+			maps.put("type", "0");
+			out.print(JSON.toJSON(maps));
+			out.flush();
+			out.close();
+		}else{
+			//验证码正确
+			maps.put("type", "1");
 			out.print(JSON.toJSON(maps));
 			out.flush();
 			out.close();

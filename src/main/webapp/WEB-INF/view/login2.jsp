@@ -29,7 +29,7 @@
 		<div class="row animated fadeInUp">
 			<h6 id="error" class="text-danger text-center"></h6>
 			<div class="login-field">
-				<form role="form" id="signForm" >
+				<form role="form" id="signForm" method="post" >
 					<div class="input-group form-group">
 						<span class="input-group-addon glyphicon glyphicon-user"></span> 
 						<input type="text" id="username" class="form-control" placeholder="Username" required
@@ -84,7 +84,7 @@
     	var pathName=window.document.location.pathname;
     	var projectPath=pathName.substring(0,pathName.substr(1).indexOf('/')+1);
     	$.ajax({
-    		url:projectPath+'/user/verification',
+    		url:projectPath+'/user/verifyCode',
             type:'post',
             data:$("#signForm").serialize(),
             //dataType:'html',
@@ -92,15 +92,12 @@
             success:function(data,status) {
          	   if(status == "success"){
          		  //var objs = jQuery.parseJSON(data);
-                    if(data.type == '2'){
+                    if(data.type == '0'){
                     	//验证码错误
                  	   $('#error').text('验证码错误');
                     }else if(data.type == '1'){
-                    	//验证码用账号都验证成功
-                 	   //alert("登录成功");
-                 	   window.location.href=projectPath+"/index";
-                    }else{
-                 	   $('#error').text("用户名或密码错误");
+                    	//验证码正确在提交
+                    	$("#signForm").submit();
                     }
                 }else{
              	   alert("请求失败");
