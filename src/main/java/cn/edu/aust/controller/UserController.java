@@ -48,6 +48,7 @@ import com.github.pagehelper.PageInfo;
 
 import cn.edu.aust.pojo.Solution;
 import cn.edu.aust.pojo.User;
+import cn.edu.aust.pojo.form.ArticleForm;
 import cn.edu.aust.pojo.form.RankForm;
 import cn.edu.aust.pojo.form.SolutionForm;
 import cn.edu.aust.service.IUserService;
@@ -298,6 +299,51 @@ public class UserController {
 			out.close();
 		}
 	}
+	@RequestMapping(value="/registerUser/addUser",method=RequestMethod.POST)
+	public void addUser(HttpServletResponse response,HttpSession session,User user){
+		Map<String, Object> maps = new HashMap<>();
+		// 设置页面不缓存
+		PrintWriter out = null;
+		try {
+			response.setContentType("application/json");
+			response.setHeader("Pragma", "No-cache");
+			response.setHeader("Cache-Control", "no-cache");
+			response.setCharacterEncoding("UTF-8");
+			out = response.getWriter();
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+		
+//		//验证验证码
+//		String code = (String) session.getAttribute("codeValidate");
+//		if(!code.equalsIgnoreCase(codevalidate.trim())){
+//			//验证码错误
+//			maps.put("type", "0");
+//			out.print(JSON.toJSON(maps));
+//			out.flush();
+//			out.close();
+//		}else{
+			//验证码正确再继续进行其他验证
+			//添加用户
+			System.out.println(user.getUsername()+" "
+					+user.getPassword() + "  " +user.getEmail());
+			user.setUsername(user.getUsername().trim());
+			user.setPassword(user.getPassword().trim());
+			//给密码进行加密
+			try {
+				user.setPassword(DecriptUtil.getMD5(user.getPassword()));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			//添加到数据库
+			this.userService.insertSelective(user);
+			//返回数据
+			maps.put("type", "1");
+			out.print(JSON.toJSON(maps));
+			out.flush();
+			out.close();
+//		}
+	}
 	
 	/**
 	 * 前往用户具体页面
@@ -326,8 +372,14 @@ public class UserController {
 		return mav;
 	}
 	
+	/**
+	 * 用户自己修改用户信息
+	 * @param user
+	 * @param session
+	 * @return
+	 */
 	@RequestMapping("/update")
-	public ModelAndView updateUser(User user,HttpSession session){
+	public ModelAndView update(User user,HttpSession session){
 		//保存用户
 		this.userService.updateByPrimaryKeySelective(user);
 		
@@ -338,6 +390,45 @@ public class UserController {
 		ModelAndView mav = new ModelAndView("redirect:/user/getUser/"+user.getUserId());
 		return mav;
 	}
+	
+	/**
+	 * 管理员修改用户信息
+	 * @param user
+	 * @return
+	 */
+	@RequestMapping(value="/updateUser",method=RequestMethod.POST)
+	@ResponseBody 
+	public String updateUser(@RequestBody User user){
+		System.out.println(user.getUserId() + "  " + user.getUsername());
+		this.userService.updateByPrimaryKeySelective(user);
+		return "修改成功";
+	}
+	
+	/**
+	 * 管理员删除用户
+	 * @param user
+	 * @return
+	 */
+	@RequestMapping(value="/deleteUser",method=RequestMethod.POST)
+	@ResponseBody 
+	public String deleteUser(@RequestBody String userIdArray){
+		System.out.println("userID:" + userIdArray);
+		String userIdNew = userIdArray.substring(1, userIdArray.length()-1);
+		String[] userIdstr = userIdNew.split(",");
+		//将字符串数组转换为整形数组
+		int[] userId = new int[userIdstr.length];
+		for(int i = 0 ; i < userIdstr.length; i++){
+			userId[i] = Integer.parseInt(userIdstr[i]);
+		}
+		try {
+			this.userService.deleteUserById(userId);
+		} catch (Exception e) {
+			return "删除用户时出现异常";
+		}
+		return "删除成功";
+	}
+	
+	
 	
 	/**
 	 * 用户修改头像
@@ -392,5 +483,27 @@ public class UserController {
 		//session.setAttribute("userLogin", null);
 		SecurityUtils.getSubject().logout();
 		return "redirect:/user/login";
+	}
+	
+	/**
+	 * 获取用户列表
+	 * @param pageUtil
+	 * @return
+	 */
+	@RequestMapping(value="/getAllUser")
+	 public @ResponseBody Map<String,Object> getAllUser(
+			 @RequestBody PageUtil pageUtil){
+		Map<String, Object> maps = new HashMap<>();
+	    //分页查询问题
+	    PageHelper.startPage(pageUtil.getOffset()/pageUtil.getLimit()+1,pageUtil.getLimit());
+	    
+	    List<User> list = this.userService.getUserList();
+	    //用PageInfo对结果进行包装
+	    PageInfo<User> page = new PageInfo<User>(list);
+	    log.info("获取的数据总数：" + page.getTotal() + "  获取的数据：" + page.getList());
+	    maps.put("total",page.getTotal());
+	    maps.put("rows", page.getList());
+		return maps;
+		
 	}
 }

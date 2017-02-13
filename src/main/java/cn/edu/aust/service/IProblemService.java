@@ -28,6 +28,12 @@ public interface IProblemService {
      * @return
      */
     List<ProblemForm> selectByStage(Integer stage);
+    
+    /**
+     * 查询全部题目
+     * @return
+     */
+    List<ProblemForm> selectAllProblem();
 
     /**
      * 查询具体问题

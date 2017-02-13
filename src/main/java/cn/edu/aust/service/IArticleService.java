@@ -37,4 +37,5 @@ public interface IArticleService {
 	 * @param path
 	 */
 	void refreshArticle(String path);
+
 }

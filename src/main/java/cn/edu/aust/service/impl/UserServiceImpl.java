@@ -97,4 +97,17 @@ public class UserServiceImpl implements IUserService{
 	public void updateLastTime(User userLogin) {
 		this.userMapper.updateByPrimaryKeySelective(userLogin);
 	}
+
+	@Override
+	public List<User> getUserList() {
+		return this.userMapper.selectAllUser();
+	}
+
+	@Override
+	public void deleteUserById(int[] userId) {
+		for(int id : userId){
+			System.out.println("要删除的ID:" + id);
+			this.userMapper.deleteByPrimaryKey(id);
+		}
+	}
 }

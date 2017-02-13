@@ -97,9 +97,9 @@
                 /practice/** = anon
                 /master/** = anon
                 /user/** = anon
+                /articles/** = anon
                 
                 /contest/** = authc
-                /articles/** = authc
                 
                 /logout = logout
                 

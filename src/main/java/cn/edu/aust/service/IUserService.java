@@ -30,4 +30,12 @@ public interface IUserService {
 	 */
 	void updateLastTime(User userLogin);
 
+	/**
+	 * 获取用户列表
+	 * @return
+	 */
+	List<User> getUserList();
+	
+	void deleteUserById(int[] userId);
+	
 }

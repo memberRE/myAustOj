@@ -62,9 +62,14 @@ public class ProblemController {
 	    //分页查询问题
 	    //PageHelper.startPage(pageNumber, pageSize);
 	    PageHelper.startPage(pageUtil.getOffset()/pageUtil.getLimit()+1,pageUtil.getLimit());
-
 	    
-	    List<ProblemForm> list = this.problemService.selectByStage(stage);
+	    //如果需要查询的等级为0,则查询全部问题
+	    List<ProblemForm> list;
+	    if(stage == 0 ){
+	    	list = this.problemService.selectAllProblem();
+	    }else{
+	    	list = this.problemService.selectByStage(stage);
+	    }
 	    //用PageInfo对结果进行包装
 	    PageInfo<ProblemForm> page = new PageInfo<ProblemForm>(list);
 		

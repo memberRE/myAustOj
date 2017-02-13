@@ -81,6 +81,15 @@
 		and p.user_id = u.user_id
 	</select>
 	
+	<!-- 按照等级查询题目题目，包括所包含的题目分类信息和作者信息 -->
+	<select id="selectAllProblem" resultMap="BaseResultMapEx">
+		select
+		*
+		from problem p,catelog c,user u
+		where p.catelog_id = c.catelog_id
+		and p.user_id = u.user_id
+	</select>
+	
 	<!-- 通过问题id查询问题的ac数量 -->
 	<select id="selectAcById" resultType="java.lang.Integer" parameterType="java.lang.Integer">
 		select

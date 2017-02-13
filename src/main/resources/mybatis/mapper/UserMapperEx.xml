@@ -66,4 +66,11 @@
     and s.verdict=5
   </select>
   
+  
+  <select id="selectAllUser" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user
+  </select>
+  
 </mapper>

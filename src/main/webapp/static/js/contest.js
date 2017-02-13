@@ -97,7 +97,7 @@ $(function () {
 //获取当前格式化后的日期
 function add0(m){return m<10?'0'+m:m }
 function format(){
-	//shijianchuo是整数，否则要parseInt转换
+	//时间戳是整数，否则要parseInt转换
 	var time = new Date();
 	var y = time.getFullYear();
 	var m = time.getMonth()+1;

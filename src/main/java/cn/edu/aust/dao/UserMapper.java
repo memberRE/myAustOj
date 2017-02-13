@@ -44,4 +44,10 @@ public interface UserMapper {
 	 * @return
 	 */
 	Integer getAcNum(Integer userId);
+
+	/**
+	 * 查询所有用户
+	 * @return
+	 */
+	List<User> selectAllUser();
 }

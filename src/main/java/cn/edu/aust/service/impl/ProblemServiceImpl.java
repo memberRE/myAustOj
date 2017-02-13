@@ -136,4 +136,26 @@ public class ProblemServiceImpl implements IProblemService{
 		return proFormList;
 	}
 
+	@Override
+	public List<ProblemForm> selectAllProblem() {
+		List<ProblemForm> proFormList = problemMapper.selectAllProblem();
+		for(ProblemForm pf:proFormList){
+			//查询每个题目的提交数量以及通过数量
+			int id = pf.getProblemId();
+			int ac = problemMapper.selectAcById(id);
+			int submit = problemMapper.selectSubmitById(id);
+			String ratio;
+			if(0 == submit && 0 == ac){
+				ratio = "0";
+			}else{
+				ratio = (Math.round((float)ac/(float)submit*100)) + "%";
+			}
+			pf.setAc(ac);
+			pf.setSubmit(submit);
+			pf.setRatio(ratio);
+			pf.setAcFra(ac + "/" + submit);
+		}
+		return proFormList;
+	}
+
 }

@@ -18,6 +18,8 @@ public interface ProblemMapper {
 
     List<ProblemForm> selectByStage(Integer stage);
     
+    List<ProblemForm> selectAllProblem();
+    
     int updateByPrimaryKeySelective(ProblemWithBLOBs record);
 
     int updateByPrimaryKeyWithBLOBs(ProblemWithBLOBs record);
@@ -35,4 +37,5 @@ public interface ProblemMapper {
 	List<ProblemForm> selectProblemByCatelogId(int catelogId);
 
 	List<ProblemForm> getProblemListBySearch(String search);
+
 }
