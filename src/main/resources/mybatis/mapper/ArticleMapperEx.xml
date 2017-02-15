@@ -93,7 +93,7 @@
 		limit 4
 	</select>
 	<!-- 插入文章 返回主键 -->
-	<insert id="insertSelectiveReturnId" parameterType="cn.edu.aust.pojo.ArticleWithBLOBs" useGeneratedKeys="true" keyProperty="article_id">
+	<insert id="insertSelectiveReturnId" parameterType="cn.edu.aust.pojo.ArticleWithBLOBs" useGeneratedKeys="true" keyProperty="articleId">
     insert into article
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="articleId != null" >

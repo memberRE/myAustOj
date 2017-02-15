@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>文章</title>
+<title>用户管理</title>
 
 <link rel="shortcut icon"
 	href="${pageContext.request.contextPath}/static/images/favicon.ico">

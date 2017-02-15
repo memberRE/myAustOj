@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>添加文章</title>
+<title>编辑文章</title>
 <%@include file="css_js.jsp"%>
 
 
@@ -51,10 +51,8 @@
 	<!--主体开始-->
 	<div class="articlepage common-page">
 		<div class="row">
-			<div class="col-md-10 col-md-offset-1" style="border:3px;">
-				<!-- <div class="col-md-2">
-				</div> -->
-				
+			<div class="col-md-10 col-md-offset-1" style="border: 3px;">
+
 				<div class="col-md-12">
 					<h4 class="text-center" id="textTitle">添加文章</h4>
 
@@ -62,14 +60,14 @@
 						<textarea id="markdownTA" name="content" rows="20"
 							placeholder="这里输入内容,支持Markdown语法."></textarea>
 						</br>
-						<button type="button" id="submitbtn" class="btn btn-primary" data-toggle="button" style="float: right;">提交</button>
+						<button type="button" id="submitbtn" class="btn btn-primary"
+							data-toggle="button" style="float: right;">提交</button>
 					</form>
-
+					<div id="hideContent" style="display: none">${article.content}</div>
 				</div>
-
-			</div>
 			</div>
 		</div>
+	</div>
 	<!--主体结束-->
 
 	<footer>
@@ -88,23 +86,23 @@
 						aria-label="Close">
 						<span aria-hidden="true">×</span>
 					</button>
-					<h4 class="modal-title" id="myModalLabel">提交</h4>
+					<h4 class="modal-title" id="myModalLabel">修改</h4>
 				</div>
 				<div class="modal-body">
 					<div class="form-group">
 						<label for="txt_departmentname">文章名称</label> 
 						<input type="text"
 							name="title" class="form-control"
-							id="title" placeholder="title">
+							id="title" placeholder="title" value="${article.title}">
 					</div>
 					<div class="form-group">
 						<label for="txt_parentdepartment">摘要</label> <input type="text"
-							name="summary" class="form-control"
+							name="summary" class="form-control" value="${article.summary}"
 							id="summary" placeholder="summary">
 					</div>
 					<div class="form-group">
 						<label for="txt_parentdepartment">标签</label> <input type="text"
-							name="tags" class="form-control"
+							name="tags" class="form-control" value="${article.tagsSec[0]}"
 							id="tags" placeholder="多个标签使用,分割">
 					</div>
 					<div class="form-group">
@@ -143,7 +141,13 @@
 	
 	
 <%@include file="article_add_js.jsp"%>
-	<!--script引入-->
+<script type="text/javascript">
+var hideContent = $('#hideContent').text();
+$("#markdownTA").val(hideContent);
+
+
+
+</script>
 	
 </body>
 </html>

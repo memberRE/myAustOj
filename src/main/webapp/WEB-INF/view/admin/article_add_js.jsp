@@ -142,8 +142,6 @@
 			"totop": $('#totop').val()
 		};
 		
-		alert(article.totop);
-		
 		$.ajax({
 			url : projectPath + "/articles/insert",
 			type : "POST",

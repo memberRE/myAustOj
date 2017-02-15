@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>文章</title>
+<title>文章管理</title>
 
 <link rel="shortcut icon"
 	href="${pageContext.request.contextPath}/static/images/favicon.ico">
@@ -179,18 +179,13 @@
 		$('#article_btn_edit').click(function(){
 			var articleObj = getSelectedRow();
 			
-			if(userObj[0] == null){
+			if(articleObj[0] == null){
 				alert('请选择要修改的文章');
-			}else if(userObj[1] != null){
+			}else if(articleObj[1] != null){
 				alert('修改文章只能选择一篇文章');
-			}else if(userObj[0] != null && userObj[1] == null){
-				
-				$('#myModal_edit').modal();
-				//设置值
-				$('#username_edit').val(userObj[0].username);
-				$('#nickname_edit').val(userObj[0].nickname);
-				$('#email_edit').val(userObj[0].email);
-				$("#role_edit").val(userObj[0].role);
+			}else if(articleObj[0] != null && articleObj[1] == null){
+				var articleId = articleObj[0].articleId;
+				window.location.href=projectPath + "/articles/toArticleEditor/" + articleId; 
 			}
 		});
 		

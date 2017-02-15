@@ -93,7 +93,8 @@ public class ArticleServiceImpl implements IArticleService{
 	public void addArticle(ArticleForm articleForm) {
 		ArticleWithBLOBs aw = ArticleFormToArticle(articleForm);
 		//添加文章
-		int articleId = articleMapper.insertSelectiveReturnId(aw);
+		articleMapper.insertSelectiveReturnId(aw);
+		int articleId = aw.getArticleId();
 		//添加标签
 		List<String> tags = articleForm.getTags();
 		for(String tagName : tags){
@@ -111,8 +112,8 @@ public class ArticleServiceImpl implements IArticleService{
 				//插入标签
 				Tags newTags = new Tags();
 				newTags.setTagname(tagName);
-				int tagsId = tagsMapper.insertSelectiveReturnId(newTags);
-				
+				tagsMapper.insertSelectiveReturnId(newTags);
+				int tagsId = newTags.getTagsId();
 				ArticleTags at = new ArticleTags();
 				at.setArticleId(articleId);
 				at.setTagsId(tagsId);

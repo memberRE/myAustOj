@@ -159,9 +159,44 @@ public class ArticleController {
 		return "admin/article_add";
 	}
 	
-	@RequestMapping(value="/toArticleEditor")
-	public String toArticleEditor(){
-		return "admin/article_editor";
+	@RequestMapping(value="/toArticleEditor/{articleId}")
+	public ModelAndView toArticleEditor(@PathVariable("articleId") Integer articleId){
+		ModelAndView mav = new ModelAndView("admin/article_editor");
+		ArticleForm articleForm = this.articleService.getArticleById(articleId);
+		//判断文章内容是文件路径还是具体的文件路径
+		File file = new File(articleForm.getContent());
+		if(file.isFile()){
+			//这里要将文件类容设置到文章中
+			try {
+				FileReader fr = new FileReader(file);
+				BufferedReader br = new BufferedReader (fr);
+				String contentLine;
+				StringBuffer sb = new StringBuffer();
+				while((contentLine = br.readLine()) != null){  
+					sb.append(contentLine + "\r\n");
+				}
+				fr.close(); 
+				articleForm.setContent(sb.toString());
+				articleForm.setMarkdown(1);
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		//设置文章标签
+		List<String> tagsList = articleForm.getTags();
+		if(tagsList != null){
+			StringBuffer sb = new StringBuffer();
+			for(String str : tagsList){
+				sb.append(str + ",");
+			}
+			articleForm.setTagsSec(new String[]{sb.toString()});
+		}
+		
+		mav.addObject("article",articleForm);
+		return mav;
 	}
 	
 	/*

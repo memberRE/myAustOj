@@ -8,7 +8,7 @@
 	<select id="selectTagsIdByTagsName" parameterType="java.lang.String" resultType="java.lang.Integer">
 		select tags_id from tags where tagname = #{tagName,jdbcType=VARCHAR} limit 1
 	</select>
-	<insert id="insertSelectiveReturnId" parameterType="cn.edu.aust.pojo.Tags" useGeneratedKeys="true" keyProperty="tags_id">
+	<insert id="insertSelectiveReturnId" parameterType="cn.edu.aust.pojo.Tags" useGeneratedKeys="true" keyProperty="tagsId">
     insert into tags
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="tagsId != null" >
