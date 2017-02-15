@@ -22,6 +22,33 @@
 <link
 	href="http://cdn.bootcss.com/highlight.js/8.0/styles/monokai_sublime.min.css"
 	rel="stylesheet">
+
+<style type="text/css">
+    @import "${pageContext.request.contextPath }/static/public/stylesheets/vendor/font.css";
+    @import "${pageContext.request.contextPath }/static/public/stylesheets/vendor/markdown.css";
+    @import "${pageContext.request.contextPath }/static/public/stylesheets/emoji/nature.css";
+    @import "${pageContext.request.contextPath }/static/public/stylesheets/emoji/object.css";
+    @import "${pageContext.request.contextPath }/static/public/stylesheets/emoji/people.css";
+    @import "${pageContext.request.contextPath }/static/public/stylesheets/emoji/place.css";
+    @import "${pageContext.request.contextPath }/static/public/stylesheets/emoji/Sysmbols.css";
+    @import "${pageContext.request.contextPath }/static/public/stylesheets/emoji/twemoji.css";
+    @import "${pageContext.request.contextPath }/static/public/stylesheets/vendor/font-awesome.css";
+    @import "${pageContext.request.contextPath }/static/public/stylesheets/vendor/sunburst.css";
+</style>
+
+<script type="text/javascript" charset="utf-8" src="${pageContext.request.contextPath }/static/public/javascripts/vendor/underscore/underscore-min.js"></script>
+<script type="text/javascript" charset="utf-8" src="${pageContext.request.contextPath }/static/public/javascripts/vendor/jquery/jquery-2.1.3.js"></script>
+<script type="text/javascript" charset="utf-8" src="${pageContext.request.contextPath }/static/public/javascripts/vendor/highlight/highlight.js"></script>
+<script type="text/javascript" charset="utf-8" src="${pageContext.request.contextPath }/static/public/javascripts/vendor/markdown/he.js"></script>
+<script type="text/javascript" charset="utf-8" src="${pageContext.request.contextPath }/static/public/javascripts/vendor/markdown/marked.js"></script>
+<script type="text/javascript" charset="utf-8" src="${pageContext.request.contextPath }/static/public/javascripts/vendor/markdown/to-markdown.js"></script>
+<script type="text/javascript" charset="utf-8" src="${pageContext.request.contextPath }/static/public/javascripts/vendor/markdown/jsHtmlToText.js"></script>
+<script type="text/javascript" charset="utf-8" src="${pageContext.request.contextPath }/static/public/javascripts/vendor/markdown/tab.js"></script>
+<script type="text/javascript" charset="utf-8" src="${pageContext.request.contextPath }/static/public/javascripts/vendor/markdown/config.js"></script>
+<script type="text/javascript" charset="utf-8" src="${pageContext.request.contextPath }/static/public/javascripts/vendor/markdown/emoji.js"></script>
+<script type="text/javascript" charset="utf-8" src="${pageContext.request.contextPath }/static/public/javascripts/vendor/markdown/bootstrap-markdown.js"></script>
+<script type="text/javascript" charset="utf-8" src="${pageContext.request.contextPath }/static/public/javascripts/vendor/markdown/locale/bootstrap-markdown.zh.js"></script>
+
 </head>
 <body>
 	<!--头部开始-->
@@ -52,7 +79,13 @@
 									<span>作者:${article.user.nickname}&nbsp;&nbsp;</span><span>&nbsp;&nbsp;分类:${article.catelog}</span>
 								</p>
 							</div>
-							<p style="text-indent: 2em">${article.content}</p>
+							<%-- <p style="text-indent: 2em">${article.content}</p> --%>
+							
+								<!-- 文章具体内容 -->
+								<p id="content" style="display: none;text-indent: 2em;">${article.content}</p>
+								<p class="panel-body" id="articleContent" text-indent: 2em></p>
+								<p id="markdown" style="display: none;">${article.markdown}</p>
+							
 						</c:if>
 						<c:if test="${error != null}">
 							<div class="title">
@@ -83,5 +116,18 @@
 	<script src="${pageContext.request.contextPath}/static/js/app.js"></script>
 	<script src="http://cdn.bootcss.com/highlight.js/8.0/highlight.min.js"></script>
 	<script>hljs.initHighlightingOnLoad();</script>
+	<script type="text/javascript">
+	$(document).ready(function(){
+		var markdown = $('#markdown').text();
+		if(markdown == "1"){
+			var ac = $('#content').text();
+			var articleContent = $('#articleContent');
+			var test = marked(ac);
+			articleContent.html(test);
+		}else{
+			$('#content').css("display","inline");
+		}
+	});
+</script>
 </body>
 </html>

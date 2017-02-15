@@ -59,13 +59,13 @@
 					<h4 class="text-center" id="textTitle">文章列表</h4>
 					<!-- <div id="problem-div" style="display:block;"> -->
 						<div id="toolbar" class="btn-group">
-							<button id="btn_add" type="button" class="btn btn-default">
+							<button id="article_btn_add" type="button" class="btn btn-default">
 								<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增
 							</button>
-							<button id="btn_edit" type="button" class="btn btn-default">
+							<button id="article_btn_edit" type="button" class="btn btn-default">
 								<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>修改
 							</button>
-							<button id="btn_delete" type="button" class="btn btn-default">
+							<button id="article_btn_delete" type="button" class="btn btn-default">
 								<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除
 							</button>
 						</div>
@@ -84,7 +84,7 @@
 	</footer>
 
 
-	
+
 	<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel">
 		<div class="modal-dialog" role="document">
@@ -94,10 +94,9 @@
 						aria-label="Close">
 						<span aria-hidden="true">×</span>
 					</button>
-					<h4 class="modal-title" id="myModalLabel">新增</h4>
+					<h4 class="modal-title" id="myModalLabel">修改</h4>
 				</div>
 				<div class="modal-body">
-
 					<div class="form-group">
 						<label for="txt_departmentname">题目名称</label> <input type="text"
 							name="txt_departmentname" class="form-control"
@@ -168,5 +167,41 @@
 	<script
 		src="${pageContext.request.contextPath}/static/js/table-demo.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/static/js/admin.js"></script>
+	<script>
+	//获取当前项目名称
+	var pathName=window.document.location.pathname;
+	var projectPath=pathName.substring(0,pathName.substr(1).indexOf('/')+1);
+	
+		$('#article_btn_add').click(function(){
+			window.location.href=projectPath + "/articles/toArticleAdd"; 
+		});
+		
+		$('#article_btn_edit').click(function(){
+			var articleObj = getSelectedRow();
+			
+			if(userObj[0] == null){
+				alert('请选择要修改的文章');
+			}else if(userObj[1] != null){
+				alert('修改文章只能选择一篇文章');
+			}else if(userObj[0] != null && userObj[1] == null){
+				
+				$('#myModal_edit').modal();
+				//设置值
+				$('#username_edit').val(userObj[0].username);
+				$('#nickname_edit').val(userObj[0].nickname);
+				$('#email_edit').val(userObj[0].email);
+				$("#role_edit").val(userObj[0].role);
+			}
+		});
+		
+		
+		//获取选中的行
+		function getSelectedRow() 
+		{
+			return $('#article-table').bootstrapTable('getAllSelections');
+		}
+		
+		
+	</script>
 </body>
 </html>

@@ -1,6 +1,9 @@
 package cn.edu.aust.controller;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -12,6 +15,7 @@ import java.util.Map;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.springframework.stereotype.Controller;
@@ -28,11 +32,11 @@ import org.springframework.web.servlet.ModelAndView;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
-import cn.edu.aust.pojo.Article;
+import cn.edu.aust.pojo.User;
 import cn.edu.aust.pojo.form.ArticleForm;
-import cn.edu.aust.pojo.form.ProblemForm;
 import cn.edu.aust.service.IArticleService;
 import cn.edu.aust.util.Contants;
+import cn.edu.aust.util.FilePathUtil;
 import cn.edu.aust.util.MyLogUtil;
 import cn.edu.aust.util.PageUtil;
 
@@ -82,6 +86,28 @@ public class ArticleController {
 	public ModelAndView getArticleById(@PathVariable("articleId") Integer articleId){
 		ModelAndView mav = new ModelAndView("article");
 		ArticleForm articleForm = this.articleService.getArticleById(articleId);
+		//判断文章内容是文件路径还是具体的文件路径
+		File file = new File(articleForm.getContent());
+		if(file.isFile()){
+			//这里要将文件类容设置到文章中
+			try {
+				FileReader fr = new FileReader(file);
+				BufferedReader br = new BufferedReader (fr);
+				String contentLine;
+				StringBuffer sb = new StringBuffer();
+				while((contentLine = br.readLine()) != null){  
+					sb.append(contentLine + "\r\n");
+				}
+				fr.close(); 
+				articleForm.setContent(sb.toString());
+				articleForm.setMarkdown(1);
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		
 		mav.addObject("article",articleForm);
 		return mav;
 	}
@@ -163,9 +189,8 @@ public class ArticleController {
                 MultipartFile file=multiRequest.getFile(iter.next().toString());
                 if(file!=null)
                 {
-                    //String path="F:/mavenProject/bolg/img/"+file.getOriginalFilename();
-                    String path="F:/mavenProject/myAustOj/src/main/webapp/static/images/article/"+file.getOriginalFilename();
-                    //String path = request.getContextPath() + "/img/" +file.getOriginalFilename();
+                    //String path="F:/mavenProject/myAustOj/src/main/webapp/static/images/article/"+file.getOriginalFilename();
+                    String path = FilePathUtil.getCourseFilePath() + "/src/main/webapp/static/images/article/"+file.getOriginalFilename();
                     System.out.println("创建文件路径"+path);
                     //上传
                     File ofile = new File(path);
@@ -190,11 +215,12 @@ public class ArticleController {
      */
   	@RequestMapping(value="/insert")
   	@ResponseBody 
-  	public  void insert(@RequestBody ArticleForm articleForm,HttpServletResponse response){
-  		System.out.println("请求到达" +   articleForm.toString());
-  		
+  	public  String insert(@RequestBody ArticleForm articleForm,HttpServletResponse response,HttpSession session,HttpServletRequest request){
+  		System.out.println("请求到达" +   articleForm.getTitle());
   		//将文章保存到内存中
-  		String path = "F:/mavenProject/myAustOj/src/main/webapp/static/article/" + articleForm.getTitle()+ ".md";
+  		//String path = "F:/mavenProject/myAustOj/src/main/webapp/static/article/" + articleForm.getTitle()+ ".md";
+  		String path = FilePathUtil.getCourseFilePath() + "/src/main/webapp/static/article/" + articleForm.getTitle()+ ".md";
+  		System.out.println("路径：" + path);
   		File file = new File(path);
   		try {
   			FileWriter fw = new FileWriter(file);
@@ -203,9 +229,14 @@ public class ArticleController {
   			fw.close();
   			//将文章的内容设置为路径
   			articleForm.setContent(path);
+  			//设置作者
+  			User user = (User) session.getAttribute("userLogin");
+  			articleForm.setUser(user);
+  			
   			//存入数据库
+  			this.articleService.addArticle(articleForm);
   			
-  			
+  			/*
   			//如果数据库中存在就不在向数据库中存入
   			int state = this.articleService.judgeArticleByaContent(path);
   			System.out.println("state" + state);
@@ -216,13 +247,15 @@ public class ArticleController {
   				//将数据存入到数据库中
   				this.articleService.insertSelective(articleForm);
   			}
-  			
-  			PrintWriter pw = response.getWriter();
+  			*/
+  			/*PrintWriter pw = response.getWriter();
   			pw.write("1");
   			pw.flush();
-  			pw.close();
+  			pw.close();*/
   		} catch (IOException e1) {
   			e1.printStackTrace();
+  			return "保存文章失败";
   		}
+  		return "文章保存成功";
   	}
 }

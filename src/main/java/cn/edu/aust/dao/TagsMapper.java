@@ -14,4 +14,10 @@ public interface TagsMapper {
     int updateByPrimaryKeySelective(Tags record);
 
     int updateByPrimaryKey(Tags record);
+
+	int selectTagsByTagsName(String tagName);
+
+	int selectTagsIdByTagsName(String tagName);
+
+	int insertSelectiveReturnId(Tags record);
 }

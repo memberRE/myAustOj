@@ -11,6 +11,10 @@ import org.springframework.stereotype.Service;
 import com.alibaba.fastjson.JSON;
 
 import cn.edu.aust.dao.ArticleMapper;
+import cn.edu.aust.dao.ArticleTagsMapper;
+import cn.edu.aust.dao.TagsMapper;
+import cn.edu.aust.pojo.ArticleTags;
+import cn.edu.aust.pojo.ArticleWithBLOBs;
 import cn.edu.aust.pojo.Tags;
 import cn.edu.aust.pojo.form.ArticleForm;
 import cn.edu.aust.pojo.form.ArticleJSONForm;
@@ -22,6 +26,12 @@ import cn.edu.aust.util.MyLogUtil;
 public class ArticleServiceImpl implements IArticleService{
 	@Resource
 	private ArticleMapper articleMapper;
+	
+	@Resource
+	private TagsMapper tagsMapper;
+	
+	@Resource
+	private ArticleTagsMapper articleTagsMapper;
 
 	@Override
 	public List<ArticleForm> getArticleFormList() {
@@ -78,7 +88,76 @@ public class ArticleServiceImpl implements IArticleService{
 		log.info("转换为JSON的article："+text);
 		JSONFileUtil.refreshTags(path, text);
 	}
+
+	@Override
+	public void addArticle(ArticleForm articleForm) {
+		ArticleWithBLOBs aw = ArticleFormToArticle(articleForm);
+		//添加文章
+		int articleId = articleMapper.insertSelectiveReturnId(aw);
+		//添加标签
+		List<String> tags = articleForm.getTags();
+		for(String tagName : tags){
+			//去标签表中查询，如果存在此名称的标签，则直接插入，否则就需要先插入标签再在文章标签表中进行插入
+			if(tagsMapper.selectTagsByTagsName(tagName) == 1){
+				//查询ID
+				int tagsId = tagsMapper.selectTagsIdByTagsName(tagName);
+				//标签存在，向文章标签表中插入
+				ArticleTags at = new ArticleTags();
+				at.setArticleId(articleId);
+				at.setTagsId(tagsId);
+				articleTagsMapper.insertSelective(at);
+				
+			}else{
+				//插入标签
+				Tags newTags = new Tags();
+				newTags.setTagname(tagName);
+				int tagsId = tagsMapper.insertSelectiveReturnId(newTags);
+				
+				ArticleTags at = new ArticleTags();
+				at.setArticleId(articleId);
+				at.setTagsId(tagsId);
+				articleTagsMapper.insertSelective(at);
+			}
+		}
+	}
 	
 	
+	private ArticleWithBLOBs ArticleFormToArticle(ArticleForm af) {
+		ArticleWithBLOBs aw = new ArticleWithBLOBs();
+		if (af.getArticleId() != null) {
+			aw.setArticleId(af.getArticleId());
+		}
+		if (af.getCatelog() != null) {
+			aw.setCatelog(af.getCatelog());
+		}
+		if (af.getContent() != null) {
+			aw.setContent(af.getContent());
+		}
+		if (af.getStartTime() != null) {
+			aw.setStartTime(af.getStartTime());
+		}
+		if (af.getSummary() != null) {
+			aw.setSummary(af.getSummary());
+		}
+		if (af.getTitle() != null) {
+			aw.setTitle(af.getTitle());
+		}
+		if (af.getTotop() != null) {
+			aw.setTotop(af.getTotop());
+		}
+		if (af.getUser() != null) {
+			aw.setUserId(af.getUser().getUserId());
+		}
+		if(af.getTagsSec() != null){
+			// 将标签数组设置到标签List中去
+			List<String> tagsList = new ArrayList<String>();
+			for (int i = 0; i < af.getTagsSec().length; i++) {
+				tagsList.add(af.getTagsSec()[i]);
+			}
+			af.setTags(tagsList);
+		}
+		return aw;
+	}
+
 	
 }

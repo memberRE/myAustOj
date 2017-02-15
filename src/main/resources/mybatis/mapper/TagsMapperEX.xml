@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.edu.aust.dao.TagsMapper" >
+	<select id="selectTagsByTagsName" parameterType="java.lang.String" resultType="java.lang.Integer">
+		select EXISTS 
+		(select * from tags where tagname = #{tagName,jdbcType=VARCHAR})
+	</select>
+	<select id="selectTagsIdByTagsName" parameterType="java.lang.String" resultType="java.lang.Integer">
+		select tags_id from tags where tagname = #{tagName,jdbcType=VARCHAR} limit 1
+	</select>
+	<insert id="insertSelectiveReturnId" parameterType="cn.edu.aust.pojo.Tags" useGeneratedKeys="true" keyProperty="tags_id">
+    insert into tags
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tagsId != null" >
+        tags_id,
+      </if>
+      <if test="tagname != null" >
+        tagname,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tagsId != null" >
+        #{tagsId,jdbcType=INTEGER},
+      </if>
+      <if test="tagname != null" >
+        #{tagname,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

@@ -14,6 +14,8 @@ public interface ArticleMapper {
     int insert(ArticleWithBLOBs record);
 
     int insertSelective(ArticleWithBLOBs record);
+    
+    int insertSelectiveReturnId(ArticleWithBLOBs record);
 
     ArticleWithBLOBs selectByPrimaryKey(Integer articleId);
 
@@ -34,4 +36,5 @@ public interface ArticleMapper {
 	List<Tags> getTagsList();
 
 	List<ArticleJSONForm> getArticleJSONList();
+
 }

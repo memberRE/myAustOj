@@ -87,6 +87,19 @@ function setArticleTable(obj,url) {
 		}, {
 			field: 'title',
 			title: '文章标题',
+			formatter: function(value,row,index){
+            	return [
+                    '<div>',
+                    '<a href="'+projectPath+'/articles/'+row.articleId+'" target="_blank">' + value + '</a>',
+                    '</div>'
+                ].join('');
+            }
+		}, {
+			field: 'startTime',
+			title: '创建日期',
+			formatter: function(value){
+	            return new Date(parseInt(value)).toLocaleString().replace(/:\d{1,2}$/,' ');  
+	        }
 		}, {
 			field: 'user.username',
 			title: '作者'

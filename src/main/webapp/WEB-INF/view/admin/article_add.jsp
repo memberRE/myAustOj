@@ -73,12 +73,76 @@
 	</div>
 	<!--主体结束-->
 
-
-
-
 	<footer>
 		<%@include file="../../common/footer.jsp"%>
 	</footer>
+	
+	
+	
+
+	<div class="modal fade" id="article_add_modal" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">×</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">提交</h4>
+				</div>
+				<div class="modal-body">
+					<div class="form-group">
+						<label for="txt_departmentname">文章名称</label> 
+						<input type="text"
+							name="title" class="form-control"
+							id="title" placeholder="title">
+					</div>
+					<div class="form-group">
+						<label for="txt_parentdepartment">摘要</label> <input type="text"
+							name="summary" class="form-control"
+							id="summary" placeholder="summary">
+					</div>
+					<div class="form-group">
+						<label for="txt_parentdepartment">标签</label> <input type="text"
+							name="tags" class="form-control"
+							id="tags" placeholder="多个标签使用,分割">
+					</div>
+					<div class="form-group">
+						<label for="txt_parentdepartment">文章类别</label>
+						<select name="select" id="catelog" name="catelog" class="form-control">
+							<option class="form-control" value="java">java</option>
+							<option  class="form-control" value="数据库">数据库</option>
+							<option  class="form-control" value="前端">前端</option>
+							<option  class="form-control" value="剑指offer">剑指offer</option>
+						</select> 
+					</div>
+					<div class="form-group">
+						<label for="txt_parentdepartment">是否置顶</label>
+						<select name="select" id="totop" name="totop" class="form-control">
+							<option class="form-control" value="false">否</option>
+							<option  class="form-control" value="true">是</option>
+						</select> 
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-warning" data-dismiss="modal">
+						<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>关闭
+					</button>
+					<button type="button" id="article_add_submit" class="btn btn-primary"
+						data-dismiss="modal">
+						<span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>保存
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
+	
+	
+	
+	
 <%@include file="article_add_js.jsp"%>
 	<!--script引入-->
 	

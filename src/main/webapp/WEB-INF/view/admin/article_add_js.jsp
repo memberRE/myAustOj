@@ -83,6 +83,11 @@
 
 
 <script>
+	//获取当前项目名称
+	var pathName=window.document.location.pathname;
+	var projectPath=pathName.substring(0,pathName.substr(1).indexOf('/')+1);
+
+
 	$("#markdownTA").markdown({
 		language : 'zh',
 		fullscreen : {
@@ -105,32 +110,49 @@
 		mydiv.html(test);
 	});
 	 */
+	 
 	//提交文章，转到文章页面
 	 $('#submitbtn').click(function() {
+		 $('#article_add_modal').modal();
+		/*  
 		var date = new Date();
 		var year = date.getFullYear();
 		var month = date.getMonth()+1;
 		var dat = date.getDate();
 		var time = year + "-" + month + "-" + dat;
+		 */
+		
+	}); 
+
+	$('#article_add_submit').click(function() {
+		
+		//将标签转为数组
+		var tagsArray = new Array();
+		var reg = /[, .;_]/;
+		tagsArray = $('#tags').val().split(reg);
+		
 		//文章内容
-		var article = {
-			title: "大国崛起",
-			summary:'大国正在崛起....',
-			content : $('#markdownTA').val(),
-			catelog:'javaEE';
-			startTime:time;
-			totop:false;
+		article = {
+			"title": $('#title').val(),
+			"summary": $('#summary').val(),
+			"content" : $('#markdownTA').val(),
+			"tagsSec":tagsArray,
+			"catelog": $('#catelog').val(),
+			"startTime": new Date(),
+			"totop": $('#totop').val()
 		};
 		
-	    $.ajax({
-	    url : "insert",
-	    type : "POST", 
-	    dataType:"json",
-	    contentType:'application/json;charset=UTF-8',
-	    data:JSON.stringify(article),
-	    complete : function(info) {
-	        alert("提交成功");  
-	    },
-		}); 
-	}); 
+		alert(article.totop);
+		
+		$.ajax({
+			url : projectPath + "/articles/insert",
+			type : "POST",
+			dataType : "json",
+			contentType : 'application/json;charset=UTF-8',
+			data : JSON.stringify(article),
+			success : function(data) {
+				alert(data);
+			}
+		});
+	});
 </script>

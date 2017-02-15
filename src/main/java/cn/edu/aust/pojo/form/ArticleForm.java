@@ -22,8 +22,28 @@ public class ArticleForm {
     
     private List<String> tags;
 
+    private String[] tagsSec;
+    
     private User user;
     
+    private Integer markdown = 0;//文章是否是markdown格式,默认不是 
+    
+	public Integer getMarkdown() {
+		return markdown;
+	}
+
+	public void setMarkdown(Integer markdown) {
+		this.markdown = markdown;
+	}
+
+	public String[] getTagsSec() {
+		return tagsSec;
+	}
+
+	public void setTagsSec(String[] tagsSec) {
+		this.tagsSec = tagsSec;
+	}
+
 	public List<String> getTags() {
 		return tags;
 	}

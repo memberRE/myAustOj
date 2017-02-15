@@ -38,4 +38,10 @@ public interface IArticleService {
 	 */
 	void refreshArticle(String path);
 
+	/**
+	 * 添加文章
+	 * @param articleForm
+	 */
+	void addArticle(ArticleForm articleForm);
+
 }

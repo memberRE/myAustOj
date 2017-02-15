@@ -92,4 +92,60 @@
 		order by a.start_time DESC
 		limit 4
 	</select>
+	<!-- 插入文章 返回主键 -->
+	<insert id="insertSelectiveReturnId" parameterType="cn.edu.aust.pojo.ArticleWithBLOBs" useGeneratedKeys="true" keyProperty="article_id">
+    insert into article
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="articleId != null" >
+        article_id,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="catelog != null" >
+        catelog,
+      </if>
+      <if test="startTime != null" >
+        start_time,
+      </if>
+      <if test="totop != null" >
+        totop,
+      </if>
+      <if test="summary != null" >
+        summary,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="articleId != null" >
+        #{articleId,jdbcType=INTEGER},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="catelog != null" >
+        #{catelog,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null" >
+        #{startTime,jdbcType=DATE},
+      </if>
+      <if test="totop != null" >
+        #{totop,jdbcType=BIT},
+      </if>
+      <if test="summary != null" >
+        #{summary,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
 </mapper>
