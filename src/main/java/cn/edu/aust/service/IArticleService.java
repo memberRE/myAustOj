@@ -44,4 +44,10 @@ public interface IArticleService {
 	 */
 	void addArticle(ArticleForm articleForm);
 
+	/**
+	 * 通过删除文章
+	 * @param articleIdArray
+	 */
+	void deleteArticleById(int articleIdArray);
+
 }

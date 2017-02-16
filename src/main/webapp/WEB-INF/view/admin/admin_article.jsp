@@ -196,6 +196,27 @@
 			return $('#article-table').bootstrapTable('getAllSelections');
 		}
 		
+		$('#article_btn_delete').click(function(){
+			 if(confirm("确认删除？")){
+				var article = getSelectedRow();
+				var articleId = new Array();
+				for(var i = 0; i < article.length; i ++){
+					articleId[i] = article[i].articleId;
+				}
+				//alert("userID:" + userId);
+				$.ajax({
+					type : "POST",
+					url : projectPath + '/articles/deleteArticle',
+					data : JSON.stringify(articleId),
+					contentType:"application/json",  
+					dataType : 'json',
+					success : function(data) {
+						alert(data);
+						$('#article-table').bootstrapTable('refresh');
+					}
+				});
+			 }
+		});
 		
 	</script>
 </body>

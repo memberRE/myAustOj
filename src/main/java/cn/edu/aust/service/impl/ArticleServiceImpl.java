@@ -1,5 +1,6 @@
 package cn.edu.aust.service.impl;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -158,6 +159,24 @@ public class ArticleServiceImpl implements IArticleService{
 			af.setTags(tagsList);
 		}
 		return aw;
+	}
+
+	@Override
+	public void deleteArticleById(int articleId) {
+		//从文件系统中删除文件
+		//ArticleForm af = this.articleMapper.getArticleById(articleId);
+		ArticleWithBLOBs af = this.articleMapper.selectByPrimaryKey(articleId);
+		try {
+			System.out.println("删除文章的目录：" + af.getContent());
+			File file = new File(af.getContent());
+			if(file.exists() && file.isFile()){
+				file.delete();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		//从数据库中删除文章
+		this.articleMapper.deleteByPrimaryKey(articleId);
 	}
 
 	

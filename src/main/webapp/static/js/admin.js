@@ -48,7 +48,7 @@ function setProblemTable(obj,url) {
             }
         }, {
         	field: 'tag',
-        	title: '作者'
+        	title: '题目类别'
         }, {
         	field: 'acFra',
         	title: 'AC/Submit'

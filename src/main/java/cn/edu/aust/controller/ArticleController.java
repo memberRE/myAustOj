@@ -138,7 +138,6 @@ public class ArticleController {
 	@RequestMapping(value="/getAllArticle")
 	 public @ResponseBody Map<String,Object> getAllArticle(
 			 @RequestBody PageUtil pageUtil){
-		System.out.println("adsfasdf");
 		log.info("文章列表查询：");
 		Map<String, Object> maps = new HashMap<>();
 	    //分页查询问题
@@ -242,8 +241,30 @@ public class ArticleController {
         return ; 
     }
     
-    
     /**
+     * 管理员删除文章
+     * @param userIdArray
+     * @return
+     */
+    @RequestMapping(value="/deleteArticle",method=RequestMethod.POST)
+    @ResponseBody 
+    public  String deleteArticle(@RequestBody String articleId){
+		String articleIdNew = articleId.substring(1, articleId.length()-1);
+		String[] articleIdArrayStr = articleIdNew.split(",");
+		//将字符串数组转换为整形数组
+		int[] articleIdArrayInt = new int[articleIdArrayStr.length];
+		for(int i = 0 ; i < articleIdArrayStr.length; i++){
+			articleIdArrayInt[i] = Integer.parseInt(articleIdArrayStr[i]);
+		}
+		for(int articleIdArray : articleIdArrayInt){
+			this.articleService.deleteArticleById(articleIdArray);
+		}
+    	return "删除成功";
+    }
+    
+    	
+    	
+    	/**
      * 添加文章
      * @param article
      * @param response
@@ -293,4 +314,6 @@ public class ArticleController {
   		}
   		return "文章保存成功";
   	}
+  	
+  	
 }
