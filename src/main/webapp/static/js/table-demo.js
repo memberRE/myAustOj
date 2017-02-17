@@ -178,33 +178,45 @@ function setverdict(value, row, index) {
     var msg = 'text-danger';
     switch (value){
         case 1:
-            value = 'Compiling';break;
-        case 2:
-            value = 'Compiling';break;
-        case 3:
-            value = '编译错误';break;
-        case 4:
-            value = 'Compiling';break;
-        case 5:
-            value = 'Accepted';msg = 'text-success';break;
-        case 6:
-            value = '答案错误';break;
-        case 7:
-            value = '运行错误';break;
-        case 8:
-            value = '超时';break;
-        case 9:
-            value = '内存超出';break;
-        case 10:
-            value = '格式错误';break;
-        case 11:
-            value = '输出错误';break;
-        case 12:
-            value = '非法函数';break;
-        case 13:
-            value = '竞赛已结束';break;
-        case 14:
-            value = '未知错误';break;
+        	value = "编译错误";
+			break;
+		case 2:
+			value = "非法操作处理";
+			break;
+		case 3:
+			value = "运行超时";
+			break;
+		case 4:
+			value = "输出异常";
+			break;
+		case 5:
+			value = "运行时错误";
+			break;
+		case 6:
+			value = "答案错误";
+			break;
+		case 7:
+			value = "运行时堆溢出异常";
+			break;
+		case 8:
+			value = "除零异常";
+			break;
+		case 9:
+			value = "内存溢出";
+			break;
+		case 10:
+			value = "数组越界";
+			break;
+		case 11:
+			value = "输出错误";
+			break;
+		case 12:
+			value = "通过";
+			msg = 'text-success';
+			break;
+		default:
+			value = "未知结果";
+			break;
     }
     return [
         '<div>',
@@ -273,6 +285,10 @@ function setCode(btn){
 	//var language = row.language;
 	
 	switch (language){
+	case '1':
+		language = 'python';break;
+	case '2':
+		language = 'javaEE';break;
     case '3':
     	language = 'c';break;
     case '4':

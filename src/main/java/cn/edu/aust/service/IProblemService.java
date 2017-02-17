@@ -2,8 +2,12 @@ package cn.edu.aust.service;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import cn.edu.aust.pojo.Problem;
 import cn.edu.aust.pojo.ProblemWithBLOBs;
+import cn.edu.aust.pojo.Testcase;
+import cn.edu.aust.pojo.User;
 import cn.edu.aust.pojo.form.ProblemForm;
 import cn.edu.aust.pojo.form.SolutionForm;
 
@@ -62,5 +66,12 @@ public interface IProblemService {
 	 * @return
 	 */
 	List<ProblemForm> getProblemListBySearch(String search);
+
+	/**
+	 * 查询此问题下所有的测试用例
+	 * @param problemId
+	 * @return
+	 */
+	String selectAllTestcase(List<String> submitdata,User user);
     
 }

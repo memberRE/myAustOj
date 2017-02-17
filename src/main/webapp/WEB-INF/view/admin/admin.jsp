@@ -98,51 +98,84 @@
 				<div class="modal-body">
 
 					<div class="form-group">
+						<input type="text" name="problemId" class="form-control hidden" id="problemId" >
 						<label for="txt_departmentname">题目名称</label> <input type="text"
 							name="title" class="form-control"
 							id="title" placeholder="请输入1到14位字符的题目">
-							 <span class="text-danger toolmsg" id="titleState">*</span>
+							 <span class="text-danger toolmsg" id="titleState">必填</span>
 					</div>
 					<div class="form-group">
 						<label for="txt_parentdepartment">题目描述</label>
 							<textarea rows="5" cols="30" class="form-control" name="description"
 							id="description" placeholder="请输入1到64位字符的题目描述"></textarea>
-							<span class="text-danger toolmsg" id="descriptionState">*</span>
+							<span class="text-danger toolmsg" id="descriptionState">必填</span>
 					</div>
 					<div class="form-group">
-						<label for="txt_parentdepartment">题目类别</label> <input type="text"
+						<label for="txt_parentdepartment">题目标签</label> <input type="text"
 							name="tag" class="form-control"
-							id="tag" placeholder="必填项">
-							<span class="text-danger toolmsg" id="tagState">*</span>
+							id="tag" placeholder="tag">
+							<span class="text-danger toolmsg" id="tagState">必填</span>
+					</div>
+					<div class="form-group">
+						<label for="txt_departmentlevel">题目类别</label> <select
+							name="select" id="catelogId" name="catelogId" class="form-control">
+							<option class="form-control" value="1">语言入门</option>
+							<option class="form-control" value="2">数据结构</option>
+							<option class="form-control" value="3">贪心算法</option>
+							<option class="form-control" value="4">搜索</option>
+							<option class="form-control" value="5">数学基础</option>
+							<option class="form-control" value="6">图论</option>
+							<option class="form-control" value="7">矩阵计算</option>
+							<option class="form-control" value="8">动态规划</option>
+						</select>
 					</div>
 					<div class="form-group">
 						<label for="txt_departmentlevel">输入描述</label> <input type="text"
 							name="input" class="form-control"
-							id="input" placeholder="必填项">
-							<span class="text-danger toolmsg" id="inputState">*</span>
+							id="input" placeholder="input">
+							<span class="text-danger toolmsg" id="inputState">必填</span>
 					</div>
 					<div class="form-group">
 						<label for="txt_statu">输出描述</label> <input type="text"
 							name="output" class="form-control" id="output"
-							placeholder="必填项">
-							<span class="text-danger toolmsg" id="outputState">*</span>
+							placeholder="output">
+							<span class="text-danger toolmsg" id="outputState">必填</span>
+							</label>
 					</div>
 					<div class="form-group">
 						<label for="txt_statu">样例输入</label> <input type="text"
 							name="sampleInput" class="form-control" id="sampleInput"
-							placeholder="必填项">
-							<span class="text-danger toolmsg" id="sampleInputState">*</span>
+							placeholder="sampleInput">
+							<span class="text-danger toolmsg" id="sampleInputState">必填</span>
 					</div>
 					<div class="form-group">
 						<label for="txt_statu">样例输出</label> <input type="text"
 							name="sampleOutput" class="form-control" id="sampleOutput"
-							placeholder="必填项">
-							<span class="text-danger toolmsg" id="sampleOutputState">*</span>
+							placeholder="sampleOutput">
+							<span class="text-danger toolmsg" id="sampleOutputState">必填</span>
 					</div>
 					<div class="form-group">
 						<label for="txt_statu">提示</label> <input type="text"
 							name="hint" class="form-control" id="hint"
 							placeholder="hint">
+					</div>
+					<div class="form-group">
+						<label for="txt_statu">题目级别</label> 
+						<select name="select" id="stage" name="stage" class="form-control">
+							<option class="form-control" value="1">新手起步</option>
+							<option class="form-control" value="2">日常训练</option>
+							<option class="form-control" value="3">高手进阶</option>
+						</select>
+					</div>
+					<div class="form-group">
+						<label for="txt_statu">时间限制</label> <input type="text"
+							name="timeLimit" class="form-control" id="timeLimit"
+							placeholder="timeLimit(ms)">
+					</div>
+					<div class="form-group">
+						<label for="txt_statu">内存限制</label> <input type="text"
+							name="memoryLimit" class="form-control" id="memoryLimit"
+							placeholder="memoryLimit(M)">
 					</div>
 				</div>
 				<div class="modal-footer">
@@ -177,6 +210,7 @@
 	
 		$('#problem_btn_add').click(function(){
 			$('#problem_myModal').modal();
+			$('#myModalLabel').text("添加题目");
 		});
 		
 		//格式检查
@@ -263,6 +297,7 @@
 		$('#problem_btn_submit').click(function(){
 			
 			var problem = {
+				"problemId":$('#problemId').val(),
 				"title":$('#title').val(),
 		    	"description" : $('#description').val(),
 		    	"input" : $('#input').val(),
@@ -270,19 +305,39 @@
 		    	"sampleInput" : $('#sampleInput').val(),
 		    	"sampleOutput" :$('#sampleOutput').val(),
 		    	"hint" :$('#hint').val(),
-		    	"tag" :$('#tag').val()
+		    	"tag" :$('#tag').val(),
+		    	"catelogId" : $('#catelogId').val(),
+		    	"stage" : $('#stage').val(),
+		    	"timeLimit" : $('#timeLimit').val(),
+		    	"memoryLimit" : $('#memoryLimit').val(),
 			};
 			
-			$.ajax({
-				type : "POST",
-				url : projectPath + '/admin/addProblem',
-				data : JSON.stringify(problem),
-				contentType: 'application/json; charset=UTF-8',
-				dataType : 'json',
-				success : function(data) {
-					alert(data);
-				}
-			});
+			var type = $('#myModalLabel').text();
+			if(type == "添加题目"){
+				$.ajax({
+					type : "POST",
+					url : projectPath + '/admin/addProblem',
+					data : JSON.stringify(problem),
+					contentType: 'application/json; charset=UTF-8',
+					dataType : 'json',
+					success : function(data) {
+						alert(data);
+						$('#problem-table').bootstrapTable('refresh');
+					}
+				});
+			}else if(type == "修改题目"){
+				$.ajax({
+					type : "POST",
+					url : projectPath + '/admin/editProblem',
+					data : JSON.stringify(problem),
+					contentType: 'application/json; charset=UTF-8',
+					dataType : 'json',
+					success : function(data) {
+						alert(data);
+						$('#problem-table').bootstrapTable('refresh');
+					}
+				});
+			}
 		});
 		
 		
@@ -311,6 +366,35 @@
 					}
 				});
 			 }
+		});
+		
+		
+		
+		//修改问题
+		$('#problem_btn_edit').click(function(){
+			var problem = getSelectedRow();
+			if(problem[0] == null){
+				alert('请选择要修改的题目');
+			}else if(problem[1] != null){
+				alert('修改题目只能选择一个题目');
+			}else if(problem[0] != null && problem[1] == null){
+				$('#problem_myModal').modal();
+				$('#myModalLabel').text("修改题目");
+				//设置值
+				$('#problemId').val(problem[0].problemId);
+				$('#title').val(problem[0].title);
+				$('#description').val(problem[0].description);
+				$('#tag').val(problem[0].tag);
+				$('#catelogId').val(problem[0].catelogId);
+				$('#input').val(problem[0].input);
+				$('#output').val(problem[0].output);
+				$('#sampleInput').val(problem[0].sampleInput);
+				$('#sampleOutput').val(problem[0].sampleOutput);
+				$('#hint').val(problem[0].hint);
+				$('#stage').val(problem[0].stage);
+				$('#timeLimit').val(problem[0].timeLimit);
+				$('#memoryLimit').val(problem[0].memoryLimit);
+			}
 		});
 	</script>
 </body>

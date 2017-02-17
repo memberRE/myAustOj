@@ -88,6 +88,7 @@
 		from problem p,catelog c,user u
 		where p.catelog_id = c.catelog_id
 		and p.user_id = u.user_id
+		order by p.problem_id asc
 	</select>
 	
 	<!-- 通过问题id查询问题的ac数量 -->

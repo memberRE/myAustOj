@@ -38,18 +38,41 @@ public class AdminController {
 	@ResponseBody 
 	public String addProblem(@RequestBody  ProblemWithBLOBs pb, HttpSession session){
 		System.out.println("添加题目" + pb.getTitle() + "  " + pb.getDescription());
-		//设置作者
 		try {
+			//设置作者
 			User user = (User) session.getAttribute("userLogin");
 			if(user == null){
 				return "添加失败，请先登录~~";
 			}
 			pb.setUserId(user.getUserId());
+			//设置题目类别
+			
+			
+			//设置题目级别
+			
+			
+			//设置时间限制
+			
+			//设置内存限制
 			this.problemService.insertSelective(pb);
 			return "添加成功";
 		} catch (Exception e) {
 			e.printStackTrace();
 			return "添加失败，出现未知错误~~";
+		}
+	}
+	
+	//保存问题
+	@RequestMapping(value="/editProblem",method=RequestMethod.POST)
+	@ResponseBody 
+	public String editProblem(@RequestBody  ProblemWithBLOBs pb, HttpSession session){
+		System.out.println("修改题目" + pb.getTitle() + "  " + pb.getDescription());
+		try {
+			this.problemService.updateByPrimaryKeySelective(pb);
+			return "修改成功";
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "修改失败，出现未知错误~~";
 		}
 	}
 	

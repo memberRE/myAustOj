@@ -127,11 +127,9 @@
 						</button>
 						<h4 class="modal-title">提交代码</h4>
 					</div>
-					<form id="pro_form" action="${pageContext.request.contextPath}/problem/judge" method="post">
 						<div class="modal-body">
 							<%--判断是否属于竞赛提交--%>
-							<input type="hidden" value="${consubmit>0?consubmit:0}" name="contestId"> 
-							<input type="hidden" value="${problem.problemId}" name="problemId">
+							<input type="hidden" value="${problem.problemId}" name="problemId" id="code_problemId">
 
 							<div class="form-group">
 								<label class="radio-inline">选择编译器:</label> <label
@@ -151,16 +149,15 @@
 							</div>
 							<div class="form-group">
 								<textarea class="form-control" rows="20" cols="20" required
-									name="source"></textarea>
+									name="source" id="code"></textarea>
 							</div>
 
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-default"
 								data-dismiss="modal">Close</button>
-							<button type="submit" class="btn btn-primary">Commit</button>
+							<button type="button" class="btn btn-primary" id="codesubmit">Commit</button>
 						</div>
-					</form>
 				</div>
 				<!-- /.modal-content -->
 			</div>
@@ -175,5 +172,29 @@
 	<script
 		src="${pageContext.request.contextPath}/static/js/flat-ui.min.js"></script>
 	<script src="${pageContext.request.contextPath}/static/js/app.js"></script>
+	<script type="text/javascript">
+	$('#codesubmit').click(function(){
+		var problemId = $('#code_problemId').val();
+		var code = $('#code').val();
+		
+		var submitdata = new Array(2);
+		submitdata[0] = problemId;
+		submitdata[1] = code;
+		
+		//提交代码到服务器
+		$.ajax({
+	        type : "POST",
+	        url : projectPath + "/problem/submit",
+	        contentType:"application/json",
+	        data : JSON.stringify(submitdata),
+	        //返回数据格式为json
+	        dataType: "json",
+	        //请求成功完成后要执行的方法
+	        success: function(data){
+	        	alert(data);
+	        }
+	    });
+	});
+	</script>
 </body>
 </html>

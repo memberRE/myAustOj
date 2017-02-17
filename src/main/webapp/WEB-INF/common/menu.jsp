@@ -7,7 +7,7 @@
 			<i class="fa fa-th-list"></i>
 		</button>
 		<a class="navbar-brand"
-			href="${pageContext.request.contextPath}/index">AUST</a>
+			href="${pageContext.request.contextPath}/index">SWUN</a>
 	</div>
 	<div class="navbar-collapse collapse">
 		<ul class="nav navbar-nav">

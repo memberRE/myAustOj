@@ -7,7 +7,7 @@
 			<i class="fa fa-th-list"></i>
 		</button>
 		<a class="navbar-brand"
-			href="${pageContext.request.contextPath}/index">AUST后台管理系统</a>
+			href="${pageContext.request.contextPath}/admin">SWUN后台管理系统</a>
 	</div>
 	<div class="navbar-collapse collapse">
 		<ul class="nav navbar-nav">

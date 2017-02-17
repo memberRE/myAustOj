@@ -5,14 +5,12 @@
 		<br/> 练习小项目，欢迎交流学习
 	</div>
 	<div class="col-md-1 col-lg-offset-3">
-		<i
-			title="<img src='${pageContext.request.contextPath}/static/images/wechat.jpg' />"
+		<i title="<img src='${pageContext.request.contextPath}/static/images/wechat.jpg' />"
 			data-html="true" data-placement="top" data-toggle="tooltip"
 			class="fa fa-wechat fa-4x mrs"></i>
 	</div>
 	<div class="col-md-1">
-		<i
-			title="<img src='${pageContext.request.contextPath}/static/images/qq.jpg' />"
+		<i title="<img src='${pageContext.request.contextPath}/static/images/qq.jpg' />"
 			data-html="true" data-placement="top" data-toggle="tooltip"
 			class="fa fa-qq fa-4x mrs"></i>
 	</div>

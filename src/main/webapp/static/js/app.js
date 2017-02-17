@@ -5,7 +5,7 @@ var projectPath=pathName.substring(0,pathName.substr(1).indexOf('/')+1);
 
 //底部二维码展示
 $(function () {
-    $('[data-toggle=tooltip]').tooltip({delay:{show:0,hide:500}});
+	 $("[data-toggle='tooltip']").tooltip();
 });
 //菜单链接进入active
 $(function () {

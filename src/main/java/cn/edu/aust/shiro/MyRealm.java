@@ -91,6 +91,8 @@ public class MyRealm extends AuthorizingRealm {
             if(null != session){  
                 session.setAttribute(key, value);  
             }  
+            session.setTimeout(3600000);
+            System.out.println("Session默认超时时间为[" + session.getTimeout() + "]毫秒");  
         }  
     }  
 }  
