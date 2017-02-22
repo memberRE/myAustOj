@@ -18,6 +18,7 @@ public class ContestServiceImpl implements IContestService{
 
 	@Resource
 	private ContestMapper contestMapper;
+	
 	@Resource
 	private ProblemMapper problemMapper;
 	

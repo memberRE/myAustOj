@@ -4,10 +4,12 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import cn.edu.aust.pojo.ProblemWithBLOBs;
 import cn.edu.aust.pojo.User;
@@ -22,6 +24,14 @@ public class AdminController {
 	@RequestMapping(value="",method=RequestMethod.GET)
 	public String toAdmin(){
 		return "admin/admin";
+	}
+	
+	@RequestMapping(value="/testcase",method=RequestMethod.GET)
+	public ModelAndView toTestcase(String problemId){
+		System.out.println("problemID:" + problemId);
+		ModelAndView mav = new ModelAndView("admin/testcase");
+		mav.addObject("problemId",problemId);
+		return mav;
 	}
 	
 	@RequestMapping(value="/adminArticle",method=RequestMethod.GET)
@@ -45,15 +55,6 @@ public class AdminController {
 				return "添加失败，请先登录~~";
 			}
 			pb.setUserId(user.getUserId());
-			//设置题目类别
-			
-			
-			//设置题目级别
-			
-			
-			//设置时间限制
-			
-			//设置内存限制
 			this.problemService.insertSelective(pb);
 			return "添加成功";
 		} catch (Exception e) {

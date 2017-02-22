@@ -6,6 +6,8 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
+import cn.edu.aust.util.Contants;
+
 
 /**
  * 负责和判题服务进行通信并获取结果
@@ -26,7 +28,7 @@ public class MyTask{
 		OjModel omNew = null;
 		try {
 			System.out.println("\n客户端发起连接...");
-			socket = new Socket("127.0.0.1", 8989);
+			socket = new Socket(Contants.JUDGE_LOCATION, Contants.JUDGE_PORT);
 			os = new ObjectOutputStream(socket.getOutputStream());
 			os.writeObject(om);
 			os.flush();

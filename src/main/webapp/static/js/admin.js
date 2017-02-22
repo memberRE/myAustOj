@@ -52,6 +52,16 @@ function setProblemTable(obj,url) {
         }, {
         	field: 'acFra',
         	title: 'AC/Submit'
+        }, {
+        	field: '',
+        	title: '测试用例管理',
+        	formatter: function(value,row,index){
+            	return [
+                    '<div>',
+                    '<button  class="btn btn-default btn-xs" onclick="showTestcase('+row.problemId+')">' + '点击查看' + '</button>',
+                    '</div>'
+                ].join('');
+            }
         }],
     });
 }
@@ -163,7 +173,9 @@ $("#btn_add").click(function() {
 
 
 
-
+function showTestcase(id){
+	window.location.href= projectPath + "/admin/testcase?problemId=" + id;
+}
 
 
 

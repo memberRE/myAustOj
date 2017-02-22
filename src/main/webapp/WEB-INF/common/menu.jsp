@@ -21,10 +21,10 @@
 				data-toggle="dropdown">联系我们<b class="caret"></b></a>
 				<ul class="dropdown-menu animated fadeIn">
 					<li><a
-						href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=fBIVCRAVTU08DQ1SHxMR"
+						href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=eBQOGhEZFydJQUFNOAkJVhsXFQ"
 						target="_blank"><i class="fa fa-envelope-o fa-fw"></i>&nbsp;&nbsp;文章投稿</a></li>
 					<li><a
-						href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=fBIVCRAVTU08DQ1SHxMR"
+						href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=eBQOGhEZFydJQUFNOAkJVhsXFQ"
 						target="_blank"><i class="fa fa-envelope-o fa-fw"></i>&nbsp;&nbsp;题目投稿</a></li>
 					<li class="divider"></li>
 					<li class="dropdown-header">意见反馈</li>

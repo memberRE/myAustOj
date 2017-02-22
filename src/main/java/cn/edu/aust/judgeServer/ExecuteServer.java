@@ -6,6 +6,8 @@ import java.net.Socket;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
+import cn.edu.aust.util.Contants;
+
 /**
  * 执行方法
  * 
@@ -17,7 +19,7 @@ public class ExecuteServer {
 	public static void main(String[] args) throws IOException {
 		ServerSocket server = null;
 		try {
-			server = new ServerSocket(8989);
+			server = new ServerSocket(Contants.JUDGE_PORT);
 			Socket socket;
 			System.out.println("执行进程已启动");
 			Executor service = Executors.newCachedThreadPool();

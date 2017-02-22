@@ -21,4 +21,12 @@ public class Contants {
 	 * 静态文件存储位置，正式部署时需要进行修改
 	 */
 	public final static String STATIC_PATH = "F:\\mavenProject\\myAustOj\\src\\main\\webapp\\static";
+	
+	
+	public final static String JUDGE_LOCATION = "127.0.0.1";
+	
+	/**
+	 * 判题服务端口
+	 */
+	public final static int JUDGE_PORT = 8989;
 }
