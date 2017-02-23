@@ -1,6 +1,10 @@
 package cn.edu.aust.pojo.form;
 
-public class ContestProblemForm {
+import java.io.Serializable;
+
+public class ContestProblemForm implements Serializable{
+	private static final long serialVersionUID = 8279697848889755931L;
+
 	private Integer problemId;
 
 	private String title;

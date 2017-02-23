@@ -1,7 +1,14 @@
 package cn.edu.aust.pojo;
 
-public class Tags {
-    private Integer tagsId;
+import java.io.Serializable;
+
+public class Tags implements Serializable{
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 8306091683266086625L;
+
+	private Integer tagsId;
 
     private String tagname;
 

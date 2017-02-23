@@ -1,7 +1,11 @@
 package cn.edu.aust.pojo;
 
-public class ContestProblem {
-    private Integer contestProblemId;
+import java.io.Serializable;
+
+public class ContestProblem implements Serializable{
+	private static final long serialVersionUID = -6147039558293218228L;
+
+	private Integer contestProblemId;
 
     private Integer contestId;
 

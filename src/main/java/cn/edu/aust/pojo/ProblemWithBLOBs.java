@@ -1,7 +1,11 @@
 package cn.edu.aust.pojo;
 
-public class ProblemWithBLOBs extends Problem {
-    private String description;
+import java.io.Serializable;
+
+public class ProblemWithBLOBs extends Problem implements Serializable{
+	private static final long serialVersionUID = -9063200651758490005L;
+
+	private String description;
 
     private String input;
 

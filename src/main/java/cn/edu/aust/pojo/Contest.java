@@ -1,9 +1,12 @@
 package cn.edu.aust.pojo;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Contest {
-    private Integer contestId;
+public class Contest implements Serializable{
+	private static final long serialVersionUID = 8873952395148153001L;
+
+	private Integer contestId;
 
     private String title;
 

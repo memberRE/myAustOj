@@ -1,11 +1,14 @@
 package cn.edu.aust.pojo.form;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
 import cn.edu.aust.pojo.User;
 
-public class ArticleForm {
+public class ArticleForm implements Serializable{
+	private static final long serialVersionUID = -2301465605534387848L;
+
 	private Integer articleId;
 
     private String title;

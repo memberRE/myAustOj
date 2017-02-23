@@ -1,7 +1,11 @@
 package cn.edu.aust.pojo;
 
-public class ArticleWithBLOBs extends Article {
-    private String summary;
+import java.io.Serializable;
+
+public class ArticleWithBLOBs extends Article implements Serializable{
+	private static final long serialVersionUID = 410868741524437599L;
+
+	private String summary;
 
     private String content;
 
