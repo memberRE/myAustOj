@@ -16,7 +16,7 @@
     <bean id="sessionIdCookie" class="org.apache.shiro.web.servlet.SimpleCookie">
         <constructor-arg value="sid"/>
         <property name="httpOnly" value="true"/>
-        <property name="maxAge" value="180000"/>
+        <property name="maxAge" value="360000"/>
     </bean>
 	<!-- rememberMe Cookie模板 -->
 	<bean id="rememberMeCookie" class="org.apache.shiro.web.servlet.SimpleCookie">
@@ -104,6 +104,7 @@
                 /logout = logout
                 
                 /rank/** = authc,roles[admin]<!-- 排名管理员可看 -->
+                /admin/** = authc,roles[admin]<!-- 后台只有管理员能进入 -->
             </value>
         </property>
     </bean>
