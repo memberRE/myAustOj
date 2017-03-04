@@ -45,9 +45,16 @@ public class MyTask{
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} finally {
-			os.close();
-			is.close();
-			socket.close();
+			if(os != null){
+				os.close();
+			}
+			if(is != null){
+				
+				is.close();
+			}
+			if(socket != null){
+				socket.close();
+			}
 		}
 		return omNew;
 	}

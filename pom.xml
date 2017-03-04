@@ -198,10 +198,15 @@
 		<version>1.0.0</version>
 	</dependency>
 	<!--ehcache缓存 -->
-	<dependency>
+	<!-- <dependency>
 		<groupId>net.sf.ehcache</groupId>
 		<artifactId>ehcache-core</artifactId>
 		<version>2.6.11</version>
+	</dependency> -->
+	<dependency>
+		<groupId>org.ehcache</groupId>
+		<artifactId>ehcache</artifactId>
+		<version>3.0.1</version>
 	</dependency>
 	<!--web页面缓存 -->
 	<dependency>

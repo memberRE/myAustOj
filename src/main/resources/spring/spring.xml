@@ -90,11 +90,11 @@
     <!--ehcache配置结束-->
     
     <!-- 使用ehcache缓存 -->    
-   <bean id="ehCacheManager" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">  
-     <property name="configLocation" value="classpath:ehcache.xml" />  
+  <!--  <bean id="ehCacheManager" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">  
+     <property name="configLocation" value="classpath:ehcache2.xml" />  
      <property name="shared" value="true"></property>
    </bean>
-
+ -->
         <!--配置事务管理 -->
     <bean name="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="dataSource"/>

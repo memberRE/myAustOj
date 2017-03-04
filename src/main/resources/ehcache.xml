@@ -3,7 +3,7 @@
     <diskStore path="F:\mavenProject\myAustOj\ehcache"/>     
     <!-- 缓存位置可以是自定义的硬盘地址也可以是JVM默认使用的缓存地址-->    
     <!--<diskStore path="d:\cache"/> -->    
-    <defaultCache maxElementsInMemory="10000" eternal="false" timeToIdleSeconds="30" timeToLiveSeconds="30" overflowToDisk="true"/>      	
+    <defaultCache maxElementsInMemory="10000" eternal="false" timeToIdleSeconds="900" timeToLiveSeconds="1800" overflowToDisk="true" memoryStoreEvictionPolicy="LFU"/>      	
     <!--         
     配置自定义缓存        
     name：Cache的唯一标识        
