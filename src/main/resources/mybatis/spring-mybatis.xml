@@ -10,6 +10,17 @@
         <setting name="useGeneratedKeys" value="true" />
         <setting name="defaultExecutorType" value="REUSE" />
     </settings>
+    
+    <!-- MyBatis使用ehcache缓存 start -->  
+   <!--  <bean id="ehCacheManager" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">  
+        <property name="configLocation" value="classpath:ehcache.xml" />  
+        <property name="shared" value="true"></property> 这里是关键！！！没有必错   
+    </bean> -->  
+    <!-- end MyBatis使用ehcache缓存 -->  
+    <!-- 缓存管理器 使用Ehcache实现 -->  
+    <!-- <bean id="shiroCacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">  
+        <property name="cacheManager" ref="ehCacheManager" />  
+    </bean>   -->
 
     <!--配置分页插件-->
     <plugins>
@@ -36,15 +47,5 @@
         </plugin>
     </plugins>
     
-    <!-- MyBatis使用ehcache缓存 start -->  
-    <bean id="ehCacheManager" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">  
-        <property name="configLocation" value="classpath:ehcache.xml" />  
-        <property name="shared" value="true"></property> <!-- 这里是关键！！！没有必错  -->  
-    </bean>  
-    <!-- end MyBatis使用ehcache缓存 -->  
-    <!-- 缓存管理器 使用Ehcache实现 -->  
-    <bean id="shiroCacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">  
-        <property name="cacheManager" ref="ehCacheManager" />  
-    </bean>  
 
 </configuration>

@@ -23,6 +23,10 @@
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
+	<!-- 启动判题服务器 -->
+	<!--  <listener>
+        <listener-class>cn.edu.aust.judgeServer.ExecuteServerServletContextListener</listener-class>
+    </listener> -->
 	<!-- 权限控制 -->
 	 <filter>
         <filter-name>shiroFilter</filter-name>

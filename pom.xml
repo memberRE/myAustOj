@@ -203,11 +203,11 @@
 		<artifactId>ehcache-core</artifactId>
 		<version>2.6.11</version>
 	</dependency> -->
-	<dependency>
+	<!-- <dependency>
 		<groupId>org.ehcache</groupId>
 		<artifactId>ehcache</artifactId>
 		<version>3.0.1</version>
-	</dependency>
+	</dependency> -->
 	<!--web页面缓存 -->
 	<dependency>
 		<groupId>net.sf.ehcache</groupId>
